@@ -1,9 +1,8 @@
 package com.revature.GroupDP2.repository;
 
 import com.revature.GroupDP2.Irepository.IGenericRepository;
-import com.revature.GroupDP2.Irepository.IPaymentRepository;
 import com.revature.GroupDP2.model.Payment;
-import com.revature.GroupDP2.util.StorageManager;
+import com.revature.GroupDP2.util.TransactionManager;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -14,21 +13,22 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 
 public class PaymentRepository implements IGenericRepository<Payment> {
 
-    private final StorageManager storageManager;
-    //private boolean running = false;
-    private Session session;
+    private final TransactionManager transactionManager;
+    private final Session session;
 
 
-    public PaymentRepository(StorageManager storageManager) {
-        this.storageManager = storageManager;
+    public PaymentRepository(TransactionManager transactionManager,Session session) {
+        this.transactionManager = transactionManager;
+        this.session =session;
     }
 
     @Override
-    public void save(Payment payment) {
+    public void create(Payment payment) {
         Transaction tx = session.beginTransaction();
         System.out.println(payment);
         session.save(payment);
@@ -43,6 +43,13 @@ public class PaymentRepository implements IGenericRepository<Payment> {
     }
 
     @Override
+    public Optional<Payment> getById(int t) {
+        TypedQuery<Payment> query = session.createQuery("FROM Payment WHERE id= :id",Payment.class);
+        query.setParameter("id",t);
+        return Optional.ofNullable(query.getSingleResult());
+    }
+
+
     public List<Payment> getAll() {
         String sql = "SELECT * FROM payment";
         Query query = session.createNativeQuery(sql);
@@ -61,17 +68,7 @@ public class PaymentRepository implements IGenericRepository<Payment> {
         return paymentList;
     }
 
-    @Override
-    public Payment getById(Integer id) {
-        String hql = " FROM Payment WHERE id = :id";
-        TypedQuery<Payment> query = session.createQuery(hql, Payment.class);
 
-        query.setParameter("id", id);
-
-        Payment payment = query.getSingleResult();
-
-        return payment;
-    }
         public Payment getByCardNumber(String cardNumber){
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<Payment> query = criteriaBuilder.createQuery(Payment.class);
@@ -82,6 +79,7 @@ public class PaymentRepository implements IGenericRepository<Payment> {
 
             return session.createQuery(query).getSingleResult();
         }
+
     @Override
     public void delete(Payment payment) {
         Transaction tx = session.beginTransaction();

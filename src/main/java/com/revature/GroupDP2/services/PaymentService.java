@@ -13,12 +13,12 @@ public class PaymentService {
 
     public void save(Payment payment) {
         System.out.println(payment);
-         paymentRepo.save(payment);
+         paymentRepo.create(payment);
 
     }
 
     public Payment getPaymentById(Integer id) {
-        return paymentRepo.getById(id);
+        return paymentRepo.getById(id).get();
     }
 
     public List<Payment> getAll() {
