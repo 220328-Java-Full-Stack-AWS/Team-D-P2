@@ -14,7 +14,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
-    @Component
+@Component
 public class ProductRepository implements IProductRepository<Product>, Lifecycle {
 
     private final StorageManager storageManager;

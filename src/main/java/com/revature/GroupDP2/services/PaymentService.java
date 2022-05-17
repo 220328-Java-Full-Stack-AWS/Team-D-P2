@@ -23,6 +23,11 @@ public class PaymentService {
 
     }
 
+    public void update(Payment payment) {
+        paymentRepo.update(payment);
+
+    }
+
     public Optional<Payment> getPaymentById(Integer id) {
          return Optional.ofNullable(paymentRepo.getById(id));
     }

@@ -128,13 +128,6 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
         return paymentList;
     }
 
-    /*
-       * Start this component.
-	   * Should not throw an exception if the component is already running.
-	   * In the case of a container, this will propagate the start signal to all
-	     components that apply.
-   */
-  
 
     public Payment getById(Integer id) {
         String hql = " FROM Payment WHERE id = :id";
@@ -148,7 +141,12 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
     }
 
 
-
+    /*
+           * Start this component.
+           * Should not throw an exception if the component is already running.
+           * In the case of a container, this will propagate the start signal to all
+             components that apply.
+       */
     @Override
     public void start() {
         running = true;
