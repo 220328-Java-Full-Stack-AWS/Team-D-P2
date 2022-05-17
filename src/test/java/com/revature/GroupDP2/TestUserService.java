@@ -94,7 +94,7 @@ public class TestUserService {
                 "EMAIL@EMAIL.COM","phone","street","Hudson","state","zip");
         tu3.setId(5);
         User out =userService.edit(tu3);
-        Assertions.assertEquals(out,tu3);
+        Assertions.assertEquals(out.toString(),tu3.toString());
     }
     @Test
     public void testEditFailureBadEmail(){
