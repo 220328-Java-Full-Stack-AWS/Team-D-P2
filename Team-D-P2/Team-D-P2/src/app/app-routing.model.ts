@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CreateProductComponent } from 'src/create-product/create-product.component';
-import { ProductListComponent } from 'src/product-list/product-list.component';
-import { ProductDetailsComponent } from 'src/product-details/product-details.component';
-import { UpdateProductComponent } from 'src/update-product/update-product.component';
+import { CreateProductComponent } from '../create-product/create-product.component';
+import { ProductListComponent } from '../product-list/product-list.component';
+import { ProductDetailsComponent } from '../product-details/product-details.component';
+import { UpdateProductComponent } from '../update-product/update-product.component';
+import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {path: 'product', component: ProductListComponent},
@@ -14,7 +17,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],                                                                                                                                                                                                                                                                                                          
+  declarations:[
+    AppComponent
+  ],
+  imports: [
+    RouterModule.forRoot(routes),
+    BrowserModule,
+    FormsModule
+  ],                                                                                                                                                                                                                                                                                                          
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

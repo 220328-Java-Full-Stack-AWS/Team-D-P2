@@ -4,10 +4,10 @@ import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
 import { FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.model';
-import { ProductListComponent } from 'src/product-list/product-list.component';
-import { CreateProductComponent } from 'src/create-product/create-product.component';
-import { ProductDetailsComponent } from 'src/product-details/product-details.component';
-import { UpdateProductComponent } from 'src/update-product/update-product.component';
+import { ProductListComponent } from '../product-list/product-list.component';
+import { CreateProductComponent } from '../create-product/create-product.component';
+import { ProductDetailsComponent } from '../product-details/product-details.component';
+import { UpdateProductComponent } from '../update-product/update-product.component';
 
 @NgModule({
   declarations: [
