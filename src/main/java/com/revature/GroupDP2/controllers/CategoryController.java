@@ -18,11 +18,10 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @PostMapping("{categoryName}")
+    @PostMapping
     //@RequestMapping(value = "/{categoryName}", method = RequestMethod.POST)
     @ResponseBody
-    public void create(@PathVariable String categoryName){
-        Category category = new Category(categoryName);
+    public void create(@RequestBody Category category){
         categoryService.create(category);
     }
 
@@ -33,9 +32,9 @@ public class CategoryController {
     }
 
     @PatchMapping
-    public void patch(@RequestHeader("id") int id, @RequestBody Category category){
+    public void patch(@RequestBody Category category){
 
-        categoryService.patch(id, category);
+        categoryService.patch(category);
     }
 
     @DeleteMapping

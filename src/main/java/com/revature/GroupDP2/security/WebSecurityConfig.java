@@ -18,12 +18,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+
+    private final JwtAuthenticationEntryPoint authenticationEntryPoint;
+
+    private final UserDetailsService userDetailsService;
+
+    private final JwtFilter filter;
+
     @Autowired
-    private JwtAuthenticationEntryPoint authenticationEntryPoint;
-    @Autowired
-    private UserDetailsService userDetailsService;
-    @Autowired
-    private JwtFilter filter;
+    public WebSecurityConfig(JwtAuthenticationEntryPoint auth, UserDetailsService userDetailsService, JwtFilter filter){
+        this.authenticationEntryPoint = auth;
+        this.userDetailsService = userDetailsService;
+        this.filter = filter;
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -32,12 +40,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
+
     @Bean
     @Override
-    public AuthenticationManager authenticationManagerBean() throws
-                                                             Exception {
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
