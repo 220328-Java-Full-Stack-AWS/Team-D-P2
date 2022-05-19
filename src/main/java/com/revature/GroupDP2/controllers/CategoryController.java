@@ -18,16 +18,18 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @PostMapping
-    public void create(@RequestBody Category category){
-
+    @PostMapping("{categoryName}")
+    //@RequestMapping(value = "/{categoryName}", method = RequestMethod.POST)
+    @ResponseBody
+    public void create(@PathVariable String categoryName){
+        Category category = new Category(categoryName);
         categoryService.create(category);
     }
 
     @PutMapping
-    public void update(@RequestBody Category category){
+    public void update(@RequestHeader("id") int id, @RequestBody Category category){
 
-        categoryService.update(category);
+        categoryService.update(id, category);
     }
 
     @PatchMapping

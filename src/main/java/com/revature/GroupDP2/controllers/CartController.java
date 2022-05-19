@@ -31,22 +31,13 @@ public class CartController {
     }
 
     @PostMapping("/add")
-    public void addCart(HttpServletResponse response) {
-
-        Cookie cookie = new Cookie("hello", "sup");
-
-        response.addCookie(cookie);
-
-        Cart cart = new Cart();
-
+    public void addCart(@RequestBody Cart cart) {
         cartService.newCart(cart);
-
     }
 
     @PutMapping("/addProduct")
     public void addProduct() {
 
-        // Cart cart = cartService.getCartById();
     }
 
 

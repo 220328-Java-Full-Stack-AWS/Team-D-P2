@@ -27,8 +27,15 @@ public class UserController {
             return userService.edit(user);
 
     }
+
+    @PutMapping("/addCart")
+    public void addCart(@RequestHeader("cartId") Integer cartId, @RequestHeader("userId") Integer userId){
+        userService.addCart(cartId, userId);
+    }
+
     @DeleteMapping
     public User delete(@RequestBody User user) throws Exception{
-        return userService.unRegester(user);
+        return userService.unRegister(user);
     }
+
 }

@@ -72,7 +72,7 @@ public class UserService {
     }
         throw new UnableException("update fail!");
     }
-    public User unRegester(User user) throws Exception {
+    public User unRegister(User user) throws Exception {
         Optional<User> oldUser =userRepository.getByUsername(user.getUserName());
         if(oldUser.isPresent()){
             userRepository.delete(oldUser.get());
@@ -80,4 +80,10 @@ public class UserService {
         }
         throw new UnableException("could not delete!");
     }
+
+    public void addCart(Integer cartId, Integer userId){
+        userRepository.addCart(cartId, userId);
+    }
 }
+
+

@@ -21,9 +21,9 @@ public class CategoryService {
         categoryRepository.create(category);
     }
 
-    public void update(Category category){
+    public void update(int id, Category category){
 
-        categoryRepository.update(category);
+        categoryRepository.update(id, category);
     }
 
     public void patch(int id, Category category){
