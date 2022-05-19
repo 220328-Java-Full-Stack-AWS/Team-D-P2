@@ -1,0 +1,39 @@
+<div class="col-md-6 offset-md-3">
+    <h3> Create Product </h3>
+    <form (ngSubmit) = "onSubmit()">
+    
+        <div class="form-group">
+            <label> Product Id</label>
+            <input type="number" class ="form-control" id = "Id"
+                [(ngModel)] = "Id" id = "Id">
+        </div>
+    
+        <div class="form-group">
+            <label> Product Name</label>
+            <input type="text" class ="form-control" id = "productName"
+                [(ngModel)] = "product" name = "productName">
+        </div>
+    
+        <div class="form-group">
+            <label> Description</label>
+            <input type="text" class ="form-control" id = "description"
+                [(ngModel)] = "product.description" name = "description">
+        </div>
+
+        <div class="form-group">
+            <label> Price</label>
+            <input type="number" class ="form-control" id = "price"
+                [(ngModel)] = "product.price" name = "price">
+        </div>
+
+        <div class="form-group">
+            <label> Category Id</label>
+            <input type="text" class ="form-control" id = "categoryId"
+                [(ngModel)] = "product.description" name = "categoryId">
+        </div>
+    
+        <button class = "btn btn-success" type ="submit">Submit</button>
+    
+    </form>
+    </div> 
+    
