@@ -91,7 +91,7 @@ public class TestUserService {
                 "EMAIL@EMAIL.COM","phone","street","Hudson","state","zip");
         tu3.setId(5);
         User out =userService.edit(tu3);
-        Assertions.assertEquals(out,tu3);
+        Assertions.assertEquals(out.toString(),tu3.toString());
     }
     @Test
     public void testEditFailureBadEmail(){
@@ -113,13 +113,13 @@ public class TestUserService {
     @Test
     public void testUnRegesterSuccess() throws Exception {
         when(userRepository.getByUsername("username")).thenReturn(Optional.of(tu1));
-        Assertions.assertEquals(tu1,userService.unRegister(tu1));
+        Assertions.assertEquals(tu1,userService.unregister(tu1));
     }
     @Test
     public void testUnRegesterFailure(){
         when(userRepository.getByUsername("username")).thenReturn(Optional.empty());
         Assertions.assertThrows(UnableException.class, () -> {
-            userService.unRegister(tu1);
+            userService.unregister(tu1);
         });
 
     }

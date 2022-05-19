@@ -35,7 +35,7 @@ public class UserController {
 
     @DeleteMapping
     public User delete(@RequestBody User user) throws Exception{
-        return userService.unRegister(user);
+        return userService.unregister(user);
     }
 
 }
