@@ -10,6 +10,7 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { CartComponent } from './components/cart/cart.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     UserComponent,
     ProductComponent,
     PaymentComponent,
-    CartComponent
+    CartComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [CategoryComponent],
+  providers: [RegistrationComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
