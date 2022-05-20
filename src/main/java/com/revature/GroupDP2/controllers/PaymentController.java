@@ -3,63 +3,55 @@ package com.revature.GroupDP2.controllers;
 import com.revature.GroupDP2.model.Payment;
 import com.revature.GroupDP2.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
-
 import java.util.List;
 
-@Controller
+
+@RestController
 @RequestMapping("/payments")
 public class PaymentController {
+
+    final PaymentService paySerRepo;
+
+
     @Autowired
-    PaymentService paySereRepo;
+    public PaymentController(PaymentService paySerRepo) {
 
-
-    @GetMapping("/add")
-    public String addPaymentForm(Model model) {
-
-        Payment aPayment = new Payment();
-        model.addAttribute("payment", aPayment);
-
-
-        return "add-payment";
+        this.paySerRepo = paySerRepo;
     }
 
-    @PostMapping("/save")
-    public String addPayment(@Valid Payment payment, Errors errors) {
-        if(errors.hasErrors())
-            return "add-payment";
-        //save to the database using a payment crud repository
-        System.out.println(payment);
-        paySereRepo.save(payment);
-        //use a redirect to prevent duplicate submission
-        return "redirect:/";
+    //Add a new payment
+    @PostMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public void addNewPayment(@RequestBody Payment Payment) {
+         paySerRepo.save(Payment);
     }
 
-    @GetMapping("/update")
-    public String updatePaymentForm(@RequestParam("id") Integer paymentId, Model model) {
+    //Update an existing payment
+    @PutMapping ()
+    @ResponseStatus(HttpStatus.OK)
+    public void updatePayment(@RequestBody Payment payment) {
+        paySerRepo.update(payment);
 
-        Payment payment = paySereRepo.getPaymentById(paymentId);
-        model.addAttribute("payment", payment);
-        return "/update-payment";
     }
 
-    @GetMapping("/delete")
-    public String deleteApayment(@RequestParam("id") Integer paymentId, Model model) {
+    //Delete an existing payment
+    @DeleteMapping ("/{id}")
+    public void deletePayment(@PathVariable("id") Integer paymentId) {
+        Payment payment = paySerRepo.getPaymentById(paymentId).get();
+         paySerRepo.delete(payment);
 
-        Payment payment = paySereRepo.getPaymentById(paymentId);
-        paySereRepo.delete(payment);
-        return "redirect:/payments/list";
     }
 
-    @GetMapping("/list")
-    public String displayPaymentList(Model model) {
-        List<Payment> aPaymet = paySereRepo.getAll();
-        model.addAttribute("payment",aPaymet);
-        return "payments-list";
+    //Get all payments
+    @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public List<Payment> paymentList() {
+        return  paySerRepo.getAll();
+
     }
 
 }
+
+

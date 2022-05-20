@@ -1,11 +1,10 @@
 package com.revature.GroupDP2.Irepository;
 
-import org.apache.catalina.User;
-
-import java.util.List;
+import com.revature.GroupDP2.model.User;
 import java.util.Optional;
 
 public interface IUserRepository extends IGenericRepository<User>{
-    public Optional<User> getByUsername(String username);
+    Optional<User> getByUsername(String username);
 
 }
+

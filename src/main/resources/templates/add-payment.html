@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"></meta>
+    <meta  th:lang="en" charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 
     <title>Add Payment</title>
 </head>
 <body>
 <br/>
-<a th:href="@{/}">Home</a> | <a th:href="@{/payments/list}">Payments List</a></p>
+<p><a th:href="@{/}">Home</a> | <a th:href="@{/payments/list}">Payments List</a></p>
 <br/>
 <form id="signup-form" method="POST" th:action="@{/payments/save}" th:object="${payment}">
     <h3>Add a Credit Payment</h3>

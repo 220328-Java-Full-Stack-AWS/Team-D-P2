@@ -2,12 +2,8 @@ package com.revature.GroupDP2.Irepository;
 
 import java.util.List;
 
-public interface IPaymentRepository<T> {
+public interface IPaymentRepository<Payment> extends IGenericRepository<Payment>{
 
-    public void save(T t);
-    public void update(T t);
-    public List<T> getAll();
-    public T getById(Integer id);
-    public void delete(T t);
+    Payment getPaymentByCardNumber(Payment payment);
 
 }

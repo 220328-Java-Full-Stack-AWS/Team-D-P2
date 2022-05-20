@@ -8,10 +8,11 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer id;
-    @Column(name="username")
-    private String userName;
+
+    @Column(name="username",unique = true)
+    private String username;
     @Column(name="password")
     private String password;
     @Column
@@ -33,14 +34,18 @@ public class User {
     @Column(name="zip_code")
     private String zipCode;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne
+    @JoinColumn(name = "cart_id")
     private Cart cart;
     @Column(name="payment_methods")
     @OneToMany(mappedBy = "user", cascade = {CascadeType.DETACH, CascadeType.MERGE,CascadeType.REFRESH, CascadeType.PERSIST}, fetch=FetchType.LAZY)
     private List<Payment> paymentMethods;
-
-    public User(String userName, String password, boolean enabled, String firstName, String lastName, String email, String phone, String streetName, String city, String state, String zipCode) {
-        this.userName = userName;
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+    public User(String username, String password, boolean enabled, String firstName, String lastName, String email, String phone, String streetName, String city, String state, String zipCode) {
+        this.username = username;
         this.password = password;
         this.enabled = enabled;
         this.firstName = firstName;
@@ -56,12 +61,12 @@ public class User {
 
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -179,7 +184,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", userName='" + userName + '\'' +
+                ", userName='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", enabled=" + enabled +
                 ", firstName='" + firstName + '\'' +
