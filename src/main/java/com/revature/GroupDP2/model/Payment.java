@@ -8,7 +8,7 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-
+    private Integer id;
     @Column(name = "card_number")
     private String cardNumber;
 
