@@ -1,5 +1,6 @@
 package com.revature.GroupDP2.repository;
 
+import com.revature.GroupDP2.Irepository.IGenericRepository;
 import com.revature.GroupDP2.Irepository.IPaymentRepository;
 import com.revature.GroupDP2.model.Payment;
 import org.hibernate.Session;
@@ -9,6 +10,9 @@ import com.revature.GroupDP2.util.StorageManager;
 import org.springframework.context.Lifecycle;
 import org.springframework.stereotype.Component;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -46,7 +50,6 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
      */
     private  Session session;
     
-    String tableName;
 
     public PaymentRepository(StorageManager storageManager) {
         this.storageManager = storageManager;
@@ -58,6 +61,7 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
     */
     @Override
     public void create(Payment payment) {
+      
         /* A transaction is associated with a Session and is usually initiated
            by a call to Session.beginTransaction().
         */
@@ -78,9 +82,9 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
 
 
     @Override
-    public Optional getById(int t) {
+    public Optional<Payment> getById(int t) {
         TypedQuery<Payment> query = session.createQuery("FROM Payment WHERE id = :id",Payment.class);
-        query.setParameter("id",t);
+
         return Optional.ofNullable(query.getSingleResult());
     }
 
@@ -111,35 +115,12 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
     }
 
     public List<Payment> getAll() {
-        String sql = "SELECT * FROM payment";
-        Query query = session.createNativeQuery(sql);
+        String sql = "FROM Payment";
+        TypedQuery query = session.createQuery(sql, Payment.class);
 
-        List<Object[]> results = query.getResultList();
+        return query.getResultList();
 
-        List<Payment> paymentList = new LinkedList<>();
-        for (Object[] result : results) {
-            Payment payment = new Payment();
-            payment.setId((Integer) result[0]);
-            payment.setCardNumber((String) result[1]);
-            payment.setExpirationDate((String) result[2]);
-            payment.setCvvNumber((Integer) result[3]);
-            paymentList.add(payment);
-        }
-        return paymentList;
     }
-
-
-    public Payment getById(Integer id) {
-        String hql = " FROM Payment WHERE id = :id";
-        TypedQuery<Payment> query = session.createQuery(hql, Payment.class);
-
-        query.setParameter("id", id);
-
-        Payment payment = query.getSingleResult();
-
-        return payment;
-    }
-
 
     /*
            * Start this component.

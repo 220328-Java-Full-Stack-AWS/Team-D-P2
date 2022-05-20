@@ -29,11 +29,12 @@ public class PaymentService {
     }
 
     public Optional<Payment> getPaymentById(Integer id) {
-         return Optional.ofNullable(paymentRepo.getById(id));
+         return paymentRepo.getById(id);
     }
 
     public Payment getPaymentByCardNumber(Payment payment){
         return paymentRepo.getPaymentByCardNumber(payment);
+
     }
 
     public List<Payment> getAll() {

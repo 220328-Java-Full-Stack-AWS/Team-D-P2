@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from 'src/app/services/category/category.service';
+import { CategoryService } from '../../services/category/category.service';
 
 @Component({
   selector: 'app-category',
@@ -16,6 +16,15 @@ export class CategoryComponent implements OnInit {
 
   search(){
     this.categoryService.getCategoryData().subscribe((data: any) => {
+      this.result = {
+        id : data.id,
+        categoryName : data.categoryName
+      }
+    })
+  }
+  //this is a test, swap out hardcoded value
+  upload(){
+    this.categoryService.setCategoryData({id:0,categoryName:'newCat',products:null}).subscribe((data:any)=>{
       this.result = {
         id : data.id,
         categoryName : data.categoryName
