@@ -1,3 +1,7 @@
 <button (click) = 'search()'>Search</button>
-<button (click) = 'upload()'>Upload test categ</button>
-<p>{{result | json}}</p>
+<button (click) = 'get()'>get</button>
+<p>here:{{result | json}}</p>
+<br>
+<ul *ngFor="let cat of categories">
+    <li>id:{{cat.categoryId}},name:{{cat.categoryName}}</li>
+</ul>

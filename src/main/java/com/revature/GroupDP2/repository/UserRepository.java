@@ -31,7 +31,8 @@ public class UserRepository implements IUserRepository, Lifecycle {
 
     @Override
     public List<User> getAll() {
-        return null;
+        TypedQuery<User> query = session.createQuery("FROM User", User.class);
+        return query.getResultList();
     }
 
     @Override
