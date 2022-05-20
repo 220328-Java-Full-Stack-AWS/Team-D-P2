@@ -22,6 +22,15 @@ export class CategoryComponent implements OnInit {
       }
     })
   }
+  //this is a test, swap out hardcoded value
+  upload(){
+    this.categoryService.setCategoryData({id:0,categoryName:'newCat',products:null}).subscribe((data:any)=>{
+      this.result = {
+        id : data.id,
+        categoryName : data.categoryName
+      }
+    })
+  }
 
   constructor(private categoryService:  CategoryService) { }
 
