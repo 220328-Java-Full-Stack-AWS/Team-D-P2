@@ -7,27 +7,31 @@ import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.repository.UserRepository;
 import com.revature.GroupDP2.services.UserService;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class TestUserService {
-    private static UserRepository userRepository;
-    private static UserService userService;
-    private static User tu1;
-    private static User tu2;
+    @MockBean(UserRepository.class)
+    @Autowired
+    private UserRepository userRepository;
+    private UserService userService;
+    private User tu1;
+    private User tu2;
 
-    @BeforeAll
-    public static void beforeC(){
-        userRepository=mock(UserRepository.class);
-        userRepository=mock(UserRepository.class);
-        userService = new UserService(userRepository);
-    }
     @BeforeEach
     public void before(){
+        userService=new UserService(userRepository);
         tu1=new User("username","password",true,"John","Test",
                 "EMAIL@EMAIL.COM","phone","street","city","state","zip");
         tu2=new User("wrong","wrong",true,"Mark","Test",
