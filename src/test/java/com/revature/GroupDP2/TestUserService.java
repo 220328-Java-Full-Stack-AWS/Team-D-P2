@@ -6,14 +6,11 @@ import com.revature.GroupDP2.exceptions.UnauthorizedException;
 import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.repository.UserRepository;
 import com.revature.GroupDP2.services.UserService;
-import com.revature.GroupDP2.util.StorageManager;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.parallel.Execution;
 
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -94,7 +91,7 @@ public class TestUserService {
                 "EMAIL@EMAIL.COM","phone","street","Hudson","state","zip");
         tu3.setId(5);
         User out =userService.edit(tu3);
-        Assertions.assertEquals(out,tu3);
+        Assertions.assertEquals(out.toString(),tu3.toString());
     }
     @Test
     public void testEditFailureBadEmail(){
@@ -116,13 +113,13 @@ public class TestUserService {
     @Test
     public void testUnRegesterSuccess() throws Exception {
         when(userRepository.getByUsername("username")).thenReturn(Optional.of(tu1));
-        Assertions.assertEquals(tu1,userService.unRegester(tu1));
+        Assertions.assertEquals(tu1,userService.unregister(tu1));
     }
     @Test
     public void testUnRegesterFailure(){
         when(userRepository.getByUsername("username")).thenReturn(Optional.empty());
         Assertions.assertThrows(UnableException.class, () -> {
-            userService.unRegester(tu1);
+            userService.unregister(tu1);
         });
 
     }
