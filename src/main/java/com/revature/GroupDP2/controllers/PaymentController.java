@@ -47,8 +47,8 @@ public class PaymentController {
     //Get all payments
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public List<Payment> paymentList(Payment payment) {
-        return  paySerRepo.getAll(payment);
+    public List<Payment> paymentList() {
+        return  paySerRepo.getAll();
 
     }
 

@@ -111,21 +111,11 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
     }
 
     public List<Payment> getAll() {
-        String sql = "SELECT * FROM payment";
-        Query query = session.createNativeQuery(sql);
+        String sql = "FROM Payment";
+        TypedQuery query = session.createQuery(sql, Payment.class);
 
-        List<Object[]> results = query.getResultList();
+        return query.getResultList();
 
-        List<Payment> paymentList = new LinkedList<>();
-        for (Object[] result : results) {
-            Payment payment = new Payment();
-            payment.setId((Integer) result[0]);
-            payment.setCardNumber((String) result[1]);
-            payment.setExpirationDate((String) result[2]);
-            payment.setCvvNumber((Integer) result[3]);
-            paymentList.add(payment);
-        }
-        return paymentList;
     }
 
 
