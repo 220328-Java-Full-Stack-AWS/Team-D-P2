@@ -23,6 +23,11 @@ public class PaymentService {
 
     }
 
+    public Payment getPaymentById(Integer id) {
+        return paymentRepo.getById(id).get();
+
+    }
+
     public void update(Payment payment) {
         paymentRepo.update(payment);
 
@@ -34,6 +39,7 @@ public class PaymentService {
 
     public Payment getPaymentByCardNumber(Payment payment){
         return paymentRepo.getPaymentByCardNumber(payment);
+
     }
 
     public List<Payment> getAll() {

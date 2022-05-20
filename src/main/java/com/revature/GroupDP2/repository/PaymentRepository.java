@@ -1,7 +1,8 @@
 package com.revature.GroupDP2.repository;
 
-import com.revature.GroupDP2.Irepository.IPaymentRepository;
+import com.revature.GroupDP2.Irepository.IGenericRepository;
 import com.revature.GroupDP2.model.Payment;
+import com.revature.GroupDP2.util.TransactionManager;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -9,6 +10,9 @@ import com.revature.GroupDP2.util.StorageManager;
 import org.springframework.context.Lifecycle;
 import org.springframework.stereotype.Component;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -46,7 +50,6 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
      */
     private  Session session;
     
-    String tableName;
 
     public PaymentRepository(StorageManager storageManager) {
         this.storageManager = storageManager;
@@ -58,6 +61,7 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
     */
     @Override
     public void create(Payment payment) {
+      
         /* A transaction is associated with a Session and is usually initiated
            by a call to Session.beginTransaction().
         */
@@ -78,9 +82,9 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
 
 
     @Override
-    public Optional getById(int t) {
+    public Optional<Payment> getById(int t) {
         TypedQuery<Payment> query = session.createQuery("FROM Payment WHERE id = :id",Payment.class);
-        query.setParameter("id",t);
+
         return Optional.ofNullable(query.getSingleResult());
     }
 
@@ -117,19 +121,6 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
         return query.getResultList();
 
     }
-
-
-    public Payment getById(Integer id) {
-        String hql = " FROM Payment WHERE id = :id";
-        TypedQuery<Payment> query = session.createQuery(hql, Payment.class);
-
-        query.setParameter("id", id);
-
-        Payment payment = query.getSingleResult();
-
-        return payment;
-    }
-
 
     /*
            * Start this component.
