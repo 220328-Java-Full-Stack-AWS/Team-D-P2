@@ -6,10 +6,11 @@ import com.revature.GroupDP2.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
-
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/product")
 public class ProductController {
@@ -26,7 +27,7 @@ public class ProductController {
     public List<Product> getAll() {
         return productService.getAll();
     }
-
+    /*
         //get product by productname
     @GetMapping("/{productnameorId}")
     @ResponseStatus(HttpStatus.OK)
@@ -42,20 +43,25 @@ public class ProductController {
             //TODO: Make this better
     }
     }
-
+*/
     //post a new product - auto generate the ID
-    @PostMapping()
-    @ResponseStatus(HttpStatus.OK)
-    public void persistNewProduct (@RequestBody Product newProduct){
-        productService.createProduct(newProduct);
+    //@PostMapping("/add")
+    @RequestMapping(value = "/add/{productname}", method = RequestMethod.GET)
+    //@ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public void persistNewProduct (@PathVariable String productname){
+       // newProduct.setProductName(productname);
+        Product product = new Product();
+        product.setProductName(productname);
+        productService.createProduct(product);
     }
 
-    @GetMapping("/auth")
+  /*  @GetMapping("/auth")
     @ResponseStatus(HttpStatus.OK)
     public AuthDto authorizeProduct (@RequestBody AuthDto authDto) throws Exception {
     return productService.authenticateProduct(authDto);
     //TODO: ResponseEntity<User> use this object to send back a different response for unauthorized
-    }
+    }*/
 
     //put (update) an existing user (based on id)
     @PutMapping

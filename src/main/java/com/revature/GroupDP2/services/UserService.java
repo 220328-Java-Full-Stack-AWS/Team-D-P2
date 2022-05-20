@@ -28,8 +28,9 @@ public class UserService {
         if (userRepository.getByUsername(user.getUsername()).isPresent()) {
             throw new AlredyExsistsException("username already taken!");
         }//email validator. got it online
-        user.setEmail(user.getEmail().toUpperCase(Locale.ROOT));
-        if(!user.getEmail().matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$")){
+        user.setEmail(user.getEmail().toLowerCase(Locale.ROOT));
+        if(!user.getEmail().matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")){
+
             throw new InvalidEmailException("email invalid!");
         }
         userRepository.create(user);
@@ -51,8 +52,8 @@ public class UserService {
     public User edit(User user) throws Exception {
     Optional<User> oldUser=userRepository.getById(user.getId());
     if(oldUser.isPresent()&&user.getPassword()!=null){
-        user.setEmail(user.getEmail().toUpperCase(Locale.ROOT));
-        if(!user.getEmail().matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$")) {
+        user.setEmail(user.getEmail().toLowerCase(Locale.ROOT));
+        if(!user.getEmail().matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")) {
             throw new InvalidEmailException("email invalid!");
         }
         User outUser=oldUser.get();

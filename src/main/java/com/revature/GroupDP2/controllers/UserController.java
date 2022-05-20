@@ -19,7 +19,9 @@ public class UserController {
     }
     @PostMapping
     public User register(@RequestBody User user) throws Exception {
-            return userService.register(user);
+        System.out.println("we are here and we are not happy");
+        System.out.println(user);
+        return userService.register(user);
 
     }
     @PutMapping
