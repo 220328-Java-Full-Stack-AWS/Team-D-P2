@@ -15,11 +15,11 @@ public class UserController {
         this.userService = userService;
     }
     @GetMapping
-    public User login(@RequestBody User user)throws Exception{
+    public User login(@RequestBody User user)throws ResponseStatusException{
             return userService.login(user);
     }
     @PostMapping
-    public User register(@RequestBody User user) throws Exception {
+    public User register(@RequestBody User user) throws ResponseStatusException {
         System.out.println("we are here and we are not happy");
         System.out.println(user);
         return userService.register(user);

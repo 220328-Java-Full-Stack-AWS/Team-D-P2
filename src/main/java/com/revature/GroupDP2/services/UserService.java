@@ -1,9 +1,5 @@
 package com.revature.GroupDP2.services;
 
-import com.revature.GroupDP2.exceptions.AlredyExsistsException;
-import com.revature.GroupDP2.exceptions.InvalidEmailException;
-import com.revature.GroupDP2.exceptions.UnableException;
-import com.revature.GroupDP2.exceptions.UnauthorizedException;
 import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
