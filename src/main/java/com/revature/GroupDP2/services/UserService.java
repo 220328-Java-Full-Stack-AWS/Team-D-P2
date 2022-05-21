@@ -7,7 +7,10 @@ import com.revature.GroupDP2.exceptions.UnauthorizedException;
 import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.Locale;
 import java.util.Optional;
 
@@ -25,12 +28,13 @@ public class UserService {
      */
     public User register(User user) throws Exception {
         if (userRepository.getByUsername(user.getUsername()).isPresent()) {
-            throw new AlredyExsistsException("username already taken!");
+            //throw new AlredyExsistsException("username already taken!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists!");
         }//email validator. got it online
         user.setEmail(user.getEmail().toLowerCase(Locale.ROOT));
         if(!user.getEmail().matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")){
-
-            throw new InvalidEmailException("email invalid!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email invalid!");
+            //throw new InvalidEmailException("email invalid!");
         }
         userRepository.create(user);
         return user;
