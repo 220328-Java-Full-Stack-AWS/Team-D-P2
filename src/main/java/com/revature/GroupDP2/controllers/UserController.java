@@ -13,7 +13,7 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-    @GetMapping
+    @PostMapping("/login")
     public User login(@RequestBody User user)throws Exception{
             return userService.login(user);
     }
