@@ -17,7 +17,7 @@ public class UserController {
     public User login(@RequestBody User user)throws Exception{
             return userService.login(user);
     }
-    @PostMapping
+    @PostMapping("/register")
     public User register(@RequestBody User user) throws Exception {
         System.out.println("we are here and we are not happy");
         System.out.println(user);
