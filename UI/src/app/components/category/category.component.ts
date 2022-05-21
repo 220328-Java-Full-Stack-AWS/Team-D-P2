@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from 'src/app/services/category/category.service';
+import { Category } from '../../common/Models';
+import { CategoryService } from '../../services/category/category.service';
 
 @Component({
   selector: 'app-category',
@@ -9,33 +10,32 @@ import { CategoryService } from 'src/app/services/category/category.service';
 export class CategoryComponent implements OnInit {
 
   result : Category = {
-    id : 0,
-    categoryName : "" 
-    
+    categoryId : 0,
+    categoryName : "" ,
+    products:[]
   }
-
+  categories: Category[]=[]
   search(){
-    this.categoryService.getCategoryData().subscribe((data: any) => {
-      this.result = {
-        id : data.id,
-        categoryName : data.categoryName
-      }
+    this.categoryService.getCategoryData().subscribe((data: Category) => {
+      //this.result = {
+      //  categoryId : data.categoryId,
+      //  categoryName : data.categoryName,
+      //  products: data.product
+      //}
+      this.result=data;
     })
+  }
+  get(){
+    this.categoryService.getAllCategoryData().subscribe((data:Category[]) =>{
+this.categories=data;
+    })
+    console.log(this.categories);
   }
 
   constructor(private categoryService:  CategoryService) { }
 
   ngOnInit(): void {
   }
-
-}
-
-class Category {
-  
-  id : number = 0
-  categoryName : string = ""
-
-  constructor () {}
 
 }
 

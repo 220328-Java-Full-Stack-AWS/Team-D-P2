@@ -1,8 +1,8 @@
 package com.revature.GroupDP2.repository;
 
 import com.revature.GroupDP2.Irepository.IGenericRepository;
+import com.revature.GroupDP2.Irepository.IPaymentRepository;
 import com.revature.GroupDP2.model.Payment;
-import com.revature.GroupDP2.util.TransactionManager;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;

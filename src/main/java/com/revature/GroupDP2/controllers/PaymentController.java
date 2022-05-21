@@ -24,24 +24,25 @@ public class PaymentController {
     //Add a new payment
     @PostMapping()
     @ResponseStatus(HttpStatus.OK)
-    public void addNewPayment(@RequestBody Payment Payment) {
-         paySerRepo.save(Payment);
+    public Payment addNewPayment(@RequestBody Payment payment) {
+         paySerRepo.save(payment);
+         return payment;
     }
 
     //Update an existing payment
     @PutMapping ()
     @ResponseStatus(HttpStatus.OK)
-    public void updatePayment(@RequestBody Payment payment) {
+    public Payment updatePayment(@RequestBody Payment payment) {
         paySerRepo.update(payment);
-
+        return payment;
     }
 
     //Delete an existing payment
-    @DeleteMapping ("/{id}")
-    public void deletePayment(@PathVariable("id") Integer paymentId) {
-        Payment payment = paySerRepo.getPaymentById(paymentId).get();
-         paySerRepo.delete(payment);
-
+    @DeleteMapping ()
+    public Payment deletePayment(@RequestBody Payment payment) {
+        Payment out = paySerRepo.getPaymentById(payment.getId()).get();
+        paySerRepo.delete(out);
+        return out;
     }
 
     //Get all payments
