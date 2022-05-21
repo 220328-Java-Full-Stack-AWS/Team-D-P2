@@ -7,13 +7,18 @@ import com.revature.GroupDP2.jwt.TokenManager;
 import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
 
 
 @RestController
@@ -33,7 +38,6 @@ public class UserController {
     }
     @PostMapping("/login")
     public ResponseEntity<Token> login(@RequestBody UserDto userDto) throws Exception{
-
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDto.getUsername(),userDto.getPassword()));
         }
@@ -45,9 +49,13 @@ public class UserController {
         }
         final UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(userDto.getUsername());
         final String token = tokenManager.generateToken(userDetails,userDto);
+
         return ResponseEntity.ok(new Token(token));
+        //return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, responseCookie.toString()).build();
 
     }
+
+
     @PostMapping("/register")
     public User register(@RequestBody User user) throws Exception {
         return userService.register(user);

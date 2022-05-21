@@ -19,9 +19,16 @@ export class LoginComponent implements OnInit {
   password: string = ""
   token: string = ""
   
-  
+    
   login(){
-      this.loginService.login(this.username,this.password).subscribe((data: any) => this.token = data);
+      this.loginService.login(this.username,this.password).subscribe((data: any) => {this.token = data.token; test(this.token)});
   }
-  
+
+}
+
+function test(token: string){
+  localStorage.clear();
+  sessionStorage.clear();
+  console.log(token);
+  localStorage.setItem('Authorization',JSON.stringify(token));
 }

@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
 
 
 @Component
@@ -31,8 +32,20 @@ public class CorsFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse resp, FilterChain chain) throws ServletException, IOException {
         String tokenHeader = req.getHeader("Authorization");
+        System.out.println(tokenHeader);
         String username = null;
         String token = null;
+
+
+        Enumeration<String> headerNames = req.getHeaderNames();
+
+        if (headerNames != null) {
+            while (headerNames.hasMoreElements()) {
+                System.out.println("Header: " + req.getHeader(headerNames.nextElement()));
+            }
+        }
+
+        System.out.println(tokenHeader);
 
         if (tokenHeader != null && tokenHeader.startsWith("Bearer ")) {
             token = tokenHeader.substring(7);
@@ -46,6 +59,7 @@ public class CorsFilter extends OncePerRequestFilter {
             }
         }
         else {
+
             System.out.println("No bearer string found");
         }
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null){

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/category")
 public class CategoryController {
 
@@ -45,7 +46,8 @@ public class CategoryController {
     }
 
     @GetMapping("/byId/{id}")
-    public Optional<Category> getById(@PathVariable("id") int t){
+    public Optional<Category> getById(@RequestHeader("Authorization") String token, @PathVariable("id") int t){
+        System.out.println(token);
         return categoryService.getById(t);
     }
 

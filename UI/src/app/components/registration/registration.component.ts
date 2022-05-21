@@ -21,7 +21,6 @@ export class RegistrationComponent implements OnInit {
   lastName : string = ""
   email : string = ""
   
-
   result : string = "";
 
 
@@ -29,7 +28,5 @@ export class RegistrationComponent implements OnInit {
     let user: User = new User(this.username,this.password,this.firstName,this.lastName, this.email);
     this.registrationService.register(user).subscribe((data: any) => this.result = "User Added")
   }
-
 }
-
 

@@ -27,7 +27,7 @@ export class CategoryComponent implements OnInit {
   }
   get(){
     this.categoryService.getAllCategoryData().subscribe((data:Category[]) =>{
-this.categories=data;
+this.categories=data; 
     })
     console.log(this.categories);
   }
@@ -38,4 +38,6 @@ this.categories=data;
   }
 
 }
+
+
 
