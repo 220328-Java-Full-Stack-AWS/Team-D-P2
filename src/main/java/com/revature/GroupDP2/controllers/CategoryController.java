@@ -20,6 +20,7 @@ public class CategoryController {
     }
 
     @PostMapping
+    //@RequestMapping(value = "/{categoryName}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void create(@RequestBody Category category){
         categoryService.create(category);

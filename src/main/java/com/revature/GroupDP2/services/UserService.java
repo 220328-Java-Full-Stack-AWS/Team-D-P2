@@ -7,14 +7,15 @@ import com.revature.GroupDP2.exceptions.UnauthorizedException;
 import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Locale;
 import java.util.Optional;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    protected BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
     @Autowired
     public UserService(UserRepository userRepository) {
     this.userRepository=userRepository;
@@ -25,6 +26,7 @@ public class UserService {
     3. check if there is a password
      */
     public User register(User user) throws Exception {
+        user.setPassword(encoder.encode(user.getPassword()));
         if (userRepository.getByUsername(user.getUsername()).isPresent()) {
             throw new AlredyExsistsException("username already taken!");
         }//email validator. got it online
@@ -37,8 +39,8 @@ public class UserService {
         return user;
     }
     public User login(User user) throws Exception{
-        Optional<User> oldUser=userRepository.getByUsername(user.getUsername());
-        if(oldUser.isPresent()&&oldUser.get().getPassword().equals(user.getPassword())){
+        Optional<User> oldUser = userRepository.getByUsername(user.getUsername());
+        if(oldUser.isPresent()&&encoder.matches(user.getPassword(),oldUser.get().getPassword())){
             return oldUser.get();
         }
         throw new UnauthorizedException("login fail!");

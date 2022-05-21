@@ -11,6 +11,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RegistrationComponent } from './components/registration/registration.co
     ProductComponent,
     PaymentComponent,
     CartComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,7 @@ import { RegistrationComponent } from './components/registration/registration.co
     FormsModule,
     HttpClientModule
   ],
-  providers: [RegistrationComponent],
+  providers: [RegistrationComponent, LoginComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
