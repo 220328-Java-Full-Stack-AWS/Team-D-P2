@@ -7,13 +7,14 @@ import com.revature.GroupDP2.jwt.TokenManager;
 import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @CrossOrigin
@@ -32,9 +33,7 @@ public class UserController {
     }
     @PostMapping("/login")
     public ResponseEntity<Token> login(@RequestBody UserDto userDto) throws Exception{
-            //return userService.login(user);
-        System.out.println(userDto.getUsername());
-        System.out.println(userDto.getPassword());
+
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDto.getUsername(),userDto.getPassword()));
         }

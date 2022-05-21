@@ -19,8 +19,9 @@ export class LoginComponent implements OnInit {
   password: string = ""
   token: string = ""
   
+  
   login(){
       this.loginService.login(this.username,this.password).subscribe((data: any) => this.token = data);
   }
-
+  
 }
