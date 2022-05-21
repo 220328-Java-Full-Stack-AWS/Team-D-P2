@@ -26,7 +26,7 @@ public class UserService {
     2. check if email is valid
     3. check if there is a password
      */
-    public User register(User user) throws Exception {
+    public User register(User user) throws ResponseStatusException {
         if (userRepository.getByUsername(user.getUsername()).isPresent()) {
             //throw new AlredyExsistsException("username already taken!");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists!");
@@ -39,12 +39,12 @@ public class UserService {
         userRepository.create(user);
         return user;
     }
-    public User login(User user) throws Exception{
+    public User login(User user) throws ResponseStatusException{
         Optional<User> oldUser = userRepository.getByUsername(user.getUsername());
         if(oldUser.isPresent()&&user.getPassword().equals(oldUser.get().getPassword())){
             return oldUser.get();
         }
-        throw new UnauthorizedException("login fail!");
+        throw new ResponseStatusException(HttpStatus.FORBIDDEN,"login fail!");
     }
     /*
     1. see if exists
@@ -52,12 +52,12 @@ public class UserService {
     3.see if email is valid
     4. update
      */
-    public User edit(User user) throws Exception {
+    public User edit(User user) throws ResponseStatusException {
     Optional<User> oldUser=userRepository.getById(user.getId());
     if(oldUser.isPresent()&&user.getPassword()!=null){
         user.setEmail(user.getEmail().toLowerCase(Locale.ROOT));
         if(!user.getEmail().matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")) {
-            throw new InvalidEmailException("email invalid!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email invalid!");
         }
         User outUser=oldUser.get();
         outUser.setUsername(user.getUsername());
@@ -74,15 +74,16 @@ public class UserService {
         userRepository.update(outUser);
         return outUser;
     }
-        throw new UnableException("update fail!");
+        throw new ResponseStatusException(HttpStatus.FORBIDDEN,"auth failed!");
     }
-    public User unregister(User user) throws Exception {
+    public User unregister(User user) throws ResponseStatusException {
         Optional<User> oldUser =userRepository.getByUsername(user.getUsername());
         if(oldUser.isPresent()){
             userRepository.delete(oldUser.get());
             return oldUser.get();
         }
-        throw new UnableException("could not delete!");
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND,"failed to delete!");
+
     }
 
     public void addCart(Integer cartId, Integer userId){
