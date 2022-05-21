@@ -26,6 +26,9 @@ public class Product {
     @Column(name = "price")
     private Double price;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @ManyToOne
     @JoinColumn
     private Category category;
@@ -35,11 +38,12 @@ public class Product {
     //private List<Cart> productCart;
 
 
-    public Product(Category category, String productName, String description, Double price) {
+    public Product(Category category, String productName, String description, Double price, String imageUrl) {
         this.category = category;
         this.productName = productName;
         this.description = description;
         this.price = price;
+        this.imageUrl = imageUrl;
         //productCart=new ArrayList<>();
     }
     public Product() {
@@ -93,7 +97,12 @@ public class Product {
     public Integer getCategoryId() {
         return null;
     }
-/*
+
+    public String getImageUrl() {return imageUrl;}
+
+    public void setImageUrl(String imageUrl) {this.imageUrl = imageUrl;}
+
+    /*
     public List<Cart> getProductCart() {
         return productCart;
     }
