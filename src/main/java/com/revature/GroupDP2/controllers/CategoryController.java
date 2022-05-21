@@ -3,6 +3,7 @@ package com.revature.GroupDP2.controllers;
 import com.revature.GroupDP2.model.Category;
 import com.revature.GroupDP2.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
@@ -19,8 +20,12 @@ public class CategoryController {
     }
 
     @PostMapping
+<<<<<<< HEAD
     //@RequestMapping(value = "/{categoryName}", method = RequestMethod.POST)
     @ResponseBody
+=======
+    @ResponseStatus(HttpStatus.OK)
+>>>>>>> main
     public void create(@RequestBody Category category){
         categoryService.create(category);
     }
@@ -43,12 +48,12 @@ public class CategoryController {
         categoryService.delete(category);
     }
 
-    @GetMapping("/byId")
-    public Optional<Category> getById(@RequestHeader("id") int t){
+    @GetMapping("/byId/{id}")
+    public Optional<Category> getById(@PathVariable("id") int t){
         return categoryService.getById(t);
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     public List<Category> getAll(){
 
         return categoryService.getAll();

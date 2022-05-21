@@ -1,0 +1,1 @@
+export let path:string ='http://localhost:8080';
