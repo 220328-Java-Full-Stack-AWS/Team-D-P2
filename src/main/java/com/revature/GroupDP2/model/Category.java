@@ -1,5 +1,7 @@
 package com.revature.GroupDP2.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,7 @@ public class Category {
     private String categoryName;
 
     @Column
+    @JsonManagedReference
     @OneToMany(mappedBy = "category", cascade = {CascadeType.DETACH, CascadeType.MERGE,CascadeType.REFRESH, CascadeType.PERSIST}, fetch=FetchType.LAZY)
     List<Product> products = new ArrayList<>();
 
