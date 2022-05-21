@@ -36,8 +36,13 @@ public class CartController {
     }
 
     @PutMapping("/addProduct")
-    public void addProduct() {
+    public void addProduct(@RequestHeader Integer cartId, @RequestBody Product product) {
+        cartService.addProduct(product, cartId);
+    }
 
+    @PutMapping("/deleteProduct")
+    public void deleteProduct(@RequestHeader Integer cartId, @RequestBody Product product) {
+        cartService.deleteProduct(product, cartId);
     }
 
 

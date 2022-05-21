@@ -52,13 +52,15 @@ public class CartService {
         return output;
     }
 
-    public Cart addProduct(Product product, Cart cart) {
+    public Cart addProduct(Product product, Integer cartId) {
+        Cart cart = getCartById(cartId).get();
         cart.addCartItem(product);
         cartRepository.update(cart);
         return cart;
     }
 
-    public Cart deleteProduct(Product product, Cart cart) {
+    public Cart deleteProduct(Product product, Integer cartId) {
+        Cart cart = getCartById(cartId).get();
         cart.deleteCartItem(product);
         cartRepository.update(cart);
         return cart;
