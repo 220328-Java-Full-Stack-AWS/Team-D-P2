@@ -4,6 +4,7 @@ import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/user")
@@ -13,19 +14,19 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-    @PostMapping("/login")
-    public User login(@RequestBody User user)throws Exception{
+    @GetMapping
+    public User login(@RequestBody User user)throws ResponseStatusException{
             return userService.login(user);
     }
-    @PostMapping("/register")
-    public User register(@RequestBody User user) throws Exception {
+    @PostMapping
+    public User register(@RequestBody User user) throws ResponseStatusException {
         System.out.println("we are here and we are not happy");
         System.out.println(user);
         return userService.register(user);
 
     }
     @PutMapping
-    public User update(@RequestBody User user) throws Exception {
+    public User update(@RequestBody User user) throws ResponseStatusException {
             return userService.edit(user);
 
     }
@@ -36,7 +37,7 @@ public class UserController {
     }
 
     @DeleteMapping
-    public User delete(@RequestBody User user) throws Exception{
+    public User delete(@RequestBody User user) throws ResponseStatusException{
         return userService.unregister(user);
     }
 

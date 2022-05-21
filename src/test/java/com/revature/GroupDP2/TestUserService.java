@@ -1,8 +1,5 @@
 package com.revature.GroupDP2;
 
-import com.revature.GroupDP2.exceptions.InvalidEmailException;
-import com.revature.GroupDP2.exceptions.UnableException;
-import com.revature.GroupDP2.exceptions.UnauthorizedException;
 import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.repository.UserRepository;
 import com.revature.GroupDP2.services.UserService;
@@ -13,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -58,7 +56,7 @@ public class TestUserService {
         Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             userService.register(tu1);
         });
-        Assertions.assertEquals("username already taken!", thrown.getMessage());
+        Assertions.assertEquals("400 BAD_REQUEST \"Username already exists!\"", thrown.getMessage());
     }
     @Test
     public void testUserRegisterFailBadEmail(){
@@ -67,7 +65,7 @@ public class TestUserService {
         Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             userService.register(tu1);
         });
-        Assertions.assertEquals("email invalid!", thrown.getMessage());
+        Assertions.assertEquals("400 BAD_REQUEST \"Email invalid!\"", thrown.getMessage());
     }
     @Test
     public void testLoginSuccess() throws Exception {
@@ -77,7 +75,7 @@ public class TestUserService {
     @Test
     public void testLoginFailure(){
         when(userRepository.getByUsername("username")).thenReturn(Optional.empty());
-        Assertions.assertThrows(UnauthorizedException.class, () -> {
+        Assertions.assertThrows(ResponseStatusException.class, () -> {
             userService.login(tu1);
         });
     }
@@ -102,7 +100,7 @@ public class TestUserService {
         when(userRepository.getById(5)).thenReturn(Optional.of(tu1));
         tu2.setId(5);
         tu2.setEmail("BADEMAIL");
-        Assertions.assertThrows(InvalidEmailException.class, () -> {
+        Assertions.assertThrows(ResponseStatusException.class, () -> {
             userService.edit(tu2);
         });
     }
@@ -110,7 +108,7 @@ public class TestUserService {
     public void testEditFailBadID(){
         when(userRepository.getById(5)).thenReturn(Optional.empty());
         tu2.setId(5);
-        Assertions.assertThrows(UnableException.class, () -> {
+        Assertions.assertThrows(ResponseStatusException.class, () -> {
             userService.edit(tu2);
         });
     }
@@ -122,7 +120,7 @@ public class TestUserService {
     @Test
     public void testUnRegesterFailure(){
         when(userRepository.getByUsername("username")).thenReturn(Optional.empty());
-        Assertions.assertThrows(UnableException.class, () -> {
+        Assertions.assertThrows(ResponseStatusException.class, () -> {
             userService.unregister(tu1);
         });
 
