@@ -14,13 +14,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  result : string = ""
-
+ 
   username: string = ""
   password: string = ""
+  token: string = ""
   
   login(){
-      this.loginService.login(this.username,this.password).subscribe((data: any) => this.result = "User Found");
+      this.loginService.login(this.username,this.password).subscribe((data: any) => this.token = data);
   }
 
 }
