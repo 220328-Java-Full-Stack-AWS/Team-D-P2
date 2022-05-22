@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Luv2ShopFormService } from 'src/app/services/luv2-shop-form.service';
+import { Luv2ShopFormService } from 'src/app/services-copy/luv2-shop-form.service';
 import { Country } from 'src/app/common/country';
 import { State } from 'src/app/common/state';
 import { Luv2ShopValidators } from 'src/app/validators/luv2-shop-validators';
-import { CartService } from 'src/app/services/cart.service';
-import { CheckoutService } from 'src/app/services/checkout.service';
+import { CartService } from 'src/app/services-copy/cart.service';
+import { CheckoutService } from 'src/app/services-copy/checkout.service';
 import { Router } from '@angular/router';
 import { Order } from 'src/app/common/order';
-import { OrderItem } from 'src/app/common/order-item';
+import { OrderItem } from 'src/app/common/order-items';
 import { Purchase } from 'src/app/common/purchase';
 import { environment } from 'src/environments/environment';
 import { PaymentInfo } from 'src/app/common/payment-info';
