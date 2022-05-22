@@ -4,16 +4,16 @@ import { Product } from '../common/product';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProductCategory } from '../common/product-category';
-import { environment } from 'src/environments/environment';
+import  set  from 'src/app/config/my-app-config'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  private baseUrl = environment.luv2shopApiUrl + '/products';
+  private baseUrl = set.oidc.redirectUri + '/products';
 
-  private categoryUrl = environment.luv2shopApiUrl + '/product-category';
+  private categoryUrl = set.oidc.redirectUri + '/products';
 
   constructor(private httpClient: HttpClient) { }
 

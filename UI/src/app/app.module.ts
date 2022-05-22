@@ -7,7 +7,7 @@ import { Routes, RouterModule, Router} from '@angular/router';
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
 import { SearchComponent } from './components/search/search.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
-import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+import { CartComponent } from './components/cart-details/cart-details.component';
 import { CartStatus } from './components/cart-status/cart-status';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -45,7 +45,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
 
   {path: 'checkout', component: CheckoutComponent},
-  {path: 'cart-details', component: CartDetailsComponent},
+  {path: 'cart-details', component: CartComponent},
   {path: 'products/:id', component: ProductDetailsComponent},
   {path: 'search/:keyword', component: ProductComponent},
   {path: 'category/:id', component: ProductComponent},
@@ -63,7 +63,7 @@ const routes: Routes = [
     SearchComponent,
     ProductDetailsComponent,
     CartStatus,
-    CartDetailsComponent,
+    CartComponent,
     CheckoutComponent,
     LoginComponent,
     LoginStatusComponent,
