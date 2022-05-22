@@ -4,15 +4,15 @@ export class CartItem {
 
     id: number;
     name: string;
-    description!: string;
+    description: string;
     unitPrice: number;
-    categortyId!: number;
+    categortyId: number;
     imageUrl: string;
     
 
-    quantity: number;
+    quantity!: number;
 
-    constructor (product: Product) {
+    constructor (product, Product) {
         this.id = product.id;
         this.name = product.Name;
         this.imageUrl = product.imageUrl;
