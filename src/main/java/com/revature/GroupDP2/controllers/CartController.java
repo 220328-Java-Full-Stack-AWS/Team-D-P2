@@ -5,8 +5,6 @@ import com.revature.GroupDP2.services.CartService;
 import com.revature.GroupDP2.model.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -33,22 +31,13 @@ public class CartController {
     }
 
     @PostMapping("/add")
-    public void addCart(HttpServletResponse response) {
-
-        Cookie cookie = new Cookie("hello", "sup");
-
-        response.addCookie(cookie);
-
-        Cart cart = new Cart();
-
+    public void addCart(@RequestBody Cart cart) {
         cartService.newCart(cart);
-
     }
 
     @PutMapping("/addProduct")
     public void addProduct() {
 
-        // Cart cart = cartService.getCartById();
     }
 
 

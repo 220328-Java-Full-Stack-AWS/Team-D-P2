@@ -19,7 +19,9 @@ public class UserController {
     }
     @PostMapping
     public User register(@RequestBody User user) throws Exception {
-            return userService.register(user);
+        System.out.println("we are here and we are not happy");
+        System.out.println(user);
+        return userService.register(user);
 
     }
     @PutMapping
@@ -27,4 +29,15 @@ public class UserController {
             return userService.edit(user);
 
     }
+
+    @PutMapping("/addCart")
+    public void addCart(@RequestHeader("cartId") Integer cartId, @RequestHeader("userId") Integer userId){
+        userService.addCart(cartId, userId);
+    }
+
+    @DeleteMapping
+    public User delete(@RequestBody User user) throws Exception{
+        return userService.unregister(user);
+    }
+
 }
