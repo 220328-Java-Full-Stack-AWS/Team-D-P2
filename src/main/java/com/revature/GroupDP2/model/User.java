@@ -1,5 +1,7 @@
 package com.revature.GroupDP2.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -36,6 +38,7 @@ public class User {
 
     @OneToOne
     @JoinColumn(name = "cart_id")
+    @JsonManagedReference
     private Cart cart;
     @Column(name="payment_methods")
     @OneToMany(mappedBy = "user", cascade = {CascadeType.DETACH, CascadeType.MERGE,CascadeType.REFRESH, CascadeType.PERSIST}, fetch=FetchType.LAZY)

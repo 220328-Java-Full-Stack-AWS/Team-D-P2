@@ -26,12 +26,12 @@ public class CartController {
         return cartService.getCartItems(cart);
     }
 //todo:this operation probably should not be accessible via api - will
-    /*
+
     @GetMapping("/all")
     public List<Cart> getAll(){
         return cartService.getAll();
     }
-*/
+
     @PostMapping("/add")
     public void addCart(@RequestBody Cart cart) {
         cartService.newCart(cart);
