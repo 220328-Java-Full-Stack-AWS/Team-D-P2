@@ -2,6 +2,7 @@ package com.revature.GroupDP2.repository;
 
 import com.revature.GroupDP2.Irepository.ICartRepository;
 import com.revature.GroupDP2.model.Cart;
+import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.util.StorageManager;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -37,6 +38,12 @@ public class CartRepository implements ICartRepository, Lifecycle {
         Transaction transaction = session.beginTransaction();
         session.update(c);
         transaction.commit();
+    }
+
+    public Optional<Cart> getByUser(User user) {
+        TypedQuery<Cart> query = session.createQuery("FROM Cart WHERE user = :u",Cart.class);
+        query.setParameter("u",user);
+        return Optional.ofNullable(query.getSingleResult());
     }
 
     @Override

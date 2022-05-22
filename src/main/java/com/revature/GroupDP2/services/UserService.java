@@ -13,9 +13,12 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final CartService cartService;
     @Autowired
-    public UserService(UserRepository userRepository) {
-    this.userRepository=userRepository;
+    public UserService(UserRepository userRepository, CartService cartService) {
+
+        this.userRepository=userRepository;
+        this.cartService = cartService;
     }
     /*
     1. check if username is unique
@@ -33,6 +36,8 @@ public class UserService {
             //throw new InvalidEmailException("email invalid!");
         }
         userRepository.create(user);
+        cartService.newCart(user);
+
         return user;
     }
     public User login(User user) throws ResponseStatusException{

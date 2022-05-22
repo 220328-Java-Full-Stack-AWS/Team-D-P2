@@ -2,6 +2,7 @@ package com.revature.GroupDP2;
 
 import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.repository.UserRepository;
+import com.revature.GroupDP2.services.CartService;
 import com.revature.GroupDP2.services.UserService;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,13 +20,16 @@ public class TestUserService {
     @MockBean(UserRepository.class)
     @Autowired
     private UserRepository userRepository;
+    @MockBean(CartService.class)
+    @Autowired
+    private CartService cartService;
     private UserService userService;
     private User tu1;
     private User tu2;
 
     @BeforeEach
     public void before(){
-        userService=new UserService(userRepository);
+        userService=new UserService(userRepository, cartService);
         tu1=new User("username","password",true,"John","Test",
                 "EMAIL@EMAIL.COM","phone","street","city","state","zip");
         tu2=new User("wrong","wrong",true,"Mark","Test",
