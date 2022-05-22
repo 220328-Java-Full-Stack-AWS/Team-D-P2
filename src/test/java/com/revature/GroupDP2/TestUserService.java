@@ -5,7 +5,6 @@ import com.revature.GroupDP2.repository.UserRepository;
 import com.revature.GroupDP2.services.UserService;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,9 +12,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
@@ -45,7 +41,7 @@ public class TestUserService {
     }
 
     @Test
-    public void testUserRegisterSuccess() throws Exception {
+    public void testUserRegisterSuccess(){
         when(userRepository.getByUsername("username")).thenReturn(Optional.empty());
         userService.register(tu1);
     }
@@ -68,7 +64,7 @@ public class TestUserService {
         Assertions.assertEquals("400 BAD_REQUEST \"Email invalid!\"", thrown.getMessage());
     }
     @Test
-    public void testLoginSuccess() throws Exception {
+    public void testLoginSuccess(){
         when(userRepository.getByUsername("username")).thenReturn(Optional.of(tu1));
         Assertions.assertEquals(userService.login(tu1),tu1);
     }
@@ -80,13 +76,13 @@ public class TestUserService {
         });
     }
     @Test
-    public void testEditSuccessWhileNotUpdateing() throws Exception{
+    public void testEditSuccessWhileNotUpdateing(){
         tu1.setId(5);
         when(userRepository.getById(5)).thenReturn(Optional.of(tu1));
         Assertions.assertEquals(userService.edit(tu1),tu1);
     }
     @Test
-    public void testEditSuccessWhileUpdating() throws Exception {
+    public void testEditSuccessWhileUpdating(){
         tu1.setId(5);
         when(userRepository.getById(5)).thenReturn(Optional.of(tu1));
         User tu3= new User("newUsername","password",true,"John","Test",
@@ -113,7 +109,7 @@ public class TestUserService {
         });
     }
     @Test
-    public void testUnRegesterSuccess() throws Exception {
+    public void testUnRegesterSuccess(){
         when(userRepository.getByUsername("username")).thenReturn(Optional.of(tu1));
         Assertions.assertEquals(tu1,userService.unregister(tu1));
     }

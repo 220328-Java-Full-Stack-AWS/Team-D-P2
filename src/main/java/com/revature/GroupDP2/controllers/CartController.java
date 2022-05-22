@@ -21,7 +21,7 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    @GetMapping("/products")
+    @GetMapping
     public List<Product> viewCart(@RequestBody Cart cart) {
         return cartService.getCartItems(cart);
     }
@@ -32,17 +32,17 @@ public class CartController {
         return cartService.getAll();
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public void addCart(@RequestBody Cart cart) {
         cartService.newCart(cart);
     }
 
-    @PutMapping("/addProduct")
+    @PutMapping
     public void addProduct(@RequestHeader Integer cartId, @RequestBody Product product) {
         cartService.addProduct(product, cartId);
     }
 
-    @PutMapping("/deleteProduct")
+    @DeleteMapping
     public void deleteProduct(@RequestHeader Integer cartId, @RequestBody Product product) {
         cartService.deleteProduct(product, cartId);
     }
