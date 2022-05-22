@@ -46,12 +46,12 @@ public class CategoryController {
         categoryService.delete(category);
     }
 
-    @GetMapping("/byId/{id}")
+    @GetMapping("/{id}")
     public Optional<Category> getById(@PathVariable("id") int t){
         return categoryService.getById(t);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping
     public List<Category> getAll(){
 
         return categoryService.getAll();

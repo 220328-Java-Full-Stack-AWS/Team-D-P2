@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderHistory } from '../../common/order-history';
-import { OrderHistoryService } from '../../services/order-history.service';
+import { OrderHistoryService } from '../../services-copy/order-history.service';
 
 @Component({
   selector: 'app-order-history',
