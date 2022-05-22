@@ -11,11 +11,11 @@ export class CategoryService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  
+
   constructor(private http: HttpClient) { }
 
   getCategoryData(): Observable<any>{
-    return this.http.get(path+'/byId/2');
+    return this.http.get(path+'/category/byId/1');
   }
   getAllCategoryData(): Observable<any>{
     return this.http.get(path+'/category/getAll');
