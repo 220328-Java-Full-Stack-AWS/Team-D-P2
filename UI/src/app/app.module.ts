@@ -17,6 +17,7 @@ import { NgModule } from '@angular/core';
 
 
 
+
     // Redirect the user to your custom login page
    
 
@@ -34,6 +35,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
   ProductComponent,
+  
     
     
   ],
