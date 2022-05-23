@@ -12,6 +12,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // <-- bannana box lives here
 //ours ///
 import { RegistrationComponent } from './components/registration/registration.component';
+import { RegistrationService } from './services/registration.service';
 
 
 
@@ -35,8 +36,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-  ProductComponent,
-  RegistrationComponent
+    ProductComponent,
+    RegistrationComponent
   
     
     
@@ -46,10 +47,10 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
-	FormsModule
+	  FormsModule
    
   ],
-  providers: [ProductService],
+  providers: [ProductService,RegistrationService],
               
   bootstrap: [AppComponent]
 })
