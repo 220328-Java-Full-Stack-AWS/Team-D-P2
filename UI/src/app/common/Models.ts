@@ -18,11 +18,11 @@ export class Category {
     constructor(){}
   }
   export class Payment{
-    id:number=0;
-    cardNumber:string="";
-    expirationDate:string="";
-    cvvNumber:number=0;
-    user:User=new User("","","","","");
+    id:number = 0;
+    cardNumber:string = "";
+    expirationDate:string = "";
+    cvvNumber:string = "";
+    user:User = new User("","","","","");
     constructor(){}
   }
   export class User {
