@@ -1,33 +1,35 @@
 package com.revature.GroupDP2;
 
-import com.revature.GroupDP2.exceptions.InvalidEmailException;
-import com.revature.GroupDP2.exceptions.UnableException;
-import com.revature.GroupDP2.exceptions.UnauthorizedException;
 import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.repository.UserRepository;
+import com.revature.GroupDP2.services.CartService;
 import com.revature.GroupDP2.services.UserService;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class TestUserService {
-    private static UserRepository userRepository;
-    private static UserService userService;
-    private static User tu1;
-    private static User tu2;
+    @MockBean(UserRepository.class)
+    @Autowired
+    private UserRepository userRepository;
+    @MockBean(CartService.class)
+    @Autowired
+    private CartService cartService;
+    private UserService userService;
+    private User tu1;
+    private User tu2;
 
-    @BeforeAll
-    public static void beforeC(){
-        userRepository=mock(UserRepository.class);
-        userRepository=mock(UserRepository.class);
-        userService = new UserService(userRepository);
-    }
     @BeforeEach
     public void before(){
+        userService=new UserService(userRepository, cartService);
         tu1=new User("username","password",true,"John","Test",
                 "EMAIL@EMAIL.COM","phone","street","city","state","zip");
         tu2=new User("wrong","wrong",true,"Mark","Test",
@@ -43,7 +45,7 @@ public class TestUserService {
     }
 
     @Test
-    public void testUserRegisterSuccess() throws Exception {
+    public void testUserRegisterSuccess(){
         when(userRepository.getByUsername("username")).thenReturn(Optional.empty());
         userService.register(tu1);
     }
@@ -54,7 +56,7 @@ public class TestUserService {
         Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             userService.register(tu1);
         });
-        Assertions.assertEquals("username already taken!", thrown.getMessage());
+        Assertions.assertEquals("400 BAD_REQUEST \"Username already exists!\"", thrown.getMessage());
     }
     @Test
     public void testUserRegisterFailBadEmail(){
@@ -63,28 +65,28 @@ public class TestUserService {
         Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             userService.register(tu1);
         });
-        Assertions.assertEquals("email invalid!", thrown.getMessage());
+        Assertions.assertEquals("400 BAD_REQUEST \"Email invalid!\"", thrown.getMessage());
     }
     @Test
-    public void testLoginSuccess() throws Exception {
+    public void testLoginSuccess(){
         when(userRepository.getByUsername("username")).thenReturn(Optional.of(tu1));
         Assertions.assertEquals(userService.login(tu1),tu1);
     }
     @Test
     public void testLoginFailure(){
         when(userRepository.getByUsername("username")).thenReturn(Optional.empty());
-        Assertions.assertThrows(UnauthorizedException.class, () -> {
+        Assertions.assertThrows(ResponseStatusException.class, () -> {
             userService.login(tu1);
         });
     }
     @Test
-    public void testEditSuccessWhileNotUpdateing() throws Exception{
+    public void testEditSuccessWhileNotUpdateing(){
         tu1.setId(5);
         when(userRepository.getById(5)).thenReturn(Optional.of(tu1));
         Assertions.assertEquals(userService.edit(tu1),tu1);
     }
     @Test
-    public void testEditSuccessWhileUpdating() throws Exception {
+    public void testEditSuccessWhileUpdating(){
         tu1.setId(5);
         when(userRepository.getById(5)).thenReturn(Optional.of(tu1));
         User tu3= new User("newUsername","password",true,"John","Test",
@@ -98,7 +100,7 @@ public class TestUserService {
         when(userRepository.getById(5)).thenReturn(Optional.of(tu1));
         tu2.setId(5);
         tu2.setEmail("BADEMAIL");
-        Assertions.assertThrows(InvalidEmailException.class, () -> {
+        Assertions.assertThrows(ResponseStatusException.class, () -> {
             userService.edit(tu2);
         });
     }
@@ -106,19 +108,19 @@ public class TestUserService {
     public void testEditFailBadID(){
         when(userRepository.getById(5)).thenReturn(Optional.empty());
         tu2.setId(5);
-        Assertions.assertThrows(UnableException.class, () -> {
+        Assertions.assertThrows(ResponseStatusException.class, () -> {
             userService.edit(tu2);
         });
     }
     @Test
-    public void testUnRegesterSuccess() throws Exception {
+    public void testUnRegesterSuccess(){
         when(userRepository.getByUsername("username")).thenReturn(Optional.of(tu1));
         Assertions.assertEquals(tu1,userService.unregister(tu1));
     }
     @Test
     public void testUnRegesterFailure(){
         when(userRepository.getByUsername("username")).thenReturn(Optional.empty());
-        Assertions.assertThrows(UnableException.class, () -> {
+        Assertions.assertThrows(ResponseStatusException.class, () -> {
             userService.unregister(tu1);
         });
 

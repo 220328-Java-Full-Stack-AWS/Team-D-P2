@@ -20,15 +20,18 @@ public class CategoryController {
     }
 
     @PostMapping
+    //@RequestMapping(value = "/{categoryName}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public void create(@RequestBody Category category){
+    public Category create(@RequestBody Category category){
         categoryService.create(category);
+        return category;
     }
 
     @PutMapping
-    public void update(@RequestHeader("id") int id, @RequestBody Category category){
+    public Category update(@RequestHeader("id") int id, @RequestBody Category category){
 
         categoryService.update(id, category);
+        return category;
     }
 
     @PatchMapping
@@ -43,12 +46,12 @@ public class CategoryController {
         categoryService.delete(category);
     }
 
-    @GetMapping("/byId/{id}")
+    @GetMapping("/{id}")
     public Optional<Category> getById(@PathVariable("id") int t){
         return categoryService.getById(t);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping
     public List<Category> getAll(){
 
         return categoryService.getAll();
