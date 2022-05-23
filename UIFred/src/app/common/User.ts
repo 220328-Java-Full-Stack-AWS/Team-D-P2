@@ -1,6 +1,6 @@
 export class User{
     constructor(){}
-    id:number=0
+    id:number=0;
     username:string="";
     password:string="";
     firstName:string="";
