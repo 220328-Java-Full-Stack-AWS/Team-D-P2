@@ -20,10 +20,7 @@ public class UserController {
     }
     @PostMapping
     public User register(@RequestBody User user) throws ResponseStatusException {
-        System.out.println("we are here and we are not happy");
-        System.out.println(user);
         return userService.register(user);
-
     }
     @PutMapping
     public User update(@RequestBody User user) throws ResponseStatusException {
