@@ -32,7 +32,6 @@ public class CorsFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse resp, FilterChain chain) throws ServletException, IOException {
         String tokenHeader = req.getHeader("Authorization");
-        System.out.println(tokenHeader);
         String username = null;
         String token = null;
 

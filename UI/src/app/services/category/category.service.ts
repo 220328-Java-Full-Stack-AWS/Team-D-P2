@@ -12,24 +12,28 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   getCategoryData(): Observable<any>{
-    getCategoryData();
-    let token: any = localStorage.getItem('Authorization');
-    var reqHeader = new HttpHeaders({ 
+    //getCategoryData();
+    let token = {  
+      'authorization': 'Bearer ' + localStorage.getItem('Authorization')
+    } //scalar value  key2: “value”, 
+    
+    let reqHeader = new HttpHeaders({ 
         'Content-Type': 'application/json',
-        'Authorization' : token
+        'Authorization' : JSON.stringify(token)
      });
 
-    return this.http.get(path +'/category/byId/2', {headers: {"jony": "depp"}});
+    return this.http.get(path +'/category/byId/1', {headers: reqHeader});
   }
   getAllCategoryData(): Observable<any>{
     return this.http.get(path+'/category/getAll');
   }
-}
 
+}
+/*
 async function getCategoryData() {
   let token = localStorage.getItem('Authorization');
   const response = await fetch(
-      path + '/category/byId/2',
+      path + '/category/byId/1',
       {
         method: "GET",
             headers: {
@@ -42,3 +46,4 @@ async function getCategoryData() {
     });
   console.log(response);
 }
+*/
