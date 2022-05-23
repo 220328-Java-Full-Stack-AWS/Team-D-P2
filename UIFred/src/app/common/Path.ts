@@ -1,1 +1,1 @@
-export let url:string="http://localhost:8080/user";
+export let url:string="http://localhost:8080";
