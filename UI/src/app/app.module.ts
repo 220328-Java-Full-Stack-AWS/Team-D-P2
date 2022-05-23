@@ -9,6 +9,7 @@ import { ProductService } from './services/product.service';
 
 import { ProductComponent } from './components/product/product.component';
 import { NgModule } from '@angular/core';
+import { PaymentComponent } from './components/payment/payment.component';
 
 
 
@@ -35,6 +36,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
   ProductComponent,
+  PaymentComponent,
   
     
     
