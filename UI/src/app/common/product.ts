@@ -1,9 +1,12 @@
 export class Product {
-    id!: number;
-    Name!: string;
+    id!: string;
+    name!: string;
     description!: string;
     unitPrice!: number;
-    categoryId!: number;
     imageUrl!: string;
+    categoryId!: number;
+  static Component: any;
     
 }
+
+
