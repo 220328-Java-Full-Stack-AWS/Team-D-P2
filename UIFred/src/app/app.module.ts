@@ -40,7 +40,7 @@ const routes: Routes = [
 
   ],
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes,{onSameUrlNavigation:'reload'}),
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,

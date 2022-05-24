@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/common/product';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/common/Category';
 
 @Component({
@@ -15,7 +15,11 @@ import { Category } from 'src/app/common/Category';
 export class ProductComponent implements OnInit {
 
   product: Product[]=[];  
-  constructor(private productService: ProductService,private route: ActivatedRoute) { }
+  constructor(private productService: ProductService,private route: ActivatedRoute,private router: Router) { 
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
+  }
 
   ngOnInit() {
     //get category from path if exists
@@ -54,6 +58,12 @@ export class ProductComponent implements OnInit {
       this.product= this.product.concat(c.products)
     }      
     })
+  }
+  popup(product:Product){
+    if(window.confirm("add "+product.productName+" to cart?")){
+      //add to cart here
+    }
+
   }
    Product() {
 

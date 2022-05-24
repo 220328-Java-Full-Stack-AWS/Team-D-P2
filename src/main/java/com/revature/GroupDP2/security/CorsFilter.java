@@ -19,61 +19,11 @@ import java.io.IOException;
 
 @Component
 public class CorsFilter extends OncePerRequestFilter {
-
-    private final JwtUserDetailsService jwtUserDetailsService;
-    private final TokenManager tokenManager;
-    @Autowired
-    public CorsFilter(JwtUserDetailsService jwtUserDetailsService,TokenManager tokenManager){
-        this.jwtUserDetailsService = jwtUserDetailsService;
-        this.tokenManager = tokenManager;
-    }
     @Override
-    protected void doFilterInternal(HttpServletRequest req, HttpServletResponse resp, FilterChain chain) throws ServletException, IOException {
-        String tokenHeader = req.getHeader("Authorization");
-        String username = null;
-        String token = null;
-
-        /*
-        Enumeration<String> headerNames = req.getHeaderNames();
-
-        if (headerNames != null) {
-            while (headerNames.hasMoreElements()) {
-                System.out.println("Header: " + req.getHeader(headerNames.nextElement()));
-            }
-        }
-        */
-
-        if (tokenHeader != null && tokenHeader.startsWith("\"Bearer ") && !(tokenHeader.equals("Bearer null"))) {
-            token = tokenHeader.substring(10,tokenHeader.length()-3);
-            try{
-                username = tokenManager.getUsernameFromToken(token);
-            }
-            catch (IllegalArgumentException e) {
-                System.out.println("Unable to get JWT Token");
-            } catch (ExpiredJwtException e) {
-                System.out.println("JWT Token has expired");
-            }
-        }
-        else  {
-            token = "Authorization Failed";
-        }
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null){
-            UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(username);
-            if (tokenManager.validateToken(token,userDetails)) {
-                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                  userDetails,null,userDetails.getAuthorities()
-                );
-                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
-                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-            }
-        }
-        chain.doFilter(req,resp);
-
-        /*
-            resp.setHeader("Access-Control-Allow-Origin", "*");
-            resp.setHeader("Access-Control-Allow-Methods", "*");
-            resp.setHeader("Access-Control-Allow-Headers", "*");
-            chain.doFilter(req, resp);
-         */
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "*");
+        response.setHeader("Access-Control-Allow-Headers", "*");
+        filterChain.doFilter(request, response);
     }
 }

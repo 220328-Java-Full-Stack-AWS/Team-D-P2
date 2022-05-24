@@ -1,4 +1,4 @@
-import { Cart } from "src/app/common/cart";
+import { Cart } from "src/app/common/Cart";
 import {Payment} from "src/app/common/Payment";
 export class User{
     constructor(){}

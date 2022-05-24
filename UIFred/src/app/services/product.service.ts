@@ -37,10 +37,11 @@ export class ProductService {
 
   }
   getCategoryName(name:string): Observable<any> {
-    return this.httpClient.get<GetResponse>(url+'/category/byName'+name);
+    return this.httpClient.get<any>(url+'/category/byName/'+name);
   }
   getCategoryAll():Observable<any>{
-    return this.httpClient.get<GetResponse>(url+'/category/getAll');
+    console.log("in all")
+    return this.httpClient.get<any>(url+'/category/getAll');
   }
 }
 

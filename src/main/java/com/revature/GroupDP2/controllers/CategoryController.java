@@ -55,8 +55,8 @@ public class CategoryController {
             return ResponseEntity.of(categoryService.getById(t));
         }
 
-    @GetMapping("/byName")
-    public ResponseEntity<Category> getByName(@RequestHeader String t){
+    @GetMapping("/byName/{name}")
+    public ResponseEntity<Category> getByName(@PathVariable("name") String t){
 
             return ResponseEntity.of(categoryService.getByName(t));
 
