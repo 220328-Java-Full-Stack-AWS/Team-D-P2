@@ -16,19 +16,24 @@ export class LoginComponent implements OnInit {
  
   username: string = ""
   password: string = ""
-  token: string = ""
+
+  response : User = {
+    id : 0,
+    username : "",
+    password : ""
+  }
   
     
   login(){
-      this.loginService.login(this.username,this.password).subscribe((data: any) => {this.token = data.token; test(this.token); console.log('response headers', data.headers)});
+      console.log(this.username, this.password);
+      this.loginService.login(this.username,this.password).subscribe((data: any) => {this.response.id = data.id,this.response.username = data.username,this.response.password = data.password});
       
   }
 
 }
 
-function test(token: string){
-  localStorage.clear();
-  sessionStorage.clear();
-  console.log(token);
-  localStorage.setItem('Authorization',JSON.stringify(token));
+export class User{
+  id: number = 0;
+  username: string = ""
+  password: string = ""
 }
