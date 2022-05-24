@@ -14,14 +14,12 @@ import { FormsModule } from '@angular/forms'; // <-- bannana box lives here
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RegistrationService } from './services/registration.service';
 
-
-
-
+import { PaymentComponent } from './components/payment/payment.component';
 
 
 
     // Redirect the user to your custom login page
-   
+
 
 const routes: Routes = [
 
@@ -38,10 +36,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     ProductComponent,
-    RegistrationComponent
-  
-    
-    
+    RegistrationComponent,
+  PaymentComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -49,10 +45,10 @@ const routes: Routes = [
     HttpClientModule,
     ReactiveFormsModule,
 	  FormsModule
-   
+
   ],
   providers: [ProductService,RegistrationService],
-              
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
