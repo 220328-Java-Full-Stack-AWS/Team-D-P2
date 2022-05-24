@@ -40,7 +40,7 @@ public class CategoryService {
         return categoryRepository.getById(t);
     }
 
-    public Optional<Category> getByName(Category t){return Optional.ofNullable(categoryRepository.getByCategoryName(t));}
+    public Optional<Category> getByName(String t){return Optional.ofNullable(categoryRepository.getByCategoryName(t));}
 
     public List<Category> getAll(){
 

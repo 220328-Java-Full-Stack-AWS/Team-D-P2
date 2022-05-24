@@ -14,8 +14,7 @@ import { Category } from 'src/app/common/Category';
 })
 export class ProductComponent implements OnInit {
 
-  product: Product[]=[];   
-  
+  product: Product[]=[];  
   constructor(private productService: ProductService,private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -32,14 +31,13 @@ export class ProductComponent implements OnInit {
 
   }
   getCategory(categoryName:string){
-    let search= new Category();
-    search.categoryName=categoryName;
-    this.productService.getCategoryName(search).subscribe((cat:Category)=>{
+    this.productService.getCategoryName(categoryName).subscribe((cat:Category)=>{
       let fakeCategory= new Category()
       fakeCategory.id=cat.id;
       fakeCategory.categoryName=cat.categoryName;
       for(let p of cat.products){
         p.category=fakeCategory;
+        console.log(p)
       }
       this.product= this.product.concat(cat.products) 
     })

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Product } from '../common/product/product';
+import { Product } from '../common/product';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { url } from '../common/Path';
@@ -36,8 +36,8 @@ export class ProductService {
     //);
 
   }
-  getCategoryName(name:Object): Observable<any> {
-    return this.httpClient.get<GetResponse>(url+'/category/byName',name);
+  getCategoryName(name:string): Observable<any> {
+    return this.httpClient.get<GetResponse>(url+'/category/byName'+name);
   }
   getCategoryAll():Observable<any>{
     return this.httpClient.get<GetResponse>(url+'/category/getAll');
