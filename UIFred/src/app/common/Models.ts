@@ -29,7 +29,7 @@ export class Category {
     expirationDate:string="";
     cvvNumber:number=0;
     user:User=new User("","","","","");
-    constructor(_cardNumber:number,_expirationDate:string,_cvvNumber:number){
+    constructor(_cardNumber:string,_expirationDate:string,_cvvNumber:number){
       this.cardNumber = _cardNumber;
       this.expirationDate = _expirationDate;
       this.cvvNumber = _cvvNumber;
