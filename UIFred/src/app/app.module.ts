@@ -9,7 +9,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RegistrationService } from './services/registration.service';
-import { PaymentComponent } from './components/payment/payment.component';
+import { PaymentService } from './services/payment.service';
+//import { PaymentComponent } from './components/payment/payment.component';
 import { LoginComponent } from './components/login/login.component';
 
 
@@ -20,8 +21,8 @@ import { LoginComponent } from './components/login/login.component';
 const routes: Routes = [
 
   {path: 'search/:keyword', component: ProductComponent},
+  {path: 'category/:categoryName', component: ProductComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'category/:id', component: ProductComponent},
   {path: 'category', component: ProductComponent},
   {path: 'products', component: ProductComponent},
   {path: 'register', component:RegistrationComponent},
@@ -35,18 +36,18 @@ const routes: Routes = [
     ProductComponent,
     LoginComponent,
     RegistrationComponent,
-    PaymentComponent,
+  //PaymentComponent,
 
   ],
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes,{onSameUrlNavigation:'reload'}),
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
 	  FormsModule
 
   ],
-  providers: [ProductService,RegistrationService],
+  providers: [PaymentService,ProductService,RegistrationService],
 
   bootstrap: [AppComponent]
 })

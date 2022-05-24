@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Product } from '../common/product/product';
+import { Product } from '../common/product';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { url } from '../common/Path';
+import { Category } from '../common/Category';
 
 
 @Injectable({
@@ -28,11 +29,19 @@ export class ProductService {
     //.pipe(map(response => response._product.product)
     //);
   }
-  //get by
+  //get by name
   getProductName(name:string): Observable<any> {
-    return this.httpClient.get<GetResponse>(this.baseUrl+'/name/'+name)
+    return this.httpClient.get<GetResponse>(this.baseUrl+'/name')
     //.pipe(  map(response => response._product.product)
     //);
+
+  }
+  getCategoryName(name:string): Observable<any> {
+    return this.httpClient.get<any>(url+'/category/byName/'+name);
+  }
+  getCategoryAll():Observable<any>{
+    console.log("in all")
+    return this.httpClient.get<any>(url+'/category/getAll');
   }
 }
 

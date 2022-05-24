@@ -37,4 +37,3 @@ export class RegistrationComponent implements OnInit {
     this.registrationService.register(user).subscribe((data: any) => console.log("user added"))
   }
 }
-

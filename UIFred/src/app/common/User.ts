@@ -1,3 +1,5 @@
+import { Cart } from "src/app/common/Cart";
+import {Payment} from "src/app/common/Payment";
 export class User{
     constructor(_username:string,_password:string,_firstname:string,_lastname:string,_enabled:boolean,_email:string,_phone:string,
                 _streetName:string,_city:string,_state:string,_zipCode:string)
@@ -26,6 +28,6 @@ export class User{
     city!:string;
     state!:string;
     zipCode!:string;
-    cart!:Object;
-    paymentMethods!:Object[];
+    cart!:Cart;
+    paymentMethods!:Payment[];
 }
