@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RegistrationService } from './services/registration.service';
 import { PaymentComponent } from './components/payment/payment.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 
@@ -19,6 +20,7 @@ import { PaymentComponent } from './components/payment/payment.component';
 const routes: Routes = [
 
   {path: 'search/:keyword', component: ProductComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'category/:id', component: ProductComponent},
   {path: 'category', component: ProductComponent},
   {path: 'products', component: ProductComponent},
@@ -31,6 +33,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     ProductComponent,
+    LoginComponent,
     RegistrationComponent,
     PaymentComponent,
 
