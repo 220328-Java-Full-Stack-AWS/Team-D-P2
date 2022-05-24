@@ -29,7 +29,7 @@ const routes: Routes = [
   {path: 'category/:id', component: ProductComponent},
   {path: 'category', component: ProductComponent},
   {path: 'products', component: ProductComponent},
-  {path: 'regester', component:RegistrationComponent},
+  {path: 'register', component:RegistrationComponent},
   //{path: '', redirectTo: '/products', pathMatch: 'full'},
   //{path: '', redirectTo: '/products', pathMatch: 'full'}
 ];
