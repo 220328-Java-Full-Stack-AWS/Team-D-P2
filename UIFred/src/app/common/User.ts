@@ -1,5 +1,5 @@
-import { Cart } from "./Cart";
-import {Payment} from "./payment"
+import { Cart } from "src/app/common/cart";
+import {Payment} from "src/app/common/Payment";
 export class User{
     constructor(){}
     id!:number;
