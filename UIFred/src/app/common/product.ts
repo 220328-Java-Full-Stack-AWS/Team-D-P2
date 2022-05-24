@@ -1,10 +1,13 @@
+import { Category } from "./Category";
+
 export class Product {
-    id!: string;
-    name!: string;
-    description!: string;
-    unitPrice!: number;
-    imageUrl!: string;
-    categoryId!: number;
+  constructor(){};
+    productId: number=0;
+    productName: string="";
+    description: string="";
+    price: number=0;
+    imageUrl: string="";
+    category!: Category;
   static Component: any;
     
 }

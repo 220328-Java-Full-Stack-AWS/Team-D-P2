@@ -49,26 +49,24 @@ public class CategoryController {
     }
   
     @GetMapping("/byId/{id}")
-    public ResponseEntity<Category> getById(@RequestHeader("Authorization") String token, @PathVariable("id") int t){
-        System.out.println("we are in a controller and token is " + token);
-        if (token.equals("\"Bearer null\"")){
-            return ResponseEntity.status(401).build();
-        }
-        else {
+    public ResponseEntity<Category> getById(@PathVariable("id") int t){
+
+
             return ResponseEntity.of(categoryService.getById(t));
         }
-    }
 
+    @GetMapping("/byName")
+    public ResponseEntity<Category> getByName(@RequestHeader String t){
+
+            return ResponseEntity.of(categoryService.getByName(t));
+
+    }
     @GetMapping("/getAll")
-    public ResponseEntity<? extends List> getAll(@RequestHeader("Authorization") String token){
-        System.out.println("we are in a controller and token is " + token);
-        if (token.equals("\"Bearer null\"")){
-            return ResponseEntity.status(401).build();
-        }
-        else {
+    public ResponseEntity<? extends List> getAll(){
+
             return ResponseEntity.ok().body(categoryService.getAll());
         }
-    }
+
 
 
 }

@@ -1,3 +1,4 @@
+ <div class="main-content">
  <table class="table">
 
     <thead class="thead-dark">
@@ -7,19 +8,22 @@
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
-            <th>CategoryId</th>
+            <th>CategoryName</th>
         </tr>
     </thead>
 
     <tbody>
         <tr *ngFor="let tempProduct of product">
             <td class="align-middle">
-                <img src="{{ tempProduct.imageUrl }}" height="50" />
+                <a href=""><img src="{{ tempProduct.imageUrl }}" height="50" /></a>
             </td>
-            <td class="align-middle">{{ tempProduct.name}}</td>
-            <td class="align-middle">{{ tempProduct.unitPrice }}</td>
-            
+            <td class="align-middle"><a href="">{{ tempProduct.productId}}</a></td>
+            <td class="align-middle"><a href="">{{ tempProduct.productName}}</a></td>
+            <td class="align-middle"><a href="">{{ tempProduct.description }}</a></td>
+            <td class="align-middle"><a href="">{{ tempProduct.price }}</a></td>
+            <td class="align-middle"><a href="category/{{tempProduct.category.categoryName}}">{{ tempProduct.category.categoryName}}</a></td>
         </tr>
 
     </tbody>
-</table> -->
+</table>
+</div>

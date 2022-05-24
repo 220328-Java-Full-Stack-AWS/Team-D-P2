@@ -1,5 +1,5 @@
-import { Payment } from "./Payment";
-
+import { Cart } from "./Cart";
+import {Payment} from "./payment"
 export class User{
     constructor(){}
     id!:number;
@@ -14,6 +14,6 @@ export class User{
     city!:string;
     state!:string;
     zipCode!:string;
-    cart!:Object;
-    paymentMethods!:Object[];
+    cart!:Cart;
+    paymentMethods!:Payment[];
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
-import { Product } from 'src/app/common/product/product';
+import { Product } from 'src/app/common/product';
 import { ActivatedRoute } from '@angular/router';
+import { Category } from 'src/app/common/Category';
 
 @Component({
   selector: 'app-product',
@@ -13,21 +14,47 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductComponent implements OnInit {
 
-  product: Product[] = [];
-  currentCategoryId!: number;
-   
-  
-  constructor(private productService: ProductService,
-              private route: ActivatedRoute) { }
+  product: Product[]=[];  
+  constructor(private productService: ProductService,private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(() => {
-      this.Product();
-    });
-    
-  }
-  
+    //get category from path if exists
+    let categoryName:any=this.route.snapshot.paramMap.get('categoryName');
+    console.log(categoryName)
+    if(categoryName){
+      //search in category
+      this.getCategory(categoryName)
+    }else{
+      //search in 
+    this.getProductsAll();
+    }
 
+  }
+  getCategory(categoryName:string){
+    this.productService.getCategoryName(categoryName).subscribe((cat:Category)=>{
+      let fakeCategory= new Category()
+      fakeCategory.id=cat.id;
+      fakeCategory.categoryName=cat.categoryName;
+      for(let p of cat.products){
+        p.category=fakeCategory;
+        console.log(p)
+      }
+      this.product= this.product.concat(cat.products) 
+    })
+  }
+  getProductsAll(){
+    this.productService.getCategoryAll().subscribe((cat:Category[])=>{
+    for(let c of cat){
+      let fakeCategory= new Category()
+      fakeCategory.id=c.id;
+      fakeCategory.categoryName=c.categoryName;
+      for(let p of c.products){
+        p.category=fakeCategory;
+      }
+      this.product= this.product.concat(c.products)
+    }      
+    })
+  }
    Product() {
 
      //Check if "id" parameter is available
