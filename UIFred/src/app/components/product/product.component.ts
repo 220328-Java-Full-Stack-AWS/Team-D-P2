@@ -10,7 +10,6 @@ import { Product } from 'src/app/common/product';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-
   product: Product[] = [];
    
   

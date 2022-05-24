@@ -45,21 +45,6 @@ public class Category {
         this.categoryName = categoryName;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public void addProduct(Product product){
-        products.add(product);
-    }
-
-    public void removeProduct(Product product){
-        products.remove(product);
-    }
 
     @Override
     public String toString() {
