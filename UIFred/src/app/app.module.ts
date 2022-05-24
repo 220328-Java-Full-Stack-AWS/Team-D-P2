@@ -1,19 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Routes, RouterModule, Router} from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { ProductService } from './services/product.service';
-
 import { ProductComponent } from './components/product/product.component';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // <-- bannana box lives here
-//ours ///
+import { FormsModule } from '@angular/forms';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RegistrationService } from './services/registration.service';
-
 import { PaymentComponent } from './components/payment/payment.component';
 
 
@@ -37,7 +32,8 @@ const routes: Routes = [
     AppComponent,
     ProductComponent,
     RegistrationComponent,
-  PaymentComponent,
+    PaymentComponent,
+
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -56,6 +52,8 @@ export class AppModule { }
 
 
 
-
+function ProductGridComponent(ProductGridComponent: any) {
+  throw new Error('Function not implemented.');
+}
 
 

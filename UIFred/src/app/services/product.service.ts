@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Product } from '../common/product';
+import { Product } from '../common/product/product';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { url } from '../common/Path';
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
   private baseUrl = url +'/product';
+  getCategory() {
+    throw new Error('Method not implemented.');
+  }
+
 
   constructor(private httpClient: HttpClient) { }
 //get all products
