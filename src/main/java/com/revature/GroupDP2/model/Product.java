@@ -29,9 +29,6 @@ public class Product {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @ManyToOne
-    @JoinColumn
-    private Category category;
   
     //@ManyToMany
     //@Column
@@ -39,7 +36,6 @@ public class Product {
 
 
     public Product(Category category, String productName, String description, Double price, String imageUrl) {
-        this.category = category;
         this.productName = productName;
         this.description = description;
         this.price = price;
@@ -84,14 +80,6 @@ public class Product {
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public Integer getCategoryId() {

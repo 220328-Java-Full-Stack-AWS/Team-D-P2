@@ -4,6 +4,7 @@ import com.revature.GroupDP2.model.Category;
 import com.revature.GroupDP2.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
@@ -46,15 +47,25 @@ public class CategoryController {
     }
 
     @GetMapping("/byId/{id}")
-    public Optional<Category> getById(@RequestHeader("Authorization") String token, @PathVariable("id") int t){
-        System.out.println(token);
-        return categoryService.getById(t);
+    public ResponseEntity<Category> getById(@RequestHeader("Authorization") String token, @PathVariable("id") int t){
+        System.out.println("we are in a controller and token is " + token);
+        if (token.equals("\"Bearer null\"")){
+            return ResponseEntity.status(401).build();
+        }
+        else {
+            return ResponseEntity.of(categoryService.getById(t));
+        }
     }
 
     @GetMapping("/getAll")
-    public List<Category> getAll(){
-
-        return categoryService.getAll();
+    public ResponseEntity<? extends List> getAll(@RequestHeader("Authorization") String token){
+        System.out.println("we are in a controller and token is " + token);
+        if (token.equals("\"Bearer null\"")){
+            return ResponseEntity.status(401).build();
+        }
+        else {
+            return ResponseEntity.ok().body(categoryService.getAll());
+        }
     }
 
 

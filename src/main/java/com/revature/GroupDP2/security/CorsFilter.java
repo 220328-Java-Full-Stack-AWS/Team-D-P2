@@ -35,7 +35,7 @@ public class CorsFilter extends OncePerRequestFilter {
         String username = null;
         String token = null;
 
-
+        /*
         Enumeration<String> headerNames = req.getHeaderNames();
 
         if (headerNames != null) {
@@ -43,11 +43,10 @@ public class CorsFilter extends OncePerRequestFilter {
                 System.out.println("Header: " + req.getHeader(headerNames.nextElement()));
             }
         }
+        */
 
-        System.out.println(tokenHeader);
-
-        if (tokenHeader != null && tokenHeader.startsWith("Bearer ")) {
-            token = tokenHeader.substring(7);
+        if (tokenHeader != null && tokenHeader.startsWith("\"Bearer ") && !(tokenHeader.equals("Bearer null"))) {
+            token = tokenHeader.substring(10,tokenHeader.length()-3);
             try{
                 username = tokenManager.getUsernameFromToken(token);
             }
@@ -57,9 +56,8 @@ public class CorsFilter extends OncePerRequestFilter {
                 System.out.println("JWT Token has expired");
             }
         }
-        else {
-
-            System.out.println("No bearer string found");
+        else  {
+            token = "Authorization Failed";
         }
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null){
             UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(username);
