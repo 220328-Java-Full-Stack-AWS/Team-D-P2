@@ -9,16 +9,27 @@ import { url } from '../common/Path';
 })
 export class ProductService {
 
-  private baseUrl = url +'/api/product';
+  private baseUrl = url +'/product';
 
   constructor(private httpClient: HttpClient) { }
-
-  getProduct(): Observable<Product[]> {
-    return this.httpClient.get<GetResponse>(this.baseUrl).pipe(
-      map(response => response._product.product)
-    );
+//get all products
+  getProduct(): Observable<any> {
+    return this.httpClient.get<GetResponse>(this.baseUrl+'/all')
+  }
+  //get by id
+  getProductId(id:number): Observable<any> {
+    return this.httpClient.get<GetResponse>(this.baseUrl+'/id/'+id)
+    //.pipe(map(response => response._product.product)
+    //);
+  }
+  //get by
+  getProductName(name:string): Observable<any> {
+    return this.httpClient.get<GetResponse>(this.baseUrl+'/name/'+name)
+    //.pipe(  map(response => response._product.product)
+    //);
   }
 }
+
 
 interface GetResponse {
   _product: any;

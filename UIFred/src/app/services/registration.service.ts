@@ -12,8 +12,6 @@
    constructor(private http: HttpClient) {}
    
    register(body: User): Observable<any>{
-     console.log(url);
-     console.log(body);
      return this.http.post(url +'/user', body);
    }
  }
