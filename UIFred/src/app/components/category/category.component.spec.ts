@@ -1,25 +1,27 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { ProductCategoryMenuComponent } from './category.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// describe('ProductCategoryMenuComponent', () => {
-//   let component: ProductCategoryMenuComponent;
-//   let fixture: ComponentFixture<ProductCategoryMenuComponent>;
+import { CategoryComponent } from './category.component';
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ ProductCategoryMenuComponent ]
-//     })
-//     .compileComponents();
-//   }));
+describe('CategoryComponent', () => {
+  let component: CategoryComponent;
+  let fixture: ComponentFixture<CategoryComponent>;
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(ProductCategoryMenuComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ CategoryComponent ]
+    })
+    .compileComponents();
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(CategoryComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+

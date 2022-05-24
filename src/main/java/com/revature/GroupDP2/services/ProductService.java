@@ -23,8 +23,9 @@ public class ProductService {
         return productRepository.getAll();
     }
 
-    public void createProduct (Product p) {
+    public Product createProduct (Product p) {
         productRepository.create(p);
+        return p;
     }
     public void updateProduct(Product p) {
          productRepository.update(p);

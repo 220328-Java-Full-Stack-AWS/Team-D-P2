@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-product',
   //templateUrl: './product-grid.component.html',
+
   templateUrl: './product-table.component.html',
    //templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
@@ -54,3 +55,4 @@ export class ProductComponent implements OnInit {
 }
    }
   }
+

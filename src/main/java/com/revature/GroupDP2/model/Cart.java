@@ -1,5 +1,7 @@
 package com.revature.GroupDP2.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,7 @@ public class Cart {
 
     @OneToOne(mappedBy = "cart")
     @JoinColumn
+    @JsonBackReference
     private User user;
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE,CascadeType.REFRESH, CascadeType.PERSIST}, fetch=FetchType.LAZY)
