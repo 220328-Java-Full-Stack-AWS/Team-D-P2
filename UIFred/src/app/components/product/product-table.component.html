@@ -1,3 +1,4 @@
+ <div class="main-content">
  <table class="table">
 
     <thead class="thead-dark">
@@ -16,10 +17,13 @@
             <td class="align-middle">
                 <img src="{{ tempProduct.imageUrl }}" height="50" />
             </td>
-            <td class="align-middle">{{ tempProduct.name}}</td>
-            <td class="align-middle">{{ tempProduct.unitPrice }}</td>
-            
+            <td class="align-middle">{{ tempProduct.productId}}</td>
+            <td class="align-middle">{{ tempProduct.productName}}</td>
+            <td class="align-middle">{{ tempProduct.description }}</td>
+            <td class="align-middle">{{ tempProduct.price }}</td>
+            <td class="align-middle">{{ tempProduct.category| json}}</td>
         </tr>
 
     </tbody>
-</table> -->
+</table>
+</div>

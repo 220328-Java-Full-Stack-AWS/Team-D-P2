@@ -13,8 +13,8 @@ import { FormsModule } from '@angular/forms'; // <-- bannana box lives here
 //ours ///
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RegistrationService } from './services/registration.service';
-
-import { PaymentComponent } from './components/payment/payment.component';
+import { PaymentService } from './services/payment.service';
+//import { PaymentComponent } from './components/payment/payment.component';
 
 
 
@@ -24,7 +24,7 @@ import { PaymentComponent } from './components/payment/payment.component';
 const routes: Routes = [
 
   {path: 'search/:keyword', component: ProductComponent},
-  {path: 'category/:id', component: ProductComponent},
+  {path: 'category/:categoryName', component: ProductComponent},
   {path: 'category', component: ProductComponent},
   {path: 'products', component: ProductComponent},
   {path: 'register', component:RegistrationComponent},
@@ -37,7 +37,7 @@ const routes: Routes = [
     AppComponent,
     ProductComponent,
     RegistrationComponent,
-  PaymentComponent,
+  //PaymentComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -47,7 +47,7 @@ const routes: Routes = [
 	  FormsModule
 
   ],
-  providers: [ProductService,RegistrationService],
+  providers: [PaymentService,ProductService,RegistrationService],
 
   bootstrap: [AppComponent]
 })

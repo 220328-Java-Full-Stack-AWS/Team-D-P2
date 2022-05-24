@@ -25,7 +25,7 @@ import {User} from 'src/app/common/User';
      //this.username,this.password,this.firstName,this.lastName, this.email
      user.username=this.username;user.password=this.password;user.firstName=this.firstName;
      user.lastName=this.lastName;user.email=this.email;
-     this.registrationService.register(user).subscribe((data: any) => this.result = "User Added")
+     this.registrationService.register(user).subscribe((data: any) => this.result = JSON.stringify(data))
    }
 
  }
