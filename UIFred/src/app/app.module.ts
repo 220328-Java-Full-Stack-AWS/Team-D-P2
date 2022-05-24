@@ -11,6 +11,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { RegistrationService } from './services/registration.service';
 import { PaymentService } from './services/payment.service';
 //import { PaymentComponent } from './components/payment/payment.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 
@@ -21,6 +22,7 @@ const routes: Routes = [
 
   {path: 'search/:keyword', component: ProductComponent},
   {path: 'category/:categoryName', component: ProductComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'category', component: ProductComponent},
   {path: 'products', component: ProductComponent},
   {path: 'register', component:RegistrationComponent},
@@ -32,6 +34,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     ProductComponent,
+    LoginComponent,
     RegistrationComponent,
   //PaymentComponent,
 
