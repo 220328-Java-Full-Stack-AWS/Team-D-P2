@@ -15,12 +15,12 @@
     <tbody>
         <tr *ngFor="let tempProduct of product">
             <td class="align-middle">
-                <a href=""><img src="{{ tempProduct.imageUrl }}" height="50" /></a>
+                <img  (click)="popup(tempProduct)"src="{{ tempProduct.imageUrl }}" height="50" />
             </td>
-            <td class="align-middle"><a href="">{{ tempProduct.productId}}</a></td>
-            <td class="align-middle"><a href="">{{ tempProduct.productName}}</a></td>
-            <td class="align-middle"><a href="">{{ tempProduct.description }}</a></td>
-            <td class="align-middle"><a href="">{{ tempProduct.price }}</a></td>
+            <td class="align-middle" (click)="popup(tempProduct)">{{ tempProduct.productId}}</td>
+            <td class="align-middle" (click)="popup(tempProduct)">{{ tempProduct.productName}}</td>
+            <td class="align-middle" (click)="popup(tempProduct)">{{ tempProduct.description }}</td>
+            <td class="align-middle" (click)="popup(tempProduct)">{{ tempProduct.price }}</td>
             <td class="align-middle"><a href="category/{{tempProduct.category.categoryName}}">{{ tempProduct.category.categoryName}}</a></td>
         </tr>
 
