@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { Payment } from '../common/payment';
+import { Payment } from 'src/app/common/Payment';
 
 @Injectable({providedIn: 'root'})
 export class PaymentService {

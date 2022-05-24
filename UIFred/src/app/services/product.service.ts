@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Product } from '../common/product/product';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { UrlTree } from '@angular/router';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import { map } from 'rxjs/operators';
 })
 export class ProductService {
 
-  private baseUrl = url +'/product';
+  private baseUrl = URL +'/product';
   getCategory() {
     throw new Error('Method not implemented.');
   }

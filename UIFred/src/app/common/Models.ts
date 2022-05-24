@@ -1,4 +1,4 @@
-
+``
 export class Category {
   
     categoryId : number = 0
@@ -15,7 +15,13 @@ export class Category {
     productName:string=""
     description:string=""
     price:number=0
-    constructor(){}
+    imageURL:string=""
+    constructor(_productName: string, _description:string, _price:number,_imageURL:string){
+      this.productName = _productName;
+      this.description = _description;
+      this.price = _price;
+      this.imageURL = _imageURL;
+    }
   }
   export class Payment{
     id:number=0;
@@ -23,7 +29,11 @@ export class Category {
     expirationDate:string="";
     cvvNumber:number=0;
     user:User=new User("","","","","");
-    constructor(){}
+    constructor(_cardNumber:number,_expirationDate:string,_cvvNumber:number){
+      this.cardNumber = _cardNumber;
+      this.expirationDate = _expirationDate;
+      this.cvvNumber = _cvvNumber;
+    }
   }
   export class User {
     username: string = ""
@@ -44,5 +54,9 @@ export class Category {
       id:number = 0
       user :User = new User("","","","","");
       cartItems: Product[]=[]
-      constructor(){}
+      constructor(_id: number, _user: User, _cartItems: Product[]){
+        this.id = _id;
+        this.user = _user;
+        this.cartItems = _cartItems;
+      }
   }
