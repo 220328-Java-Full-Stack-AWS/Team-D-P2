@@ -1,36 +1,49 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CategoryComponent } from './components/category/category.component';
-import { UserComponent } from './components/user/user.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Routes, RouterModule, Router} from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ProductService } from './services/product.service';
 import { ProductComponent } from './components/product/product.component';
-import { PaymentComponent } from './components/payment/payment.component';
-import { CartComponent } from './components/cart/cart.component';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { LoginComponent } from './components/login/login.component';
+import { RegistrationService } from './services/registration.service';
+import { PaymentComponent } from './components/payment/payment.component';
+
+
+
+    // Redirect the user to your custom login page
+
+
+const routes: Routes = [
+
+  {path: 'search/:keyword', component: ProductComponent},
+  {path: 'category/:id', component: ProductComponent},
+  {path: 'category', component: ProductComponent},
+  {path: 'products', component: ProductComponent},
+  {path: '', redirectTo: '/products', pathMatch: 'full'},
+  {path: '**', redirectTo: '/products', pathMatch: 'full'}
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    CategoryComponent,
-    UserComponent,
     ProductComponent,
-    PaymentComponent,
-    CartComponent,
     RegistrationComponent,
-    LoginComponent
+    PaymentComponent,
   ],
   imports: [
+    RouterModule.forRoot(routes),
     BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+	  FormsModule
+
   ],
-  providers: [RegistrationComponent, LoginComponent],
+  providers: [ProductService,RegistrationService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

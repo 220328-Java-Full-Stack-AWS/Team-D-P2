@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.server.ResponseStatusException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
@@ -57,10 +57,9 @@ public class UserController {
     @PostMapping("/register")
     public User register(@RequestBody User user) throws Exception {
         return userService.register(user);
-
     }
     @PutMapping
-    public User update(@RequestBody User user) throws Exception {
+    public User update(@RequestBody User user) throws ResponseStatusException {
             return userService.edit(user);
 
     }
@@ -71,7 +70,7 @@ public class UserController {
     }
 
     @DeleteMapping
-    public User delete(@RequestBody User user) throws Exception{
+    public User delete(@RequestBody User user) throws ResponseStatusException{
         return userService.unregister(user);
     }
 

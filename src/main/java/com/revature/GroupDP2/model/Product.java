@@ -1,5 +1,6 @@
 package com.revature.GroupDP2.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer productId;
 
-    @Column(name = "product_name")
+    @Column(name = "product_name",unique = true)
     private String productName;
 
     @Column(name = "description")
@@ -29,6 +30,10 @@ public class Product {
     @Column(name = "image_url")
     private String imageUrl;
 
+    @ManyToOne
+    @JoinColumn
+    @JsonBackReference
+    private Category category;
   
     //@ManyToMany
     //@Column
