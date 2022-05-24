@@ -1,6 +1,9 @@
-export class Payment {
-  id!: number;
-  cardNumber!: string;
-  expirationDate!: string;
-  cvvNumber!: number;
+import { User } from "./User";
+
+export class Payment{
+    constructor(){};
+    id!:number;
+    cardNumber!:string;
+    cvvNumber!: number;
+    user!:User;
 }
