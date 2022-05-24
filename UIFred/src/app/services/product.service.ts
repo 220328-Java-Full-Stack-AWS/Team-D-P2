@@ -10,21 +10,31 @@ import { map } from 'rxjs/operators';
 })
 export class ProductService {
 
+  private baseUrl = url +'/product';
   getCategory() {
     throw new Error('Method not implemented.');
   }
 
-  private baseUrl = 'http://localhost:8080/api/product';
-
 
   constructor(private httpClient: HttpClient) { }
-
-  getProduct(): Observable<Product[]> {
-    return this.httpClient.get<GetResponse>(this.baseUrl).pipe(
-      map(response => response._product.product)
-    );
+//get all products
+  getProduct(): Observable<any> {
+    return this.httpClient.get<GetResponse>(this.baseUrl+'/all')
+  }
+  //get by id
+  getProductId(id:number): Observable<any> {
+    return this.httpClient.get<GetResponse>(this.baseUrl+'/id/'+id)
+    //.pipe(map(response => response._product.product)
+    //);
+  }
+  //get by
+  getProductName(name:string): Observable<any> {
+    return this.httpClient.get<GetResponse>(this.baseUrl+'/name/'+name)
+    //.pipe(  map(response => response._product.product)
+    //);
   }
 }
+
 
 interface GetResponse {
   _product: any;

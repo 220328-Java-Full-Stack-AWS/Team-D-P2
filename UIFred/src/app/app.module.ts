@@ -22,8 +22,9 @@ const routes: Routes = [
   {path: 'category/:id', component: ProductComponent},
   {path: 'category', component: ProductComponent},
   {path: 'products', component: ProductComponent},
-  {path: '', redirectTo: '/products', pathMatch: 'full'},
-  {path: '**', redirectTo: '/products', pathMatch: 'full'}
+  {path: 'register', component:RegistrationComponent},
+  //{path: '', redirectTo: '/products', pathMatch: 'full'},
+  //{path: '', redirectTo: '/products', pathMatch: 'full'}
 ];
 
 @NgModule({
