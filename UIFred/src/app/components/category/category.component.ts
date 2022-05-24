@@ -32,6 +32,7 @@ this.categories=data;
     })
     console.log(this.categories);
   }
+  
 
   constructor(private categoryService:  CategoryService) { }
 
