@@ -32,6 +32,7 @@ const routes: Routes = [
     ProductComponent,
     RegistrationComponent,
     PaymentComponent,
+
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -46,4 +47,12 @@ const routes: Routes = [
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+
+
+function ProductGridComponent(ProductGridComponent: any) {
+  throw new Error('Function not implemented.');
+}
+
 

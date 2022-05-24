@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../../common/Models';
 import { CategoryService } from '../../services/category/category.service';
@@ -38,6 +39,7 @@ this.categories=data;
   }
 
 }
+
 
 
 

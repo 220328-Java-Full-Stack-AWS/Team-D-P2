@@ -1,3 +1,4 @@
+
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../../common/Models';
 import { RegistrationService } from '../../services/registration/registration.service';
@@ -29,3 +30,4 @@ export class RegistrationComponent implements OnInit {
     this.registrationService.register(user).subscribe((data: any) => this.result = "User Added")
   }
 }
+
