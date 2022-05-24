@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { url } from '../common/Path';
 import { Category } from '../common/Category';
+import { UrlTree } from '@angular/router';
 
 
 @Injectable({
@@ -12,7 +13,7 @@ import { Category } from '../common/Category';
 })
 export class ProductService {
 
-  private baseUrl = url +'/product';
+  private baseUrl = URL +'/product';
   getCategory() {
     throw new Error('Method not implemented.');
   }

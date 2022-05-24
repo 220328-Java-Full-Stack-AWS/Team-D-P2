@@ -10,13 +10,11 @@ import { FormsModule } from '@angular/forms';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RegistrationService } from './services/registration.service';
 import { PaymentService } from './services/payment.service';
-//import { PaymentComponent } from './components/payment/payment.component';
+import { PaymentComponent } from './components/payment/payment.component';
 import { LoginComponent } from './components/login/login.component';
-
-
+import { CartComponent } from './components/cart/cart.component';
 
     // Redirect the user to your custom login page
-
 
 const routes: Routes = [
 
@@ -26,6 +24,7 @@ const routes: Routes = [
   {path: 'category', component: ProductComponent},
   {path: 'products', component: ProductComponent},
   {path: 'register', component:RegistrationComponent},
+  {path: 'cart', component:CartComponent},
   //{path: '', redirectTo: '/products', pathMatch: 'full'},
   //{path: '', redirectTo: '/products', pathMatch: 'full'}
 ];
@@ -36,7 +35,9 @@ const routes: Routes = [
     ProductComponent,
     LoginComponent,
     RegistrationComponent,
-  //PaymentComponent,
+    PaymentComponent,
+    CartComponent
+
 
   ],
   imports: [

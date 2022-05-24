@@ -53,6 +53,7 @@ public class CartRepository implements ICartRepository, Lifecycle {
         return Optional.ofNullable(query.getSingleResult());
     }
 
+
     @Override
     public void delete(Cart c) {
         Transaction transaction = session.beginTransaction();

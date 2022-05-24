@@ -87,6 +87,11 @@ public class UserService {
 
     }
 
+    public User getById(Integer userId) {
+        return userRepository.getById(userId).get();
+
+    }
+
     public void addCart(Integer cartId, Integer userId){
         userRepository.addCart(cartId, userId);
     }
