@@ -4,7 +4,7 @@
 	<aside class="menu-sidebar d-none d-lg-block">
 	  <div class="logo">
 		<a href="#">
-		  <img src="Team-D-P2-Shop" alt="Team-D-P2-Shop" class="img-responsive">
+		  <img src="../assets/images/Logo.png" alt="Team-D-P2-Shop" class="img-responsive">
 		</a>
 	  </div>
 	  <div class="menu-sidebar-content js-scrollbar1">
@@ -42,7 +42,7 @@
 				</form>
 				<form class="form-header" onsubmit="return false;" method="GET">
 					<button class="au-btn-submit" type="submit">
-					  Login
+					  <a href="login">Login</a>
 					</button>
 			  </form>
 			  <div class="cart-area d-n">
@@ -56,15 +56,13 @@
 		</div>
 	  </header>
 	  <!-- END HEADER DESKTOP-->
-	  <!-- MAIN CONTENT-->
-	  <router-outlet></router-outlet>
-
-	 <!-- END MAIN CONTENT-->
 
 	</div>
+	<!-- MAIN CONTENT-->
+	<router-outlet></router-outlet>
+	<!-- END MAIN CONTENT-->
 
 </div>
-
 
 <!-- END PAGE CONTAINER-->
   
@@ -74,6 +72,5 @@
 	  <li><a href="#">Contact Us</a></li>
 	  <li><a href="#">Help</a></li>
 	</ul>
-
   </footer>
 
