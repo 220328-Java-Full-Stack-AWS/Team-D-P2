@@ -31,5 +31,8 @@ export class CategoryService {
      });
     return this.http.get(path+'/category/getAll', {headers: reqHeader});
   }
+    getCategoryName(name:Object): Observable<any> {
+    return this.http.get<any>(path+'/category/byName',name);
+  }
 
 }

@@ -14,11 +14,13 @@ import java.util.Optional;
 public class CartService {
 
     CartRepository cartRepository;
+    UserService userService;
 
     @Autowired
-    public CartService(CartRepository cartRepository){
+    public CartService(CartRepository cartRepository, UserService userService){
 
         this.cartRepository = cartRepository;
+        this.userService = userService;
         System.out.println(cartRepository);
     }
 
@@ -34,6 +36,11 @@ public class CartService {
 
     public Optional<Cart> getCartByUser(User user) {
         return cartRepository.getByUser(user);
+    }
+
+    public Optional<Cart> getCartByUser(Integer userId) {
+        User user = userService.getById(userId);
+        return getCartByUser(user);
     }
 
     public Optional<Cart> getCartById(Integer cartId) {

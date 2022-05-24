@@ -9,22 +9,22 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RegistrationService } from './services/registration.service';
+import { PaymentService } from './services/payment.service';
 import { PaymentComponent } from './components/payment/payment.component';
 import { LoginComponent } from './components/login/login.component';
-
-
+import { CartComponent } from './components/cart/cart.component';
 
     // Redirect the user to your custom login page
-
 
 const routes: Routes = [
 
   {path: 'search/:keyword', component: ProductComponent},
+  {path: 'category/:categoryName', component: ProductComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'category/:id', component: ProductComponent},
   {path: 'category', component: ProductComponent},
   {path: 'products', component: ProductComponent},
   {path: 'register', component:RegistrationComponent},
+  {path: 'cart', component:CartComponent},
   //{path: '', redirectTo: '/products', pathMatch: 'full'},
   //{path: '', redirectTo: '/products', pathMatch: 'full'}
 ];
@@ -36,17 +36,19 @@ const routes: Routes = [
     LoginComponent,
     RegistrationComponent,
     PaymentComponent,
+    CartComponent
+
 
   ],
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes,{onSameUrlNavigation:'reload'}),
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
 	  FormsModule
 
   ],
-  providers: [ProductService,RegistrationService],
+  providers: [PaymentService,ProductService,RegistrationService],
 
   bootstrap: [AppComponent]
 })
