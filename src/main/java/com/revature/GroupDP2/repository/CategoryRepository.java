@@ -103,14 +103,13 @@ public class CategoryRepository implements ICategoryRepository<Category>, Lifecy
         return Optional.ofNullable(category);
     }
 
-    @Override
-    public Category getByCategoryName(Category category) {
-        if (session != null){
-            TypedQuery<Category> query = session.createQuery("FROM Category WHERE categoryName = :categoryName",Category.class);
-            query.setParameter("categoryName", category.getCategoryName());
+    public Category getByCategoryName(String t) {
+        Category category = null;
+        if (session != null) {
+            TypedQuery<Category> query = session.createQuery("FROM Category WHERE categoryName = :categoryName", Category.class);
+            query.setParameter("categoryName", t);
             category = query.getSingleResult();
-        }
-        else{
+        } else {
             //throw an exception
         }
         return category;

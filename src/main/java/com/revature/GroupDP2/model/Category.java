@@ -1,5 +1,7 @@
 package com.revature.GroupDP2.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +14,11 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer categoryId;
 
-    @Column(name = "category_name")
+    @Column(name = "category_name",unique=true)
     private String categoryName;
 
     @Column
+    @JsonManagedReference
     @OneToMany(mappedBy = "category", cascade = {CascadeType.DETACH, CascadeType.MERGE,CascadeType.REFRESH, CascadeType.PERSIST}, fetch=FetchType.LAZY)
     List<Product> products = new ArrayList<>();
 
@@ -42,21 +45,6 @@ public class Category {
         this.categoryName = categoryName;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public void addProduct(Product product){
-        products.add(product);
-    }
-
-    public void removeProduct(Product product){
-        products.remove(product);
-    }
 
     @Override
     public String toString() {

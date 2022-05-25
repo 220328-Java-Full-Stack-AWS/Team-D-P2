@@ -1,0 +1,24 @@
+
+<div class="login-header">
+
+    <div *ngIf="isAuthenticated && userFullName" class="login-user-info">
+        Welcome back {{ userFullName }}!
+    </div>
+
+    <button *ngIf="!isAuthenticated" routerLink="/login" class="security-btn">Login</button>
+
+    <button *ngIf="isAuthenticated" (click)="logout()" class="security-btn">Logout</button>
+
+    <button *ngIf="isAuthenticated" routerLink="/registration" class="security-btn ml-1">Registration</button>
+
+    <button *ngIf="isAuthenticated" routerLink="/payment" class="security-btn ml-1">Payment</button>
+
+</div>
+
+<!-- Container to inject the Okta Sign-In Widget -->
+
+<!-- <input type = "text" placeholder="username" [(ngModel)]="username"/>
+<input type = "password" placeholder="password" [(ngModel)]="password"/>
+<input type="button" value="Submit" (click) = 'login()'/> 
+<p>{{token | json}}</p> -->
+

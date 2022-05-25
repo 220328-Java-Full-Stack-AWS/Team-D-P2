@@ -31,7 +31,7 @@ public class ProductController {
     //get product by productname or id
     @GetMapping("/{productnameorId}")
     @ResponseStatus(HttpStatus.OK)
-    public Product getProduct (@PathVariable String productnameorId) throws Exception {
+    public Product getProduct (@PathVariable String productnameorId) {
         //this checks if parameter is only numeric
         if(productnameorId.matches("^[0-9]*$")){
             return productService.getProductById(Integer.parseInt(productnameorId));
@@ -41,12 +41,12 @@ public class ProductController {
     }
     @GetMapping("/id/{productId}")
     @ResponseStatus(HttpStatus.OK)
-    public Product getProductId(@PathVariable String productId) throws Exception{
+    public Product getProductId(@PathVariable String productId){
         return productService.getProductById(Integer.parseInt(productId));
     }
     @GetMapping("/name/{productName}")
     @ResponseStatus(HttpStatus.OK)
-    public Product getProductName(@PathVariable String productName) throws Exception{
+    public Product getProductName(@PathVariable String productName){
         return productService.getProductByProductname(productName);
     }
     //post a new product - auto generate the ID

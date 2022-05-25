@@ -1,0 +1,29 @@
+ <div class="main-content">
+ <table class="table">
+
+    <thead class="thead-dark">
+        <tr>
+            <th></th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>CategoryName</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let tempProduct of product">
+            <td class="align-middle">
+                <img  (click)="popup(tempProduct)"src="{{ tempProduct.imageUrl }}" height="50" />
+            </td>
+            <td class="align-middle" (click)="popup(tempProduct)">{{ tempProduct.productId}}</td>
+            <td class="align-middle" (click)="popup(tempProduct)">{{ tempProduct.productName}}</td>
+            <td class="align-middle" (click)="popup(tempProduct)">{{ tempProduct.description }}</td>
+            <td class="align-middle" (click)="popup(tempProduct)">{{ tempProduct.price }}</td>
+            <td class="align-middle"><a href="category/{{tempProduct.category.categoryName}}">{{ tempProduct.category.categoryName}}</a></td>
+        </tr>
+
+    </tbody>
+</table>
+</div>
