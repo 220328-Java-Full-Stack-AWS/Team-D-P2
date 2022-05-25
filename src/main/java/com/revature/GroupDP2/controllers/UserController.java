@@ -20,7 +20,6 @@ public class UserController {
         return userService.login(user);
     }
 
-
     @PostMapping("/register")
     public User register(@RequestBody User user) throws Exception {
         return userService.register(user);
