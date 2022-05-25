@@ -14,12 +14,17 @@ public class PaymentController {
 
     final PaymentService paySerRepo;
 
-
     @Autowired
     public PaymentController(PaymentService paySerRepo) {
 
         this.paySerRepo = paySerRepo;
     }
+
+    @GetMapping("/byUser")
+    public List<Payment> getByUser(@RequestHeader("userId") Integer userId) {
+        return paySerRepo.getByUser(userId);
+    }
+
 
     //Add a new payment
     @PostMapping()

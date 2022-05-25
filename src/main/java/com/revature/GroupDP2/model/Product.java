@@ -3,6 +3,9 @@ package com.revature.GroupDP2.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,15 +21,19 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer productId;
 
+    @NotEmpty @Size(min = 2, max = 255, message = "product name should be between 2 and 255 characters")
     @Column(name = "product_name",unique = true)
     private String productName;
 
+    @NotEmpty
     @Column(name = "description")
     private String description;
 
+    @NotEmpty @Digits(integer = 1000, fraction = 2)
     @Column(name = "price")
     private Double price;
 
+    @NotEmpty
     @Column(name = "image_url")
     private String imageUrl;
 

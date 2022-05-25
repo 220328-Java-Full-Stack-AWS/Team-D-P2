@@ -39,7 +39,7 @@ public class CartService {
 
     public Optional<Cart> getCartByUser(Integer userId) {
         User user = userService.getById(userId);
-        return getCartByUser(user);
+        return cartRepository.getByUser(user);
     }
 
     public Optional<Cart> getCartById(Integer cartId) {
