@@ -21,7 +21,7 @@ public class User {
     @NotEmpty(message = "password can't be empty")
     @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", message = "password should contain at least one upper case letter," +
                                                                                         " at least one lower case letter, at least one digit, at least one special character," +
-                                                                                        " and it has to be minimum 8 symbols")
+                                                                                        " and it has to be at least 8 symbols")
     @Column(name="password")
     private String password;
     @Column

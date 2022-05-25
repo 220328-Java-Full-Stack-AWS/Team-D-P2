@@ -31,6 +31,10 @@ public class PaymentService {
 
     }
 
+    public void patch(Payment payment){
+        paymentRepo.patch(payment);
+    }
+
     public Optional<Payment> getPaymentById(Integer id) {
          return paymentRepo.getById(id);
     }
