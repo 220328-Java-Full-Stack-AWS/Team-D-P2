@@ -1,8 +1,10 @@
 package com.revature.GroupDP2.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.List;
 
 @Entity
@@ -13,26 +15,38 @@ public class User {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @NotEmpty @Size(min = 2,max = 255, message = "username should be between 2 and 255 characters")
     @Column(name="username",unique = true)
     private String username;
+    @NotEmpty(message = "password can't be empty") @Size(min = 8, max = 255, message = "password should be between 8 and 255 characters")
+    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", message = "password should contain at least one upper case letter," +
+                                                                                        " at least one lower case letter, at least one digit, at least one special character," +
+                                                                                        " and it has to be minimum 8 symbols")
     @Column(name="password")
     private String password;
     @Column
     private boolean enabled;
+    @NotEmpty(message = "First name should not be empty")
     @Column(name="first_name")
     private String firstName;
+    @NotEmpty(message = "Last name should not be empty")
     @Column(name="last_name")
     private String lastName;
+    @NotEmpty(message = "Email should not be empty") @Email
     @Column(name="email")
     private String email;
     @Column(name="phone")
     private String phone;
+    @NotEmpty(message = "Street name should not be empty")
     @Column(name="street_name")
     private String streetName;
+    @NotEmpty(message = "City should not be empty")
     @Column(name="city")
     private String city;
+    @NotEmpty(message = "State should not be empty")
     @Column(name="state")
     private String state;
+    @NotEmpty(message = "Zip code should not be empty")
     @Column(name="zip_code")
     private String zipCode;
 

@@ -10,7 +10,7 @@ import { RegistrationService } from '../../services/registration/registration.se
 })
 
 export class RegistrationComponent implements OnInit {
-
+ 
   constructor(private registrationService: RegistrationService) { }
 
   ngOnInit(): void {
@@ -27,12 +27,33 @@ export class RegistrationComponent implements OnInit {
   zipCode : string = ""
   phone : string = ""
   enabled : boolean = false
+
+  errorMessageUsername = ""
+  errorMessagePassword = ""
+  errorMessageFirstName = ""
+  errorMessageLastName = ""
+  errorMessageEmail = ""
+  errorMessageStreetName = ""
+  errorMessageCity = ""
+  errorMessageState =  ""
+  errorMessageZipCode =  ""
+  
+  
   result : string = "";
 
 
   register(){
-    let user: User = new User(this.username,this.password,this.firstName,this.lastName,this.enabled,this.email,this.phone,this.streetName,this.city,this.state,this.zipCode);
-    console.log(user);
-    this.registrationService.register(user).subscribe((data: any) => {console.log("user added");sessionStorage.setItem("user",JSON.stringify(data))})
+    let user: User = new User(this.username,this.password,this.firstName,this.lastName,this.enabled,this.email,this.phone,this.streetName,this.city,this.state,this.zipCode=======
+    this.registrationService.register(user).subscribe((data: any) => {console.log("user added");sessionStorage.setItem("user",JSON.stringify(data))},
+                                                      (error) => {console.log(this.errorMessageUsername = error.error.username), 
+                                                                  console.log(this.errorMessagePassword = error.error.password),
+                                                                  console.log(this.errorMessageFirstName = error.error.firstName),
+                                                                  console.log(this.errorMessageLastName = error.error.lastName),
+                                                                  console.log(this.errorMessageEmail = error.error.email),
+                                                                  console.log(this.errorMessageStreetName = error.error.streetName),
+                                                                  console.log(this.errorMessageCity = error.error.city),
+                                                                  console.log(this.errorMessageState= error.error.state),
+                                                                  console.log(this.errorMessageZipCode = error.error.zipCode)
+                                                                })
   }
 }
