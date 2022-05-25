@@ -1,5 +1,5 @@
 import { Cart } from "src/app/common/Cart";
-import {Payment} from "src/app/common/payment";
+import {Payment} from "src/app/common/Payment";
 
 export class User{
     constructor(_username:string,_password:string,_firstname:string,_lastname:string,_enabled:boolean,_email:string,_phone:string,

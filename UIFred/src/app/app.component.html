@@ -9,19 +9,10 @@
 	  </div>
 	  <div class="menu-sidebar-content js-scrollbar1">
 		<nav class="navbar-sidebar">
-		  <ul class="list-unstyled navbar-list">
+		  <ul *ngFor="let cat of cats"class="list-unstyled navbar-list">
 			<li>
-			  <a routerLink="/category/BOOKS" routerLinkActive="active-link">Books</a>
+			  <a routerLink="/category/{{cat.categoryName}}" routerLinkActive="active-link">{{cat.categoryName}}</a>
 			</li>
-			<li>
-			  <a routerLink="/category/MUSIC" routerLinkActive="active-link">Music</a>
-			</li>
-			<li>
-				<a routerLink="/category/GAMES" routerLinkActive="active-link">Games</a>
-			  </li>
-			  <li>
-				<a routerLink="/category/MEMES" routerLinkActive="active-link">Memes</a>
-			  </li>
 		  </ul>
 		</nav>
 	  </div>
