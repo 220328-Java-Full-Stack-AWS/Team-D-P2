@@ -31,9 +31,9 @@
 				  Search
 				</button>
 				</form>
-				<button><a>Welcome{{username}}</a></button>
+				<button *ngIf="username" class="form-header" class="au-btn-submit"><a href="userPage" style="color:white">Welcome, {{username}}</a></button>
 				<form class="form-header" onsubmit="return false;" method="GET">
-					<button class="au-btn-submit" type="submit">
+					<button *ngIf="!username" class="au-btn-submit" type="submit">
 					  <a href="login">Login</a>
 					</button>
 			  </form>

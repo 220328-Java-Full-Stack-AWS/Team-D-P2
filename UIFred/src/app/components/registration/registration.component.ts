@@ -27,13 +27,12 @@ export class RegistrationComponent implements OnInit {
   zipCode : string = ""
   phone : string = ""
   enabled : boolean = false
-  
   result : string = "";
 
 
   register(){
     let user: User = new User(this.username,this.password,this.firstName,this.lastName,this.enabled,this.email,this.phone,this.streetName,this.city,this.state,this.zipCode);
     console.log(user);
-    this.registrationService.register(user).subscribe((data: any) => console.log("user added"))
+    this.registrationService.register(user).subscribe((data: any) => {console.log("user added");sessionStorage.setItem("user",JSON.stringify(data))})
   }
 }

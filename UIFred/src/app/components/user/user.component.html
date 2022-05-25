@@ -1,1 +1,84 @@
-<p>user works!</p>
+<section class="main-content">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card bg-dark text-white" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+                <div class="row">
+                    <h1 class="fw-bold text-white-50 mb-2 text-uppercase ">User Data</h1>
+                    <p class="text-white-50 mb-5">Update your information</p>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" id="form3Example1m" class="form-control form-control-lg" [(ngModel)]="user.firstName"/>
+                        <label class="form-label" for="form3Example1m">First name</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" id="form3Example1n" class="form-control form-control-lg" [(ngModel)]="user.lastName"/>
+                        <label class="form-label" for="form3Example1n">Last name</label>
+                      </div>
+                    </div>
+                </div>
+
+                <input type="text" id="form3Example8" class="form-control form-control-lg" [(ngModel)]="user.streetName"/>
+                <label class="form-label" for="form3Example8">Street</label>
+  
+                <div class=row>
+                <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                        <input type="text" id="form3Example1n" class="form-control form-control-lg" [(ngModel)]="user.city"/>
+                        <label class="form-label" for="form3Example1n">City</label>
+                    </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" id="form3Example1n" class="form-control form-control-lg" [(ngModel)]="user.state"/>
+                            <label class="form-label" for="form3Example1n">State</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" id="form3Example1n" class="form-control form-control-lg" [(ngModel)]="user.zipCode"/>
+                            <label class="form-label" for="form3Example1n">Zip Code</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <input type="text" id="form3Example1n" class="form-control form-control-lg" [(ngModel)]="user.phone"/>
+                            <label class="form-label" for="form3Example1n">Phone</label>
+                        </div>
+                    </div>
+                </div>
+  
+                <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+  
+                </div>
+  
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form3Example97" class="form-control form-control-lg"[(ngModel)]="user.email" />
+                    <label class="form-label" for="form3Example97">Email</label>
+                    <input type="text" id="form3Example97" class="form-control form-control-lg"[(ngModel)]="user.username" />
+                    <label class="form-label" for="form3Example97">Username</label>
+                    <input type="text" id="form3Example97" class="form-control form-control-lg" [(ngModel)]="user.password" />
+                    <label class="form-label" for="form3Example97">Password</label>
+                  </div>
+
+                  <div *ngFor="let p of user.paymentMethods"class="form-outline mb-4">
+                    <label class="form-label" for="form3Example97">Payment method {{p.id}}</label>
+                    <input type="text" id="form3Example97" class="form-control form-control-lg"[(ngModel)]="p.cardNumber" />
+                    <label class="form-label" for="form3Example97">Card number</label>
+                    <input type="text" id="form3Example97" class="form-control form-control-lg"[(ngModel)]="p.expirationDate" />
+                    <label class="form-label" for="form3Example97">Expiration Date</label>
+                    <input type="text" id="form3Example97" class="form-control form-control-lg" [(ngModel)]="p.cvvNumber" />
+                    <label class="form-label" for="form3Example97">CVV number</label>
+                  </div>
+
+                <button class="btn btn-outline-light btn-lg px-5" type="submit" (click) = 'update()'>Update</button>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
