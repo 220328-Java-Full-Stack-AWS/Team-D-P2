@@ -17,13 +17,20 @@ export class CartComponent implements OnInit {
   //public payments = [this.pay1,this.pay2];
 
   public cart: Cart = new Cart();
-  public total: number = 10000000000000000;
+  public total: number = 0;
 
-  constructor(private cartService: CartService) { }
+  public cardNumber = 0;
+  public expiration = 0;
+  public cvv = 0;
+
+  constructor(private cartService: CartService) {
+   }
 
   ngOnInit(): void {
-    this.getCart();
-    console.log(this.cart)
+    this.getCart()
+    console.log(this.cardNumber);
+    console.log(this.expiration);
+    console.log(this.cvv);
   }
 
   public getCart() {
@@ -41,4 +48,8 @@ export class CartComponent implements OnInit {
     let cartId = localStorage.getItem("cartId");
     this.cartService.deleteProduct(cartId, body);
   }
+
+
 }
+
+

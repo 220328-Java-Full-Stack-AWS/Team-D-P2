@@ -67,7 +67,9 @@ public class CartService {
 
     public Cart deleteProduct(Product product, Integer cartId) {
         Cart cart = getCartById(cartId).get();
+        System.out.println("Before " + cart);
         cart.deleteCartItem(product);
+        System.out.println("After " + cart);
         cartRepository.update(cart);
         return cart;
     }
