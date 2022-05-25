@@ -4,6 +4,7 @@ import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -16,7 +17,6 @@ public class UserService {
     private final CartService cartService;
     @Autowired
     public UserService(UserRepository userRepository, CartService cartService) {
-
         this.userRepository=userRepository;
         this.cartService = cartService;
     }
@@ -26,6 +26,8 @@ public class UserService {
     3. check if there is a password
      */
     public User register(User user) throws ResponseStatusException {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
+        user.setPassword(encoder.encode(user.getPassword()));
         if (userRepository.getByUsername(user.getUsername()).isPresent()) {
             //throw new AlredyExsistsException("username already taken!");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists!");
@@ -35,14 +37,17 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email invalid!");
             //throw new InvalidEmailException("email invalid!");
         }
+        user.setCart(cartService.newCart());
         userRepository.create(user);
-        cartService.newCart(user);
+
 
         return user;
     }
     public User login(User user) throws ResponseStatusException{
+        System.out.println(cartService.newCart().getId());
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
         Optional<User> oldUser = userRepository.getByUsername(user.getUsername());
-        if(oldUser.isPresent()&&user.getPassword().equals(oldUser.get().getPassword())){
+        if(oldUser.isPresent()&&encoder.matches(user.getPassword(),oldUser.get().getPassword())){
             return oldUser.get();
         }
         throw new ResponseStatusException(HttpStatus.FORBIDDEN,"login fail!");

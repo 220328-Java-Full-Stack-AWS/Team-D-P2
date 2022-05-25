@@ -17,21 +17,20 @@ public class CartService {
     UserService userService;
 
     @Autowired
-    public CartService(CartRepository cartRepository, UserService userService){
-
+    public CartService(CartRepository cartRepository){
         this.cartRepository = cartRepository;
-        this.userService = userService;
-        System.out.println(cartRepository);
     }
 
-
+    public Cart newCart(){
+        return cartRepository.create();
+    }
     public void newCart(User user) {
-        cartRepository.create(new Cart(user));
+        //cartRepository.create(new Cart(user));
     }
 
     public void newCart(Cart cart) {
-        System.out.println("Service layer" + cart);
-        cartRepository.create(cart);
+        //System.out.println("Service layer" + cart);
+        //cartRepository.create(cart);
     }
 
     public Optional<Cart> getCartByUser(User user) {
