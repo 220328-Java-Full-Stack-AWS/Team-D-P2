@@ -54,9 +54,5 @@ export class Category {
       id:number = 0
       user :User = new User("","","","","");
       cartItems: Product[]=[]
-      constructor(_id: number, _user: User, _cartItems: Product[]){
-        this.id = _id;
-        this.user = _user;
-        this.cartItems = _cartItems;
-      }
+      constructor(){}
   }

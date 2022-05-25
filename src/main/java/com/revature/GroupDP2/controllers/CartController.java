@@ -45,13 +45,13 @@ public class CartController {
         cartService.newCart(cart);
     }
 
-    @PutMapping
-    public void addProduct(@RequestHeader Integer cartId, @RequestBody Product product) {
+    @PutMapping("/addProduct")
+    public void addProduct(@RequestHeader("cartId") Integer cartId, @RequestBody Product product) {
         cartService.addProduct(product, cartId);
     }
 
-    @DeleteMapping
-    public void deleteProduct(@RequestHeader Integer cartId, @RequestBody Product product) {
+    @PutMapping("/deleteProduct")
+    public void deleteProduct(@RequestHeader("cartId") Integer cartId, @RequestBody Product product) {
         cartService.deleteProduct(product, cartId);
     }
 
