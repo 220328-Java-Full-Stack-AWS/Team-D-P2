@@ -22,4 +22,11 @@ export class AppComponent implements OnInit {
     this.cats=cat;
   })
   }
+  logout():void{
+    sessionStorage.removeItem("username");
+    sessionStorage.removeItem("cartId");
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("id");
+    window.location.reload();
+  }
 }
