@@ -37,10 +37,6 @@ public class CartService {
         return cartRepository.getByUser(user);
     }
 
-    public Optional<Cart> getCartByUser(Integer userId) {
-        User user = userService.getById(userId);
-        return cartRepository.getByUser(user);
-    }
 
     public Optional<Cart> getCartById(Integer cartId) {
         return cartRepository.getById(cartId);

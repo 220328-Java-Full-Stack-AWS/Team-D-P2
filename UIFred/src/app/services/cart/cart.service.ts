@@ -14,9 +14,9 @@ export class CartService {
 
   constructor(private http: HttpClient){ }
 
-  getCart(userId: any): Observable<any>{
+  getCart(cartId: string): Observable<any>{
 
-    let header = new HttpHeaders({'userId': userId})
+    let header = new HttpHeaders({'cartId': cartId})
     return this.http.get(url +'/cart', {headers: header});
   }
 

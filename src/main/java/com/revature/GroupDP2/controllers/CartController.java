@@ -24,8 +24,8 @@ public class CartController {
     }
 
     @GetMapping
-    public Cart getCart(@RequestHeader("userId") Integer userId) {
-        return cartService.getCartByUser(userId).get();
+    public Cart getCart(@RequestHeader("cartId") Integer cartId) {
+        return cartService.getCartById(cartId).get();
     }
 
     @GetMapping("/viewCart")

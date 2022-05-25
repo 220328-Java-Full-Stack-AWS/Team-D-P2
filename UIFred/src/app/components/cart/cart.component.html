@@ -12,7 +12,7 @@
   
                   <div class="d-flex align-items-center mb-5" *ngFor="let product of cart.cartItems">
                     <div class="flex-shrink-0">
-                      <img src={{product.imageURL}}
+                      <img src={{product.imageUrl}}
                         class="img-fluid" style="width: 150px;" alt="Generic placeholder image">
                     </div>
                     <div class="flex-grow-1 ms-3">
@@ -37,7 +37,7 @@
   
                   <div class="d-flex justify-content-between p-2 mb-2" style="background-color: #e1f5fe;">
                     <h5 class="fw-bold mb-0">Total:</h5>
-                    <h5 class="fw-bold mb-0">2261$</h5>
+                    <h5 class="fw-bold mb-0">{{total | currency}}</h5>
                   </div>
   
                 </div>

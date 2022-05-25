@@ -112,6 +112,7 @@ public class UserService {
     }
 
     public User getById(Integer userId) {
+        System.out.println("made it here");
         return userRepository.getById(userId).get();
 
     }
