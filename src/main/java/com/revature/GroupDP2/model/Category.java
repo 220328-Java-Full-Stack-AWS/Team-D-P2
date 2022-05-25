@@ -3,6 +3,9 @@ package com.revature.GroupDP2.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +17,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer categoryId;
 
+    @NotEmpty @Size(min = 2, max = 255, message = "category name should be between 2 and 255 characters")
     @Column(name = "category_name",unique=true)
     private String categoryName;
 

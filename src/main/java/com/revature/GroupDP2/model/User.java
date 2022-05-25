@@ -3,6 +3,7 @@ package com.revature.GroupDP2.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.List;
 
 @Entity
@@ -13,26 +14,38 @@ public class User {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @NotEmpty @Size(min = 2,max = 255, message = "username should be between ")
     @Column(name="username",unique = true)
     private String username;
+    @NotEmpty(message = "password can't be empty") @Size(min = 8, max = 255, message = "password should be between 8 and 255 characters")
+    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", message = "password should contain at least one upper case letter," +
+                                                                                        " at least one lower case letter, at least one digit, at least one special character," +
+                                                                                        " and it has to be minimum 8 symbols")
     @Column(name="password")
     private String password;
     @Column
     private boolean enabled;
+    @NotEmpty
     @Column(name="first_name")
     private String firstName;
+    @NotEmpty
     @Column(name="last_name")
     private String lastName;
+    @NotEmpty @Email
     @Column(name="email")
     private String email;
     @Column(name="phone")
     private String phone;
+    @NotEmpty
     @Column(name="street_name")
     private String streetName;
+    @NotEmpty
     @Column(name="city")
     private String city;
+    @NotEmpty
     @Column(name="state")
     private String state;
+    @NotEmpty
     @Column(name="zip_code")
     private String zipCode;
 

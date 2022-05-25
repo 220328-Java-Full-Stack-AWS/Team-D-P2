@@ -1,6 +1,9 @@
 package com.revature.GroupDP2.model;
 
+import org.hibernate.validator.constraints.CreditCardNumber;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "payment", schema = "groupd")
@@ -9,12 +12,15 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
+    @NotEmpty @CreditCardNumber(message = "Not a valid credit card number")
     @Column(name = "card_number")
     private String cardNumber;
 
+    @NotEmpty
     @Column(name = "expiration_date")
     private String expirationDate;
 
+    @NotEmpty
     @Column(name = "cvv_number")
     private Integer cvvNumber;
 
