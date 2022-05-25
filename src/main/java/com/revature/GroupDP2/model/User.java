@@ -55,7 +55,7 @@ public class User {
     @JsonManagedReference
     private Cart cart;
     @Column(name="payment_methods")
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.DETACH, CascadeType.MERGE,CascadeType.REFRESH, CascadeType.PERSIST}, fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
     private List<Payment> paymentMethods;
     public User(String username, String password) {
         this.username = username;
