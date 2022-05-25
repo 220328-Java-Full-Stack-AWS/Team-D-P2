@@ -37,10 +37,9 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email invalid!");
             //throw new InvalidEmailException("email invalid!");
         }
-        //userRepository.create(user);
-        //cartService.newCart(user);
-        //user.setCart();
-        cartService.newCart();
+        user.setCart(cartService.newCart());
+        userRepository.create(user);
+
 
         return user;
     }
