@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Payment } from 'src/app/common/Models';
 import { User } from 'src/app/common/User';
 import { LoginService } from 'src/app/services/login/login.service';
 
@@ -20,5 +21,12 @@ export class UserComponent implements OnInit {
   }
   update():void{
     this.loginService.updateUer(this.user).subscribe((user:User)=>console.log(user))
+  }
+  addPayment():void{
+    this.user.paymentMethods.push(new Payment("","",""))
+  }
+  removePayment(payment:any){
+    delete this.user.paymentMethods[payment]
+    window.location.reload()
   }
 }
