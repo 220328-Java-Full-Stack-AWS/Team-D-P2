@@ -1,6 +1,9 @@
 package com.revature.GroupDP2.services;
 
+import com.revature.GroupDP2.Irepository.IPaymentRepository;
+import com.revature.GroupDP2.model.Payment;
 import com.revature.GroupDP2.model.User;
+import com.revature.GroupDP2.repository.PaymentRepository;
 import com.revature.GroupDP2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -15,10 +20,12 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     private final CartService cartService;
+    private final IPaymentRepository paymentRepository;
     @Autowired
-    public UserService(UserRepository userRepository, CartService cartService) {
+    public UserService(UserRepository userRepository, CartService cartService,PaymentRepository paymentRepository) {
         this.userRepository=userRepository;
         this.cartService = cartService;
+        this.paymentRepository=paymentRepository;
     }
     /*
     1. check if username is unique
@@ -75,6 +82,20 @@ public class UserService {
         outUser.setCity(user.getCity());
         outUser.setState(user.getState());
         outUser.setZipCode(user.getZipCode());
+        outUser.setPaymentMethods(user.getPaymentMethods());
+        List<Payment> p2List = new ArrayList<>();
+        for(Payment p: user.getPaymentMethods()){
+            Payment p2=new Payment();
+            p2.setId(p.getId());
+            p2.setCardNumber(p.getCardNumber());
+            p2.setCvvNumber(p.getCvvNumber());
+            p2.setExpirationDate(p.getExpirationDate());
+            p2List.add(p2);
+        }
+        outUser.setPaymentMethods(p2List);
+        for(Payment p: outUser.getPaymentMethods()){
+            paymentRepository.create(p);
+        }
         userRepository.update(outUser);
         return outUser;
     }

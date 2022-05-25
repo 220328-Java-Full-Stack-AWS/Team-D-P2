@@ -17,16 +17,36 @@ export class UserComponent implements OnInit {
     let x=sessionStorage.getItem("user")
     console.log(x)
     this.user=JSON.parse(x);
-    console.log(sessionStorage.getItem("user"))
+    console.log(this.user)
   }
   update():void{
-    this.loginService.updateUer(this.user).subscribe((user:User)=>console.log(user))
+    console.log(this.user)//correct
+    this.loginService.updateUser(this.user).subscribe((user:User)=>{
+      console.log(user)//wrong
+      this.user=user;
+    })
+    sessionStorage.setItem("user",JSON.stringify(this.user))
   }
   addPayment():void{
-    this.user.paymentMethods.push(new Payment("","",""))
+    let x:Payment =new Payment("","","");
+    if(this.user.paymentMethods.length==0){
+      x.id=1;
+    }else{
+    x.id=this.user.paymentMethods[this.user.paymentMethods.length-1].id+1;
+    }
+    this.user.paymentMethods.push(x);
+    
   }
   removePayment(payment:any){
-    delete this.user.paymentMethods[payment]
-    window.location.reload()
+    console.log(payment)
+    //delete this.user.paymentMethods[payment]
+    for(let i=0; i<this.user.paymentMethods.length;i++){
+      console.log(this.user.paymentMethods[i])
+      if(payment.id == this.user.paymentMethods[i].id){
+        this.user.paymentMethods.splice(i-1,1)
+        console.log('DELETE ONE ITEM')
+      }
+    }
+    //window.location.reload()
   }
 }

@@ -1,9 +1,11 @@
 package com.revature.GroupDP2;
 
 import com.revature.GroupDP2.model.User;
+import com.revature.GroupDP2.repository.PaymentRepository;
 import com.revature.GroupDP2.repository.UserRepository;
 import com.revature.GroupDP2.services.CartService;
 import com.revature.GroupDP2.services.UserService;
+import com.revature.GroupDP2.util.StorageManager;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -29,7 +31,7 @@ public class TestUserService {
 
     @BeforeEach
     public void before(){
-        userService=new UserService(userRepository, cartService);
+        userService=new UserService(userRepository, cartService, new PaymentRepository(new StorageManager()));
         tu1=new User("username","password",true,"John","Test",
                 "EMAIL@EMAIL.COM","phone","street","city","state","zip");
         tu2=new User("wrong","wrong",true,"Mark","Test",
