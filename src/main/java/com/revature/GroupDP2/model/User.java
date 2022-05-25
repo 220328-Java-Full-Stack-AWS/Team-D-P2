@@ -1,6 +1,7 @@
 package com.revature.GroupDP2.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -14,7 +15,7 @@ public class User {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @NotEmpty @Size(min = 2,max = 255, message = "username should be between ")
+    @NotEmpty @Size(min = 2,max = 255, message = "username should be between 2 and 255 characters")
     @Column(name="username",unique = true)
     private String username;
     @NotEmpty(message = "password can't be empty") @Size(min = 8, max = 255, message = "password should be between 8 and 255 characters")
@@ -25,27 +26,27 @@ public class User {
     private String password;
     @Column
     private boolean enabled;
-    @NotEmpty
+    @NotEmpty(message = "First name should not be empty")
     @Column(name="first_name")
     private String firstName;
-    @NotEmpty
+    @NotEmpty(message = "Last name should not be empty")
     @Column(name="last_name")
     private String lastName;
-    @NotEmpty @Email
+    @NotEmpty(message = "Email should not be empty") @Email
     @Column(name="email")
     private String email;
     @Column(name="phone")
     private String phone;
-    @NotEmpty
+    @NotEmpty(message = "Street name should not be empty")
     @Column(name="street_name")
     private String streetName;
-    @NotEmpty
+    @NotEmpty(message = "City should not be empty")
     @Column(name="city")
     private String city;
-    @NotEmpty
+    @NotEmpty(message = "State should not be empty")
     @Column(name="state")
     private String state;
-    @NotEmpty
+    @NotEmpty(message = "Zip code should not be empty")
     @Column(name="zip_code")
     private String zipCode;
 
