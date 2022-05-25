@@ -31,10 +31,14 @@
 				  Search
 				</button>
 				</form>
-				<button *ngIf="username" class="form-header" class="au-btn-submit"><a href="userPage" style="color:white">Welcome, {{username}}</a></button>
+				<div *ngIf="username">
+				<button class="form-header" class="au-btn-submit"><a href="userPage" style="color:white;padding:.5em">Welcome, {{username}}</a></button>
+				<button class="form-header" class="au-btn-submit"><a href="userPage" style="color:white;padding:.5em">View Profile</a></button>
+				<button class="form-header" class="au-btn-submit"style="color:white;padding:.5em" (click)="logout()">logout</button>
+				</div>
 				<form class="form-header" onsubmit="return false;" method="GET">
 					<button *ngIf="!username" class="au-btn-submit" type="submit">
-					  <a href="login">Login</a>
+					  <a href="login" style="color:white;padding:.5em">Login</a>
 					</button>
 			  </form>
 			  <div class="cart-area d-n">
