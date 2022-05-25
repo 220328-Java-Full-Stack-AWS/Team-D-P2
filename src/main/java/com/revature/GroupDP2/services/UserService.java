@@ -40,11 +40,9 @@ public class UserService {
         user.setCart(cartService.newCart());
         userRepository.create(user);
 
-
         return user;
     }
     public User login(User user) throws ResponseStatusException{
-        System.out.println(cartService.newCart().getId());
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
         Optional<User> oldUser = userRepository.getByUsername(user.getUsername());
         if(oldUser.isPresent()&&encoder.matches(user.getPassword(),oldUser.get().getPassword())){
