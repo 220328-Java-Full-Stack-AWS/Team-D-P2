@@ -1,6 +1,8 @@
 package com.revature.GroupDP2.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.validator.constraints.CreditCardNumber;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -22,17 +24,18 @@ public class Payment {
 
     @NotEmpty
     @Column(name = "cvv_number")
-    private Integer cvvNumber;
+    private String cvvNumber;
 
 
     @ManyToOne
+    @JsonBackReference
     private User user;
 
     public Payment() {
 //comment
     }
 
-    public Payment(String cardNumber , String expirationDate , Integer cvvNumber) {
+    public Payment(String cardNumber , String expirationDate , String cvvNumber) {
         this.cardNumber = cardNumber;
         this.expirationDate = expirationDate;
         this.cvvNumber = cvvNumber;
@@ -63,12 +66,12 @@ public class Payment {
         this.expirationDate = expirationDate;
     }
 
-    public Integer getCvvNumber() {
+    public String getCvvNumber() {
 
         return cvvNumber;
     }
 
-    public void setCvvNumber(Integer cvvNumber) {
+    public void setCvvNumber(String cvvNumber) {
 
         this.cvvNumber = cvvNumber;
     }

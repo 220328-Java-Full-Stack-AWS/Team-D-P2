@@ -9,19 +9,10 @@
 	  </div>
 	  <div class="menu-sidebar-content js-scrollbar1">
 		<nav class="navbar-sidebar">
-		  <ul class="list-unstyled navbar-list">
+		  <ul *ngFor="let cat of cats"class="list-unstyled navbar-list">
 			<li>
-			  <a routerLink="/category/BOOKS" routerLinkActive="active-link">Books</a>
+			  <a routerLink="/category/{{cat.categoryName}}" routerLinkActive="active-link">{{cat.categoryName}}</a>
 			</li>
-			<li>
-			  <a routerLink="/category/MUSIC" routerLinkActive="active-link">Music</a>
-			</li>
-			<li>
-				<a routerLink="/category/GAMES" routerLinkActive="active-link">Games</a>
-			  </li>
-			  <li>
-				<a routerLink="/category/MEMES" routerLinkActive="active-link">Memes</a>
-			  </li>
 		  </ul>
 		</nav>
 	  </div>
@@ -40,8 +31,9 @@
 				  Search
 				</button>
 				</form>
+				<button *ngIf="username" class="form-header" class="au-btn-submit"><a href="userPage" style="color:white">Welcome, {{username}}</a></button>
 				<form class="form-header" onsubmit="return false;" method="GET">
-					<button class="au-btn-submit" type="submit">
+					<button *ngIf="!username" class="au-btn-submit" type="submit">
 					  <a href="login">Login</a>
 					</button>
 			  </form>

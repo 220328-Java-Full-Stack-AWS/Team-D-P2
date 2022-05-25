@@ -4,6 +4,6 @@ export class Payment{
     constructor(){};
     id!:number;
     cardNumber!:string;
-    cvvNumber!: number;
+    cvvNumber!: string;
     user!:User;
 }

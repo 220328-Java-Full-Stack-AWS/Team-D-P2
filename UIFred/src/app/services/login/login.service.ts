@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/common/User';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,10 @@ export class LoginService {
       userDto.password = password;
       return this.http.post("http://localhost:8080/user/login", userDto);
   }
+  updateUer(user:User): Observable<any>{
+    return this.http.put("http://localhost:8080/user",user);
+  }
+
 }
 
 export class UserDto{

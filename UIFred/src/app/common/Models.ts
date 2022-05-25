@@ -26,10 +26,10 @@ export class Category {
   export class Payment{
     id:number=0;
     cardNumber:string="";
-    expirationDate:string="";
-    cvvNumber:number=0;
+    expirationDate:string='';
+    cvvNumber:string="";
     user:User=new User("","","","","");
-    constructor(_cardNumber:string,_expirationDate:string,_cvvNumber:number){
+    constructor(_cardNumber:string,_expirationDate:string,_cvvNumber:string){
       this.cardNumber = _cardNumber;
       this.expirationDate = _expirationDate;
       this.cvvNumber = _cvvNumber;

@@ -13,6 +13,7 @@ import { PaymentService } from './services/payment.service';
 import { PaymentComponent } from './components/payment/payment.component';
 import { LoginComponent } from './components/login/login.component';
 import { CartComponent } from './components/cart/cart.component';
+import { UserComponent } from './components/user/user.component';
 
     // Redirect the user to your custom login page
 
@@ -22,9 +23,10 @@ const routes: Routes = [
   {path: 'category/:categoryName', component: ProductComponent},
   {path: 'login', component: LoginComponent},
   {path: 'category', component: ProductComponent},
-  {path: 'products', component: ProductComponent},
+  {path: '', component: ProductComponent},
   {path: 'register', component:RegistrationComponent},
   {path: 'cart', component:CartComponent},
+  {path: 'userPage',component:UserComponent}
   //{path: '', redirectTo: '/products', pathMatch: 'full'},
   //{path: '', redirectTo: '/products', pathMatch: 'full'}
 ];
@@ -36,7 +38,8 @@ const routes: Routes = [
     LoginComponent,
     RegistrationComponent,
     PaymentComponent,
-    CartComponent
+    CartComponent,
+    UserComponent
 
 
   ],
