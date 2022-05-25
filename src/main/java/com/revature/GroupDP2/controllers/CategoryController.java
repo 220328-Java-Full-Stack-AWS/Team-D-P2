@@ -3,11 +3,9 @@ package com.revature.GroupDP2.controllers;
 import com.revature.GroupDP2.model.Category;
 import com.revature.GroupDP2.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -22,11 +20,8 @@ public class CategoryController {
     }
 
     @PostMapping
-    //@RequestMapping(value = "/{categoryName}", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
-    public Category create(@RequestBody Category category){
+    public void create(@RequestBody Category category){
         categoryService.create(category);
-        return category;
     }
 
     @PutMapping
@@ -51,22 +46,19 @@ public class CategoryController {
     @GetMapping("/byId/{id}")
     public ResponseEntity<Category> getById(@PathVariable("id") int t){
 
-
-            return ResponseEntity.of(categoryService.getById(t));
-        }
+        return ResponseEntity.of(categoryService.getById(t));
+    }
 
     @GetMapping("/byName/{name}")
     public ResponseEntity<Category> getByName(@PathVariable("name") String t){
 
-            return ResponseEntity.of(categoryService.getByName(t));
+        return ResponseEntity.of(categoryService.getByName(t));
 
     }
     @GetMapping("/getAll")
     public ResponseEntity<? extends List> getAll(){
 
-            return ResponseEntity.ok().body(categoryService.getAll());
-        }
-
-
+        return ResponseEntity.ok().body(categoryService.getAll());
+    }
 
 }

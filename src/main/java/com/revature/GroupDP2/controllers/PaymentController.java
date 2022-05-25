@@ -14,7 +14,6 @@ public class PaymentController {
 
     final PaymentService paySerRepo;
 
-
     @Autowired
     public PaymentController(PaymentService paySerRepo) {
 
