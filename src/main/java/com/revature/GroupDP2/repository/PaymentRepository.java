@@ -82,6 +82,12 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
         tx.commit();
     }
 
+    public void patch(Payment payment){
+        Transaction transaction = session.beginTransaction();
+        session.merge(payment);
+        transaction.commit();
+    }
+
 
     @Override
     public Optional<Payment> getById(int t) {

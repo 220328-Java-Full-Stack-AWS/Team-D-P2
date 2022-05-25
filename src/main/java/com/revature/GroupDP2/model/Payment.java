@@ -17,7 +17,8 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    @NotEmpty @CreditCardNumber(message = "Not a valid credit card number")
+    @NotEmpty
+    @Pattern(regexp = "^[0-9]{15,16}$", message = "credit card number should be 15 or 16 digits")
     @Column(name = "card_number")
     private String cardNumber;
 
