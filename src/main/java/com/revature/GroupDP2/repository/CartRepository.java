@@ -25,6 +25,17 @@ public class CartRepository implements ICartRepository, Lifecycle {
         this.storageManager = storageManager;
     }
 
+
+    public Cart create(){
+        Cart cart = new Cart();
+        Transaction transaction = session.beginTransaction();
+        session.save(cart);
+        TypedQuery<Cart> query = session.createQuery("FROM Cart cart ORDER BY cart.id desc",Cart.class);
+        List<Cart> list = query.getResultList();
+        cart.setId(list.get(0).getId());
+        transaction.commit();
+        return cart;
+    }
     @Override
     public void create(Cart c) {
         System.out.println("create method" + this.session);
