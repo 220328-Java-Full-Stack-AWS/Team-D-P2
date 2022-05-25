@@ -2,7 +2,9 @@ package com.revature.GroupDP2.repository;
 
 import com.revature.GroupDP2.Irepository.IGenericRepository;
 import com.revature.GroupDP2.Irepository.IPaymentRepository;
+import com.revature.GroupDP2.model.Cart;
 import com.revature.GroupDP2.model.Payment;
+import com.revature.GroupDP2.model.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -120,6 +122,12 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
 
         return query.getResultList();
 
+    }
+
+    public List<Payment> getByUser(User user) {
+        TypedQuery<Payment> query = session.createQuery("FROM Payment WHERE user = :u",Payment.class);
+        query.setParameter("u",user);
+        return query.getResultList();
     }
 
     /*

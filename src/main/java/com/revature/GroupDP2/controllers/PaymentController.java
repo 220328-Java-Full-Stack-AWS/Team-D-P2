@@ -21,6 +21,12 @@ public class PaymentController {
         this.paySerRepo = paySerRepo;
     }
 
+    @GetMapping("/byUser")
+    public List<Payment> getByUser(@RequestHeader("userId") Integer userId) {
+        return paySerRepo.getByUser(userId);
+    }
+
+
     //Add a new payment
     @PostMapping()
     @ResponseStatus(HttpStatus.OK)

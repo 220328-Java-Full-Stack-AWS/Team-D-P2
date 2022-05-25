@@ -1,6 +1,7 @@
 package com.revature.GroupDP2.services;
 
 import com.revature.GroupDP2.model.Payment;
+import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +13,12 @@ import java.util.Optional;
 public class PaymentService {
 
     PaymentRepository paymentRepo;
+    UserService userService;
 
     @Autowired
-    public PaymentService(PaymentRepository paymentRepo) {
+    public PaymentService(PaymentRepository paymentRepo, UserService userService) {
         this.paymentRepo = paymentRepo;
+        this.userService = userService;
     }
 
     public void save(Payment payment) {
@@ -35,6 +38,11 @@ public class PaymentService {
     public Payment getPaymentByCardNumber(Payment payment){
         return paymentRepo.getPaymentByCardNumber(payment);
 
+    }
+
+    public List<Payment> getByUser(Integer userId) {
+        User user = userService.getById(userId);
+        return paymentRepo.getByUser(user);
     }
 
     public List<Payment> getAll() {
