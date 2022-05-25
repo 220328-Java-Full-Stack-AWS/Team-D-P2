@@ -28,9 +28,9 @@ export class LoginComponent implements OnInit {
     
   login(){
       this.loginService.login(this.username,this.password).subscribe((data: any) => {this.response.id = data.id,this.response.username = data.username,this.response.password = data.password; 
-                                                                                    sessionStorage.setItem("id",data.id),sessionStorage.setItem("username",data.username),sessionStorage.setItem("cartId",data.cart.id)},
-                                                                      (error) => {console.log(this.errorMessageUsername = error.error.username), console.log(this.errorMessagePassword = error.error.password);
-                                                                      });
+                                                                                    sessionStorage.setItem("id",data.id),sessionStorage.setItem("username",data.username),sessionStorage.setItem("cartId",data.cart.id)}
+                                                                      
+                                                                      );
   }
 
 }

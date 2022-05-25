@@ -23,8 +23,9 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+    //finish validation of login
     @PostMapping("/login")
-    public ResponseEntity<User> login(@Valid @RequestBody User user) throws Exception {
+    public ResponseEntity<User> login(@RequestBody User user) throws Exception {
         return ResponseEntity.ok(userService.login(user));
     }
 
