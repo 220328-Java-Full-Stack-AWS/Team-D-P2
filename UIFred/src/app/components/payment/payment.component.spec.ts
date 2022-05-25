@@ -19,7 +19,13 @@ describe('PaymentComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  
 });
+function beforeEach(arg0: () => void) {
+  throw new Error('Function not implemented.');
+}
+
+function expect(component: PaymentComponent) {
+  throw new Error('Function not implemented.');
+}
+

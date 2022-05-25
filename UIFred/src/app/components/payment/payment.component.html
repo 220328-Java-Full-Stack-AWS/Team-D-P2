@@ -1,1 +1,49 @@
-<p>payment works!</p>
+<section class="main-content">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card bg-dark text-white" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+                <div class="row">
+                    <h1 class="fw-bold text-white-50 mb-2 text-uppercase ">Payment</h1>
+                    <p class="text-white-50 mb-5">Enter your information</p>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" id="form3Example1m" class="form-control form-control-lg" [(ngModel)]="cardNumber"/>
+                        <label class="form-label" for="form3Example1m">Credit Card Number</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" id="form3Example1n" class="form-control form-control-lg" [(ngModel)]="expirationDate"/>
+                        <label class="form-label" for="form3Example1n">Expiration Date</label>
+                      </div>
+                    </div>
+                </div>
+
+                <input type="text" id="form3Example8" class="form-control form-control-lg" [(ngModel)]="cvvNumber"/>
+                <label class="form-label" for="form3Example8">CCV</label>
+  
+                
+  
+                <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+  
+                </div>
+  
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form3Example97" class="form-control form-control-lg"[(ngModel)]="cardNumber" />
+                    <label class="form-label" for="form3Example97">Card Number</label>
+                    <input type="text" id="form3Example97" class="form-control form-control-lg"[(ngModel)]="expirationDate" />
+                    <label class="form-label" for="form3Example97">Expiration Date</label>
+                    <input type="password" id="form3Example97" class="form-control form-control-lg" [(ngModel)]="cvvNumber" />
+                    <label class="form-label" for="form3Example97">CCV Number</label>
+                  </div>
+
+                <button class="btn btn-outline-light btn-lg px-5" type="submit" (click) = 'addPayment()'>Add Payment</button>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

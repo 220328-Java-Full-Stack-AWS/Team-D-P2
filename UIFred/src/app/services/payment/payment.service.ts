@@ -10,7 +10,7 @@ import { Payment } from '../../common/Models';
 export class PaymentService {
 
   // Base url
-  baseurl = 'http://localhost:4200/payments';
+  baseurl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) {
   }
@@ -21,10 +21,11 @@ export class PaymentService {
       'Content-Type': 'application/json'
     })
   }
-
+//register(body: User): Observable<any>{
+  //return this.http.post(path +'/user/register', body);
   // POST
-  CreatePayment(data: any): Observable<Payment> {
-    return this.http.post<Payment>(this.baseurl, JSON.stringify(data), this.httpOptions)
+  createPayment(data: any): Observable<Payment> {
+    return this.http.post<Payment>(this.baseurl + '/payments/addpayment', JSON.stringify(data), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.errorHandl)

@@ -5,6 +5,7 @@ import { CategoryComponent } from './components/category/category.component';
 import { ProductComponent } from './components/product/product.component';
 import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/login/login.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'product',component: ProductComponent},
   {path: 'user',component: UserComponent},
   {path: 'login', component:LoginComponent}
+  {path: 'payment', component:PaymentComponent}
 
 ]
 

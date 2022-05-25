@@ -22,7 +22,7 @@ public class PaymentController {
     }
 
     //Add a new payment
-    @PostMapping()
+    @PostMapping("/addpayment")
     @ResponseStatus(HttpStatus.OK)
     public Payment addNewPayment(@RequestBody Payment payment) {
          paySerRepo.save(payment);
