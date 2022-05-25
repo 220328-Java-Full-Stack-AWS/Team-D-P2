@@ -5,6 +5,8 @@ import com.revature.GroupDP2.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -29,7 +31,7 @@ public class PaymentController {
     //Add a new payment
     @PostMapping()
     @ResponseStatus(HttpStatus.OK)
-    public Payment addNewPayment(@RequestBody Payment payment) {
+    public Payment addNewPayment(@Valid @RequestBody Payment payment) {
          paySerRepo.save(payment);
          return payment;
     }
@@ -37,7 +39,7 @@ public class PaymentController {
     //Update an existing payment
     @PutMapping ()
     @ResponseStatus(HttpStatus.OK)
-    public Payment updatePayment(@RequestBody Payment payment) {
+    public Payment updatePayment(@Valid @RequestBody Payment payment) {
         paySerRepo.update(payment);
         return payment;
     }

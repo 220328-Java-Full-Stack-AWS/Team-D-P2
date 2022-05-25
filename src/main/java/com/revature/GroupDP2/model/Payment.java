@@ -5,7 +5,10 @@ import org.hibernate.validator.constraints.CreditCardNumber;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "payment", schema = "groupd")
@@ -18,11 +21,12 @@ public class Payment {
     @Column(name = "card_number")
     private String cardNumber;
 
-    @NotEmpty
+    @NotEmpty(message = "expiration date is empty")
     @Column(name = "expiration_date")
     private String expirationDate;
 
-    @NotEmpty
+    @NotEmpty(message = "cvv number is empty")
+    @Pattern(regexp = "^[0-9]{3,3}$", message = "cvv should be 3 digits")
     @Column(name = "cvv_number")
     private String cvvNumber;
 

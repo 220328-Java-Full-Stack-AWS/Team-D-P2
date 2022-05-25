@@ -9,7 +9,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +33,7 @@ public class UserController {
         return ResponseEntity.ok(userService.register(user));
     }
     @PutMapping
-    public User update(@RequestBody User user) throws ResponseStatusException {
+    public User update(@Valid @RequestBody User user) throws ResponseStatusException {
             return userService.edit(user);
 
     }
