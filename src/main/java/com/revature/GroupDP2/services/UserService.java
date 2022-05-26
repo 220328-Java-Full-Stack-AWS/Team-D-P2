@@ -40,7 +40,7 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists!");
         }//email validator. got it online
         user.setEmail(user.getEmail().toLowerCase(Locale.ROOT));
-        if(!user.getEmail().matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")){
+        if(!user.getEmail().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email invalid!");
             //throw new InvalidEmailException("email invalid!");
         }
@@ -112,6 +112,7 @@ public class UserService {
     }
 
     public User getById(Integer userId) {
+        System.out.println("made it here");
         return userRepository.getById(userId).get();
 
     }

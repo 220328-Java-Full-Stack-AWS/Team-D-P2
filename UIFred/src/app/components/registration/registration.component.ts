@@ -63,5 +63,6 @@ export class RegistrationComponent implements OnInit {
   console.log(this.errorMessageState= error.error.state),
   console.log(this.errorMessageZipCode = error.error.zipCode)
 })
+
   }
 }

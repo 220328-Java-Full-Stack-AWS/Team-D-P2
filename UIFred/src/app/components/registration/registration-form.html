@@ -11,36 +11,55 @@
                       <div class="form-outline">
                         <input type="text" id="form3Example1m" class="form-control form-control-lg" [(ngModel)]="firstName"/>
                         <label class="form-label" for="form3Example1m">First name</label>
+                            <p style="color:red">
+                                {{errorMessageFirstName}}
+                            </p>
                       </div>
                     </div>
                     <div class="col-md-6 mb-4">
                       <div class="form-outline">
                         <input type="text" id="form3Example1n" class="form-control form-control-lg" [(ngModel)]="lastName"/>
                         <label class="form-label" for="form3Example1n">Last name</label>
+                        <p style="color:red">
+                            {{errorMessageLastName}}
+                        </p>
                       </div>
                     </div>
                 </div>
 
                 <input type="text" id="form3Example8" class="form-control form-control-lg" [(ngModel)]="streetName"/>
                 <label class="form-label" for="form3Example8">Street</label>
+                <p style="color:red">
+                    {{errorMessageStreetName}}
+                </p>
+                
   
                 <div class=row>
                 <div class="col-md-6 mb-4">
                     <div class="form-outline">
                         <input type="text" id="form3Example1n" class="form-control form-control-lg" [(ngModel)]="city"/>
                         <label class="form-label" for="form3Example1n">City</label>
+                        <p style="color:red">
+                            {{errorMessageCity}}
+                        </p>
                     </div>
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="form-outline">
                             <input type="text" id="form3Example1n" class="form-control form-control-lg" [(ngModel)]="state"/>
                             <label class="form-label" for="form3Example1n">State</label>
+                            <p style="color:red">
+                                {{errorMessageState}}
+                            </p>
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="form-outline">
                             <input type="text" id="form3Example1n" class="form-control form-control-lg" [(ngModel)]="zipCode"/>
                             <label class="form-label" for="form3Example1n">Zip Code</label>
+                            <p style="color:red">
+                                {{errorMessageZipCode}}
+                            </p>
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
@@ -58,10 +77,19 @@
                   <div class="form-outline mb-4">
                     <input type="text" id="form3Example97" class="form-control form-control-lg"[(ngModel)]="email" />
                     <label class="form-label" for="form3Example97">Email</label>
+                    <p style="color:red">
+                        {{errorMessageEmail}}
+                    </p>
                     <input type="text" id="form3Example97" class="form-control form-control-lg"[(ngModel)]="username" />
                     <label class="form-label" for="form3Example97">Username</label>
+                    <p style="color:red">
+                        {{errorMessageUsername}}
+                    </p>
                     <input type="password" id="form3Example97" class="form-control form-control-lg" [(ngModel)]="password" />
                     <label class="form-label" for="form3Example97">Password</label>
+                    <p style="color:red">
+                        {{errorMessagePassword}}
+                    </p>
                   </div>
 
                 <button class="btn btn-outline-light btn-lg px-5" type="submit" (click) = 'register()'>Sign Up</button>
