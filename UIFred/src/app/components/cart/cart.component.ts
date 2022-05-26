@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/common/User';
 import { CartService } from 'src/app/services/cart/cart.service';
-import { Cart, User, Product, Payment } from '../../common/Models';
+import { Cart, Product, Payment } from '../../common/Models';
+
+
 
 @Component({
   selector: 'app-test',
@@ -9,19 +12,14 @@ import { Cart, User, Product, Payment } from '../../common/Models';
 })
 export class CartComponent implements OnInit {
 
-  //public user = new User("uname","pword","fname","lname","email");
-  //public prod1 = new Product("Some Thing","descrip",20.22,"assets/images/products/mousepads/mousepad-luv2code-1019.png");
-  //public cart = new Cart(1,this.user,[this.prod1]);
-  //public pay1 = new Payment('1234', "11/24", '234');
-  //public pay2 = new Payment('12345', "10/10", '312');
-  //public payments = [this.pay1,this.pay2];
 
   public cart: Cart = new Cart();
+  public sStorage: any = sessionStorage.getItem("user")
+  public user: any = JSON.parse(this.sStorage);
   public total: number = 0;
-
-  public cardNumber = 0;
-  public expiration = 0;
-  public cvv = 0;
+  public cardNumber = "";
+  public expiration = "";
+  public cvv = "";
 
   constructor(private cartService: CartService) {
    }
@@ -31,6 +29,11 @@ export class CartComponent implements OnInit {
     console.log(this.cardNumber);
     console.log(this.expiration);
     console.log(this.cvv);
+
+    let total: number = 0;
+    for (let product of this.cart.cartItems) {
+      this.total += product.price
+    }
   }
 
   public getCart() {
@@ -47,6 +50,18 @@ export class CartComponent implements OnInit {
   public deleteProduct(body: Product) {
     let cartId = localStorage.getItem("cartId");
     this.cartService.deleteProduct(cartId, body);
+  }
+
+  public populatePayment(payment: Payment) {
+
+    this.cardNumber = payment.cardNumber;
+    this.expiration = payment.expirationDate;
+    this.cvv = payment.cvvNumber
+
+    console.log(this.cardNumber)
+    console.log(this.expiration)
+    console.log(this.cvv)
+
   }
 
 

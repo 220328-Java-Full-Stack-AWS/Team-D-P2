@@ -31,7 +31,7 @@
                             class="plus"></button>
                         </div>
                       </div>
-                    </div>
+                    </div> 
                   </div>
   
   
@@ -46,14 +46,12 @@
                 <div class="col-lg-6 px-5 py-4">
   
                   <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Payment</h3>
-                  <details><summary>Items</summary>
-                    <div onclick="">Item 1</div>
-                    <div onclick="">Item 2</div>
-                    <div onclick="">Item 3</div>
-                    <div onclick="">Item 4</div>
+                  <details><summary>Payments on File</summary>
+                    <div (click)="populatePayment(i)" *ngFor="let i of user.paymentMethods">{{i.cardNumber}}</div>
+                    
                     </details>
 
-                  <form class="mb-5">
+                  
   
                     <div class="form-outline mb-5">
                       <input type = "text" id = "typeExp" class = "form-control form-control-lg" placeholder="Card Number" [(ngModel)] = 'cardNumber'>
@@ -77,14 +75,14 @@
                       </div>
                     </div>
   
-  
-                    <button type="button" class="btn btn-primary btn-block btn-lg">Buy now</button>
-  
+
+                    <button type="button" class="btn btn-primary btn-block btn-sm">Checkout</button>
+                  <br>
                     <h5 class="fw-bold mb-5" style="position: absolute; bottom: 0;">
                       <a href="#!"><i class="fas fa-angle-left me-2"></i>Back to shopping</a>
                     </h5>
   
-                  </form>
+                  
   
                 </div>
               </div>
