@@ -91,6 +91,7 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
 
     @Override
     public Optional<Payment> getById(int t) {
+        session = storageManager.getSessionFactory().openSession();
         TypedQuery<Payment> query = session.createQuery("FROM Payment WHERE id = :id",Payment.class);
 
         return Optional.ofNullable(query.getSingleResult());
@@ -112,6 +113,7 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
     @Override
     public Payment getPaymentByCardNumber(Payment payment) {
         if (session != null){
+            session = storageManager.getSessionFactory().openSession();
             TypedQuery<Payment> query = session.createQuery("FROM Payment WHERE cardNumber = :cardNumber",Payment.class);
             query.setParameter("cardNumber", payment.getCardNumber());
             payment = query.getSingleResult();
@@ -123,6 +125,7 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
     }
 
     public List<Payment> getAll() {
+        session = storageManager.getSessionFactory().openSession();
         String sql = "FROM Payment";
         TypedQuery query = session.createQuery(sql, Payment.class);
 
@@ -131,6 +134,7 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
     }
 
     public List<Payment> getByUser(User user) {
+        session = storageManager.getSessionFactory().openSession();
         TypedQuery<Payment> query = session.createQuery("FROM Payment WHERE user = :u",Payment.class);
         query.setParameter("u",user);
         return query.getResultList();

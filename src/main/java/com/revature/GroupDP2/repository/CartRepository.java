@@ -27,6 +27,7 @@ public class CartRepository implements ICartRepository, Lifecycle {
 
 
     public Cart create(){
+        session = storageManager.getSessionFactory().openSession();
         Cart cart = new Cart();
         Transaction transaction = session.beginTransaction();
         session.save(cart);
@@ -56,6 +57,7 @@ public class CartRepository implements ICartRepository, Lifecycle {
     }
 
     public Optional<Cart> getByUser(User user) {
+        session = storageManager.getSessionFactory().openSession();
         TypedQuery<Cart> query = session.createQuery("FROM Cart WHERE user = :u",Cart.class);
         query.setParameter("u",user);
         return Optional.ofNullable(query.getSingleResult());
@@ -63,6 +65,7 @@ public class CartRepository implements ICartRepository, Lifecycle {
 
     @Override
     public Optional<Cart> getById(int t) {
+        session = storageManager.getSessionFactory().openSession();
         TypedQuery<Cart> query = session.createQuery("FROM Cart WHERE id = :id",Cart.class);
         query.setParameter("id",t);
         return Optional.ofNullable(query.getSingleResult());
@@ -79,6 +82,7 @@ public class CartRepository implements ICartRepository, Lifecycle {
     //NEED TO FINISH THIS METHOD
     @Override
     public List<Cart> getAll() {
+        session = storageManager.getSessionFactory().openSession();
         Query query = session.createQuery("from Cart");
         return query.getResultList();
     }

@@ -78,6 +78,7 @@ public class CategoryRepository implements ICategoryRepository<Category>, Lifecy
     @Override
     public void delete(Category category) {
         if (session != null){
+            session = storageManager.getSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
             TypedQuery<Category> query = session.createQuery("DELETE FROM Category WHERE categoryName = :categoryName");
             query.setParameter("categoryName",category.getCategoryName());
@@ -106,6 +107,7 @@ public class CategoryRepository implements ICategoryRepository<Category>, Lifecy
     public Category getByCategoryName(String categoryName) {
         Category category = null;
         if (session != null) {
+            session = storageManager.getSessionFactory().openSession();
             TypedQuery<Category> query = session.createQuery("FROM Category WHERE categoryName = :categoryName", Category.class);
             query.setParameter("categoryName", categoryName);
             category = query.getSingleResult();
@@ -117,6 +119,7 @@ public class CategoryRepository implements ICategoryRepository<Category>, Lifecy
 
     @Override
     public List<Category> getAll() {
+        session = storageManager.getSessionFactory().openSession();
         TypedQuery<Category> query = session.createQuery("FROM Category", Category.class);
         return query.getResultList();
     }

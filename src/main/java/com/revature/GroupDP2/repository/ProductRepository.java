@@ -48,6 +48,7 @@ public class ProductRepository implements IProductRepository<Product>, Lifecycle
 
     @Override
     public Optional<Product> getById(int t) {
+        session = storageManager.getSessionFactory().openSession();
         TypedQuery<Product> query = session.createQuery("FROM Product WHERE id = :id", Product.class);
         query.setParameter("id", t);
         return Optional.ofNullable(query.getSingleResult());
@@ -62,6 +63,7 @@ public class ProductRepository implements IProductRepository<Product>, Lifecycle
 
     @Override
     public Product getByCategoryId(int id) {
+        session = storageManager.getSessionFactory().openSession();
         TypedQuery<Product> query = session.createQuery("FROM Product WHERE categoryId = :categoryId", Product.class);
         query.setParameter("categoryId", id);
         return query.getSingleResult();
@@ -69,21 +71,23 @@ public class ProductRepository implements IProductRepository<Product>, Lifecycle
 
     @Override
     public List<Product> getAll() {
+        session = storageManager.getSessionFactory().openSession();
         TypedQuery<Product> query = session.createQuery("FROM Product", Product.class);
         return query.getResultList();
     }
 
     public Product getProductByProductName(String productnameorId) {
         Transaction transaction = session.beginTransaction();
-
-         TypedQuery<Product>query = session.createQuery("From Product where productName = : productName");
+        session = storageManager.getSessionFactory().openSession();
+        TypedQuery<Product>query = session.createQuery("From Product where productName = : productName");
         query.setParameter("productName", productnameorId);
         Product product = query.getSingleResult();
-         transaction .commit();
-         return product;
+        transaction .commit();
+        return product;
     }
     public List<Product> getProductByMatchingName(String productName){
         Transaction transaction = session.beginTransaction();
+        session = storageManager.getSessionFactory().openSession();
         String hql = "From Product where productName like :productName";
         TypedQuery<Product> query = session.createQuery(hql);
         query.setParameter("productName",productName + "%");
@@ -95,6 +99,7 @@ public class ProductRepository implements IProductRepository<Product>, Lifecycle
     @Override
     public Product getById(Integer id) {
         Transaction transaction = session.beginTransaction();
+        session = storageManager.getSessionFactory().openSession();
         TypedQuery<Product>query = session.createQuery("From Product where productId = : productId");
         query.setParameter("productId", id);
         Product product = query.getSingleResult();

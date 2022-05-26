@@ -31,6 +31,7 @@ public class UserRepository implements IUserRepository, Lifecycle {
 
     @Override
     public List<User> getAll() {
+        session = storageManager.getSessionFactory().openSession();
         TypedQuery<User> query = session.createQuery("FROM User", User.class);
         return query.getResultList();
     }
@@ -53,6 +54,7 @@ public class UserRepository implements IUserRepository, Lifecycle {
     @Override
     public Optional<User> getById(int t) {
         try {
+            session = storageManager.getSessionFactory().openSession();
             TypedQuery<User> query = session.createQuery("FROM User WHERE id= :id", User.class);
             query.setParameter("id", t);
             return Optional.ofNullable(query.getSingleResult());
@@ -71,6 +73,7 @@ public class UserRepository implements IUserRepository, Lifecycle {
     @Override
     public Optional<User> getByUsername (String username){
         try {
+            session = storageManager.getSessionFactory().openSession();
             TypedQuery<User> query = session.createQuery("FROM User WHERE userName= :userName", User.class);
             query.setParameter("userName", username);
             return Optional.ofNullable(query.getSingleResult());
