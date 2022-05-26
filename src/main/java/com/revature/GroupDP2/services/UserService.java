@@ -64,6 +64,9 @@ public class UserService {
     4. update
      */
     public User edit(User user) throws ResponseStatusException {
+    return userRepository.merge(user);
+    }
+        /*
         Optional<User> oldUser=userRepository.getById(user.getId());
         if(oldUser.isPresent()&&user.getPassword()!=null){
             user.setEmail(user.getEmail().toLowerCase(Locale.ROOT));
@@ -85,6 +88,8 @@ public class UserService {
             outUser.setPaymentMethods(user.getPaymentMethods());
             for(Payment p: user.getPaymentMethods()){
                 paymentRepository.patch(p);
+                */
+
             /*
             Payment p2;
             if(p.getId()==0){
@@ -99,13 +104,17 @@ public class UserService {
             if(p.getId()==0){
                 paymentRepository.create(p2);
             }
-            */
+
             }
             userRepository.update(outUser);
             return outUser;
+
+
         }
         throw new ResponseStatusException(HttpStatus.FORBIDDEN,"auth failed!");
     }
+    */
+
     public User unregister(User user) throws ResponseStatusException {
         Optional<User> oldUser =userRepository.getByUsername(user.getUsername());
         if(oldUser.isPresent()){

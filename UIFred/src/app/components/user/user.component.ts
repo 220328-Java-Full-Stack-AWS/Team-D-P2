@@ -39,6 +39,7 @@ export class UserComponent implements OnInit {
   addPayment():void{
     let x:Payment =new Payment("","","");
     x.user=this.fakeUser;
+    this.user.paymentMethods.push(x)
   }
   removePayment(payment:any){
     console.log(payment)
