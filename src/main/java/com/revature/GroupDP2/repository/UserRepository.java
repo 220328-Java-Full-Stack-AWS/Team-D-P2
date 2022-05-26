@@ -5,6 +5,7 @@ import com.revature.GroupDP2.model.Cart;
 import com.revature.GroupDP2.util.StorageManager;
 import com.revature.GroupDP2.model.User;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.Lifecycle;
@@ -20,7 +21,7 @@ import java.util.Optional;
 public class UserRepository implements IUserRepository, Lifecycle {
     private boolean running;
     private final StorageManager storageManager;
-    private Session session;
+    private SessionFactory sessionFactory;
 
 
     @Autowired
@@ -31,28 +32,36 @@ public class UserRepository implements IUserRepository, Lifecycle {
 
     @Override
     public List<User> getAll() {
-        TypedQuery<User> query = session.createQuery("FROM User", User.class);
+        Session s=sessionFactory.openSession();
+        TypedQuery<User> query = s.createQuery("FROM User", User.class);
+        s.close();
         return query.getResultList();
     }
 
     @Override
     public void create(User o) {
-        Transaction t = session.beginTransaction();
-        session.save(o);
+        Session s=sessionFactory.openSession();
+        Transaction t = s.beginTransaction();
+        s.save(o);
+        s.close();
         t.commit();
     }
 
     @Override
     public void update(User o) {
-        Transaction t = session.beginTransaction();
-        session.update(o);
+        Session s=sessionFactory.openSession();
+        Transaction t = s.beginTransaction();
+        s.update(o);
+        s.close();
         t.commit();
     }
 
     @Override
     public Optional<User> getById(int t) {
         try {
-            TypedQuery<User> query = session.createQuery("FROM User WHERE id= :id", User.class);
+            Session s=sessionFactory.openSession();
+            TypedQuery<User> query = s.createQuery("FROM User WHERE id= :id", User.class);
+            s.close();
             query.setParameter("id", t);
             return Optional.ofNullable(query.getSingleResult());
         } catch (NoResultException e) {
@@ -62,15 +71,19 @@ public class UserRepository implements IUserRepository, Lifecycle {
 
     @Override
     public void delete (User o){
-        Transaction t = session.beginTransaction();
-        session.delete(o);
+        Session s=sessionFactory.openSession();
+        Transaction t = s.beginTransaction();
+        s.delete(o);
+        s.close();
         t.commit();
     }
 
     @Override
     public Optional<User> getByUsername (String username){
         try {
-            TypedQuery<User> query = session.createQuery("FROM User WHERE userName= :userName", User.class);
+            Session s=sessionFactory.openSession();
+            TypedQuery<User> query = s.createQuery("FROM User WHERE userName= :userName", User.class);
+            s.close();
             query.setParameter("userName", username);
             return Optional.ofNullable(query.getSingleResult());
         }
@@ -91,7 +104,7 @@ public class UserRepository implements IUserRepository, Lifecycle {
 
     @Override
     public void start () {
-        session = storageManager.getSession();
+        sessionFactory = storageManager.getSessionFactory();
         running = true;
     }
 
