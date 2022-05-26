@@ -44,6 +44,7 @@ export class CartComponent implements OnInit {
   public addProduct(body: Product) {
     let cartId = localStorage.getItem("cartId");
     this.cartService.addProduct(cartId, body);
+
   }
 
   public deleteProduct(body: Product) {
@@ -55,12 +56,11 @@ export class CartComponent implements OnInit {
   } 
 
   public deleteAll() {
-    let p = this.cart.cartItems.length;
-    for(let i of Array(p).keys()){
-      this.deleteProduct(this.cart.cartItems[0])
-    }
-    
-   
+    let cart = new Cart();
+    let cartId = sessionStorage.getItem("cartId");
+    cart.id = Number(sessionStorage.getItem("cartId"));
+    this.cartService.deleteProductCart(cartId,cart).subscribe((data:any) => console.log(data));
+    window.location.href = "cart"
   }
 
   public populatePayment(payment: Payment) {

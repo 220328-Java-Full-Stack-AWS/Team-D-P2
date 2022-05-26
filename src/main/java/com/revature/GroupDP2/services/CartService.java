@@ -78,6 +78,11 @@ public class CartService {
         return cart;
     }
 
+    public void deleteCartItems(Cart cart, Integer cartId){
+        System.out.println("service");
+        cartRepository.delete(cart);
+    }
+
     public List<Product> getCartItems(Cart cart) {return cart.getCartItems();}
 
 

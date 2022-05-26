@@ -74,8 +74,9 @@ public class CartRepository implements ICartRepository, Lifecycle {
 
     @Override
     public void delete(Cart c) {
+        System.out.println("repo");
         Transaction transaction = session.beginTransaction();
-        session.delete(c);
+        session.merge(c);
         transaction.commit();
     }
 

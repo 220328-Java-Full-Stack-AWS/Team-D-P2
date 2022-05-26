@@ -36,5 +36,13 @@ export class CartService {
 
   }
 
+  deleteProductCart(cartId: any, cart: Cart) {
+    console.log("regular cart id" + cartId);
+    console.log("variable cart id" + cart.id)
+    let header = new HttpHeaders({'cartId': cartId})
+    return this.http.put(url +'/cart/deleteProductItems', cart, {headers: header});
+
+  }
+
 
 }
