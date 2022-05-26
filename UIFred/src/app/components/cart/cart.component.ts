@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/common/User';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { Cart, Product, Payment } from '../../common/Models';
@@ -21,19 +22,16 @@ export class CartComponent implements OnInit {
   public expiration = "";
   public cvv = "";
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService, private router: Router) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    }
    }
 
   ngOnInit(): void {
-    this.getCart()
-    console.log(this.cardNumber);
-    console.log(this.expiration);
-    console.log(this.cvv);
 
-    let total: number = 0;
-    for (let product of this.cart.cartItems) {
-      this.total += product.price
-    }
+    //this.getCart()
+    
   }
 
   public getCart() {
@@ -50,7 +48,7 @@ export class CartComponent implements OnInit {
   public deleteProduct(body: Product) {
     let cartId = localStorage.getItem("cartId");
     this.cartService.deleteProduct(cartId, body);
-  }
+  } 
 
   public populatePayment(payment: Payment) {
 
@@ -64,6 +62,15 @@ export class CartComponent implements OnInit {
 
   }
 
+  public totalPrice() {
+
+    let prodSum: number = 0
+
+    for (let product of this.cart.cartItems) {
+      prodSum += product.price;
+    }
+    this.total = prodSum
+}
 
 }
 
