@@ -38,6 +38,7 @@ public class UserRepository implements IUserRepository, Lifecycle {
     @Override
     public void create(User o) {
         Transaction t = session.beginTransaction();
+        session.save(o.getCart());
         session.save(o);
         t.commit();
     }

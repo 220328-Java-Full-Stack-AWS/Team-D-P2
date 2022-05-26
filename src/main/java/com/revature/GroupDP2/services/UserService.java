@@ -1,6 +1,7 @@
 package com.revature.GroupDP2.services;
 
 import com.revature.GroupDP2.Irepository.IPaymentRepository;
+import com.revature.GroupDP2.model.Cart;
 import com.revature.GroupDP2.model.Payment;
 import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.repository.PaymentRepository;
@@ -44,8 +45,10 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email invalid!");
             //throw new InvalidEmailException("email invalid!");
         }
-        user.setCart(cartService.newCart());
+        Cart cart=new Cart();
+        user.setCart(cart);
         userRepository.create(user);
+        //user.setCart(cartService.newCart());
         return user;
     }
     public User login(User user) throws ResponseStatusException{

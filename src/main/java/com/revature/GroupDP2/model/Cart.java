@@ -20,7 +20,7 @@ public class Cart {
     @JsonBackReference
     private User user;
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE,CascadeType.REFRESH, CascadeType.PERSIST}, fetch=FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
     @Column
     private List<Product> cartItems;
 

@@ -4,6 +4,7 @@ import com.revature.GroupDP2.model.Cart;
 import com.revature.GroupDP2.model.Product;
 import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.repository.CartRepository;
+import com.revature.GroupDP2.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,12 @@ public class CartService {
 
     CartRepository cartRepository;
     UserService userService;
+    ProductRepository productRepository;
 
     @Autowired
-    public CartService(CartRepository cartRepository){
+    public CartService(CartRepository cartRepository,ProductRepository productRepository){
         this.cartRepository = cartRepository;
+        this.productRepository = productRepository;
     }
 
     public Cart newCart(){
@@ -60,8 +63,9 @@ public class CartService {
 
     public Cart addProduct(Product product, Integer cartId) {
         Cart cart = getCartById(cartId).get();
-        cart.addCartItem(product);
-        cartRepository.update(cart);
+        Product nProduct=productRepository.getById(product.getProductId());
+        cart.addCartItem(nProduct);
+        cartRepository.merge(cart);
         return cart;
     }
 
