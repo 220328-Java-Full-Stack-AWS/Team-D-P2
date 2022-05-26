@@ -49,6 +49,11 @@ public class CartRepository implements ICartRepository, Lifecycle {
         session.update(c);
         transaction.commit();
     }
+    public void merge(Cart c){
+        Transaction transaction = session.beginTransaction();
+        session.merge(c);
+        transaction.commit();
+    }
 
     public Optional<Cart> getByUser(User user) {
         TypedQuery<Cart> query = session.createQuery("FROM Cart WHERE user = :u",Cart.class);
