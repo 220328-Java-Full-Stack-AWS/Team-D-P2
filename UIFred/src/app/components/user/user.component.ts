@@ -43,7 +43,7 @@ export class UserComponent implements OnInit {
     for(let i=0; i<this.user.paymentMethods.length;i++){
       console.log(this.user.paymentMethods[i])
       if(payment.id == this.user.paymentMethods[i].id){
-        this.user.paymentMethods.splice(i-1,1)
+        this.user.paymentMethods.splice(i,1)
         console.log('DELETE ONE ITEM')
       }
     }
