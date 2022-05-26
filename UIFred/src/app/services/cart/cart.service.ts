@@ -35,6 +35,4 @@ export class CartService {
     return this.http.put(url +'/cart/deleteProduct', product, {headers: header});
 
   }
-
-
 }

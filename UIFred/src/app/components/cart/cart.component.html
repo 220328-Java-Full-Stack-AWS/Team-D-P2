@@ -1,3 +1,4 @@
+<section class="h-100 h-custom" style="background-color: #eee;">
 
 <section class="h-100 h-custom" style="background-color: #eee;">
 
@@ -34,38 +35,55 @@
                   <div class="d-flex justify-content-between p-2 mb-2" style="background-color: #e1f5fe;">
                     <h5 class="fw-bold mb-0">Total:</h5>
                     <h5 class="fw-bold mb-0">{{total | currency}}</h5>
-                  </div>
-  
-                </div>
-                <div class="col-lg-6 px-5 py-4">
-  
-                  <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Payment</h3>
-                  <details><summary>Payments on File</summary>
-                    <div (click)="populatePayment(i)" *ngFor="let i of user.paymentMethods">{{i.cardNumber}}</div>
-                    
-                    </details>
 
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <a (click)="deleteProduct(product)" class="float-end text-black"><i class="fas fa-times"></i></a>
+                    <h5 class="text-primary">{{product.productName}}</h5>
+                    <div class="d-flex align-items-center">
+                      <p class="fw-bold mb-0 me-5 pe-3">{{product.price | currency}}</p>
+                      
+                    </div>
+                  </div> 
+                </div>
+
+
+                <hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
+
+                <div class="d-flex justify-content-between p-2 mb-2" style="background-color: #e1f5fe;">
+                  <h5 class="fw-bold mb-0">Total:</h5>
+                  <h5 class="fw-bold mb-0">{{total | currency}}</h5>
+                </div>
+
+              </div>
+              <div class="col-lg-6 px-5 py-4">
+
+                <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Payment</h3>
+                <details><summary>Payments on File</summary>
+                  <div (click)="populatePayment(i)" *ngFor="let i of user.paymentMethods">{{i.cardNumber}}</div>
                   
-  
-                    <div class="form-outline mb-5">
-                      <input type = "text" id = "typeExp" class = "form-control form-control-lg" placeholder="Card Number" [(ngModel)] = 'cardNumber'>
-                      <label class="form-label" for="typeText">Card Number</label>
+                  </details>
+
+                
+
+                  <div class="form-outline mb-5">
+                    <input type = "text" id = "typeExp" class = "form-control form-control-lg" placeholder="Card Number" [(ngModel)] = 'cardNumber'>
+                    <label class="form-label" for="typeText">Card Number</label>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-md-6 mb-5">
+                      <div class="form-outline">
+                        <input type = "text" id = "typeExp" class = "form-control form-control-lg" placeholder="Expiration Date" [(ngModel)] = 'expiration'>
+                        <label class="form-label" for="typeExp">Expiration</label>
+                      </div>
                     </div>
 
-  
-                    <div class="row">
-                      <div class="col-md-6 mb-5">
-                        <div class="form-outline">
-                          <input type = "text" id = "typeExp" class = "form-control form-control-lg" placeholder="Expiration Date" [(ngModel)] = 'expiration'>
-                          <label class="form-label" for="typeExp">Expiration</label>
-                        </div>
-                      </div>
-
-                      <div class="col-md-6 mb-5">
-                        <div class="form-outline">
-                          <input type = "password" id = "typeExp" class = "form-control form-control-lg" placeholder="CVV" [(ngModel)] = 'cvv'>
-                          <label class="form-label" for="typeText">CVV</label>
-                        </div>
+                    <div class="col-md-6 mb-5">
+                      <div class="form-outline">
+                        <input type = "password" id = "typeExp" class = "form-control form-control-lg" placeholder="CVV" [(ngModel)] = 'cvv'>
+                        <label class="form-label" for="typeText">CVV</label>
                       </div>
                     </div>
   
@@ -80,8 +98,8 @@
   
                 </div>
               </div>
-  
             </div>
+
           </div>
         </div>
       </div>
