@@ -1,4 +1,4 @@
-<section class="main-content">
+<div class="main-content">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -60,14 +60,12 @@
                     <label class="form-label" for="form3Example97">Email</label>
                     <input type="text" id="form3Example97" class="form-control form-control-lg"[(ngModel)]="user.username" />
                     <label class="form-label" for="form3Example97">Username</label>
-                    <input type="text" id="form3Example97" class="form-control form-control-lg" [(ngModel)]="user.password" />
-                    <label class="form-label" for="form3Example97">Password</label>
                   </div>
 
                   <button style="color: rgb(51, 255, 61);font-size: 2em;" (click) ="addPayment()">Add payment</button>
 
                   <div *ngFor="let p of user.paymentMethods"class="form-outline mb-4">
-                    <label class="form-label" for="form3Example97">Payment method {{p.id}}</label>
+                    <label class="form-label" for="form3Example97">Payment method:</label>
                     <input type="text" id="form3Example97" class="form-control form-control-lg"[(ngModel)]="p.cardNumber" />
                     <label class="form-label" for="form3Example97">Card number</label>
                     <input type="text" id="form3Example97" class="form-control form-control-lg"[(ngModel)]="p.expirationDate" />
@@ -84,4 +82,4 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>

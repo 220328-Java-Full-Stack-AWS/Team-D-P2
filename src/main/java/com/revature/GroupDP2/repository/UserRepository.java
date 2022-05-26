@@ -87,7 +87,14 @@ public class UserRepository implements IUserRepository, Lifecycle {
         session.merge(user);
         transaction.commit();
     }
-
+    public User merge(User u){
+        Session s = storageManager.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        session.merge(u);
+        t.commit();
+        s.close();
+        return u;
+    }
 
     @Override
     public void start () {

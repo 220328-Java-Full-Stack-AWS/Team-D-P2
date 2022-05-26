@@ -16,7 +16,7 @@ export class LoginService {
       userDto.password = password;
       return this.http.post("http://localhost:8080/user/login", userDto);
   }
-  updateUer(user:User): Observable<any>{
+  updateUser(user:User): Observable<any>{
     return this.http.put("http://localhost:8080/user",user);
   }
 

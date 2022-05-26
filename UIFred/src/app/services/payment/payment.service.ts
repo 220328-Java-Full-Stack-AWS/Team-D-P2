@@ -9,5 +9,9 @@ import { path } from '../../common/defaultPath';
 })
 export class PaymentService {
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
+  updatePayment(p:any):Observable<any>{
+    console.log(p)
+    return this.http.put(path+'/payments',p)
+  }
 }

@@ -24,8 +24,8 @@ public class CartController {
     }
 
     @GetMapping
-    public Cart getCart(@RequestHeader("userId") Integer userId) {
-        return cartService.getCartByUser(userId).get();
+    public Cart getCart(@RequestHeader("cartId") Integer cartId) {
+        return cartService.getCartById(cartId).get();
     }
 
     @GetMapping("/viewCart")
@@ -45,17 +45,18 @@ public class CartController {
         cartService.newCart(cart);
     }
 
-    @PutMapping
-    public void addProduct(@RequestHeader Integer cartId, @RequestBody Product product) {
+    @PutMapping("/addProduct")
+    public void addProduct(@RequestHeader("cartId") Integer cartId, @RequestBody Product product) {
+        System.out.println("AZAZAZA");
         cartService.addProduct(product, cartId);
     }
 
-    @DeleteMapping
-    public void deleteProduct(@RequestHeader Integer cartId, @RequestBody Product product) {
+    @PutMapping("/deleteProduct")
+    public void deleteProduct(@RequestHeader("cartId") Integer cartId, @RequestBody Product product) {
+        System.out.println("azazaza " + cartId);
+        System.out.println(product);
         cartService.deleteProduct(product, cartId);
     }
-
-
 
 }
 

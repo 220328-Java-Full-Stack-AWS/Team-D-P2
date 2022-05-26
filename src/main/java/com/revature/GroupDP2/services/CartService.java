@@ -37,10 +37,6 @@ public class CartService {
         return cartRepository.getByUser(user);
     }
 
-    public Optional<Cart> getCartByUser(Integer userId) {
-        User user = userService.getById(userId);
-        return cartRepository.getByUser(user);
-    }
 
     public Optional<Cart> getCartById(Integer cartId) {
         return cartRepository.getById(cartId);
@@ -71,7 +67,9 @@ public class CartService {
 
     public Cart deleteProduct(Product product, Integer cartId) {
         Cart cart = getCartById(cartId).get();
+        System.out.println("Before " + cart);
         cart.deleteCartItem(product);
+        System.out.println("After " + cart);
         cartRepository.update(cart);
         return cart;
     }

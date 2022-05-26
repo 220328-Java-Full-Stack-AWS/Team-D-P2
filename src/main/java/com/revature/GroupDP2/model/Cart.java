@@ -47,7 +47,9 @@ public class Cart {
         cartItems.add(product);
     }
 
-    public void deleteCartItem(Product product){cartItems.remove(product);}
+    public void deleteCartItem(Product product){
+        System.out.println(product.getProductName());
+        cartItems.removeIf(item -> item.getProductId() == product.getProductId());}
 
     public Integer getId() {return id;}
 
