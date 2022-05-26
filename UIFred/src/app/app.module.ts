@@ -41,7 +41,7 @@ const routes: Routes = [
     CartComponent,
     UserComponent
 
-
+    
   ],
   imports: [
     RouterModule.forRoot(routes,{onSameUrlNavigation:'reload'}),

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
-import { Product } from 'src/app/common/product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/common/Category';
+import { Product } from 'src/app/common/product';
 
 @Component({
   selector: 'app-product',
@@ -13,6 +13,8 @@ import { Category } from 'src/app/common/Category';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
+
+  //productName: string = ""
 
   product: Product[]=[];  
   constructor(private productService: ProductService,private route: ActivatedRoute,private router: Router) { 
@@ -59,6 +61,7 @@ export class ProductComponent implements OnInit {
     }      
     })
   }
+  
   popup(product:Product){
     if(window.confirm("add "+product.productName+" to cart?")){
       //add to cart here
