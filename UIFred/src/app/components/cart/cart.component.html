@@ -18,18 +18,11 @@
                         class="img-fluid" style="width: 150px;" alt="N/A">
                     </div>
                     <div class="flex-grow-1 ms-3">
-                      <a href="#!" class="float-end text-black"><i class="fas fa-times"></i></a>
+                      <a (click)="deleteProduct(product)" class="float-end text-black"><i class="fas fa-times"></i></a>
                       <h5 class="text-primary">{{product.productName}}</h5>
                       <div class="d-flex align-items-center">
                         <p class="fw-bold mb-0 me-5 pe-3">{{product.price | currency}}</p>
-                        <div class="def-number-input number-input safari_only">
-                          <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                            class="minus"></button>
-                          <input class="quantity fw-bold text-black" min="0" name="quantity" value="1"
-                            type="number">
-                          <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                            class="plus"></button>
-                        </div>
+                        
                       </div>
                     </div> 
                   </div>
@@ -76,7 +69,7 @@
                     </div>
   
 
-                    <button type="button" class="btn btn-primary btn-block btn-lg" [routerLink]="['']">Checkout</button>
+                    <button (click)="deleteAll()" type="button" class="btn btn-primary btn-block btn-lg" >Checkout</button>
                   <br>
                     <h5 class="fw-bold mb-5" style="position: absolute; bottom: 0;">
                       <a href=""><i class="fas fa-angle-left me-2"></i>Back to shopping</a>

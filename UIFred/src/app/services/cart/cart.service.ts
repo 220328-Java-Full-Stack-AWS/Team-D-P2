@@ -31,6 +31,8 @@ export class CartService {
   deleteProduct(cartId: any, product: any) {
 
     let header = new HttpHeaders({'cartId': cartId})
+    console.log("made it")
+    console.log(cartId)
     return this.http.put(url +'/cart/deleteProduct', product, {headers: header});
 
   }

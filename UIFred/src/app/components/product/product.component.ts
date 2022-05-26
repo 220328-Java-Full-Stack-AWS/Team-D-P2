@@ -25,7 +25,7 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
     //get category from path if exists
     let categoryName:any=this.route.snapshot.paramMap.get('categoryName');
-    console.log(categoryName)
+
     if(categoryName){
       //search in category
       this.getCategory(categoryName)
