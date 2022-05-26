@@ -38,7 +38,9 @@ export class AppComponent implements OnInit {
   public getCart() {
     console.log("get cart called");
     let cartId = sessionStorage.getItem("cartId");
+    if(cartId){
     this.cartService.getCart(cartId).subscribe((cart: Cart) => {this.cart = cart;this.totalPrice(this.cart)})
+    }
   }
   public totalPrice(cart: Cart) {
     
