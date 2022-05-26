@@ -1,6 +1,6 @@
 
 import { Component, Input, OnInit } from '@angular/core';
-import { User } from '../../common/Models';
+import { User } from 'src/app/common/User';
 import { RegistrationService } from '../../services/registration/registration.service';
 
 @Component({
