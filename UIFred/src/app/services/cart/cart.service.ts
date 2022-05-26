@@ -2,7 +2,7 @@
  import { HttpClient, HttpHeaders } from '@angular/common/http';
  import { Injectable } from '@angular/core';
  import { Observable } from 'rxjs/internal/Observable';
- import { User } from '../common/User';
+ import { User } from 'src/app/common/User';
  import { url } from 'src/app/common/Path'
 import { Cart } from 'src/app/common/Models';
   
@@ -12,15 +12,26 @@ import { Cart } from 'src/app/common/Models';
 })
 export class CartService {
 
-  constructor(private http: HttpClient, private userService: UserService){ }
+  constructor(private http: HttpClient){ }
 
-  viewCart(): Observable<any>{
+  getCart(cartId: string): Observable<any>{
 
-    let userId = '1'
+    let header = new HttpHeaders({'cartId': cartId})
+    return this.http.get(url +'/cart', {headers: header});
+  }
 
-    let header = new HttpHeaders({'userId': userId})
+  addProduct(cartId: any, product: any) {
 
-    return this.http.get(url +'/cart/viewCart', {headers: header});
+    let header = new HttpHeaders({'cartId': cartId})
+    return this.http.put(url +'/cart/addProduct', product, {headers: header});
+
+  }
+
+  deleteProduct(cartId: any, product: any) {
+
+    let header = new HttpHeaders({'cartId': cartId})
+    return this.http.put(url +'/cart/deleteProduct', product, {headers: header});
+
   }
 
 

@@ -59,9 +59,12 @@ public class CartRepository implements ICartRepository, Lifecycle {
 
     @Override
     public Optional<Cart> getById(int t) {
+
         TypedQuery<Cart> query = session.createQuery("FROM Cart WHERE id = :id",Cart.class);
         query.setParameter("id",t);
+
         return Optional.ofNullable(query.getSingleResult());
+
     }
 
 

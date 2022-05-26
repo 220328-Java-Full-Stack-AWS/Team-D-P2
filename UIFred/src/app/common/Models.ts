@@ -15,12 +15,12 @@ export class Category {
     productName:string=""
     description:string=""
     price:number=0
-    imageURL:string=""
+    imageUrl:string=""
     constructor(_productName: string, _description:string, _price:number,_imageURL:string){
       this.productName = _productName;
       this.description = _description;
       this.price = _price;
-      this.imageURL = _imageURL;
+      this.imageUrl = _imageURL;
     }
   }
   export class Payment{
@@ -54,9 +54,5 @@ export class Category {
       id:number = 0
       user :User = new User("","","","","");
       cartItems: Product[]=[]
-      constructor(_id: number, _user: User, _cartItems: Product[]){
-        this.id = _id;
-        this.user = _user;
-        this.cartItems = _cartItems;
-      }
+      constructor(){}
   }
