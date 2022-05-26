@@ -25,12 +25,9 @@
 		<div class="section-content section-content-p30">
 		  <div class="container-fluid">
 			<div class="header-wrap">
-			  <form class="form-header" onsubmit="return false;" method="GET">
-				<input class="au-input au-input-xl" type="text" name="search" placeholder="Search for data ..." />
-				<button class="au-btn-submit" type="submit">
-				  Search
-				</button>
-				</form>
+
+				<app-search></app-search>
+
 				<button *ngIf="username" class="form-header" class="au-btn-submit"><a href="userPage" style="color:white">Welcome, {{username}}</a></button>
 				<form class="form-header" onsubmit="return false;" method="GET">
 					<button *ngIf="!username" class="au-btn-submit" type="submit">

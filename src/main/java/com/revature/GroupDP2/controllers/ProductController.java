@@ -9,18 +9,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+
+import java.awt.print.Pageable;
 import java.util.List;
 
 @RestController
 @RequestMapping("/product")
 public class ProductController {
+
+
     private final ProductService productService;
+
 
     @Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;
 
     }
+
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
@@ -75,6 +81,10 @@ public class ProductController {
     @ResponseStatus(HttpStatus.OK)
     public Product deleteProduct (@RequestBody Product product){
     return productService.delete(product);
+    }
+    @GetMapping("/search/findByNameContaining")
+    public List <Product>findByNameContaining(@RequestParam("name") String name) {
+        return productService.getProductByMatchingName(name);
     }
 
 }

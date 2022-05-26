@@ -9,15 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.Lifecycle;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
 
 @Component
 public class ProductRepository implements IProductRepository<Product>, Lifecycle {
+
 
     private final StorageManager storageManager;
     private Session session;
@@ -71,11 +75,21 @@ public class ProductRepository implements IProductRepository<Product>, Lifecycle
 
     public Product getProductByProductName(String productnameorId) {
         Transaction transaction = session.beginTransaction();
+
          TypedQuery<Product>query = session.createQuery("From Product where productName = : productName");
         query.setParameter("productName", productnameorId);
         Product product = query.getSingleResult();
          transaction .commit();
          return product;
+    }
+    public List<Product> getProductByMatchingName(String productName){
+        Transaction transaction = session.beginTransaction();
+        String hql = "From Product where productName like :productName";
+        TypedQuery<Product> query = session.createQuery(hql);
+        query.setParameter("productName",productName + "%");
+        List<Product> productList = query.getResultList();
+        transaction.commit();
+        return productList;
     }
 
     @Override

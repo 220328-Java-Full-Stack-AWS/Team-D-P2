@@ -43,6 +43,9 @@ public class ProductService {
 
        return productRepository.getProductByProductName(productnameorId);
     }
+    public List<Product> getProductByMatchingName(String productName){
+        return productRepository.getProductByMatchingName(productName);
+    }
 
     public AuthDto authenticateProduct(AuthDto authDto) {
         return null;

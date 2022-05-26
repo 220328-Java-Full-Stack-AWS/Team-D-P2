@@ -14,11 +14,14 @@ import { Category } from 'src/app/common/Category';
 })
 export class ProductComponent implements OnInit {
 
+  searchMode: Boolean;
   product: Product[]=[];  
   constructor(private productService: ProductService,private route: ActivatedRoute,private router: Router) { 
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
+
+    
   }
 
   ngOnInit() {
@@ -64,7 +67,38 @@ export class ProductComponent implements OnInit {
       //add to cart here
     }
 
+     
+  
+  
+
   }
+
+  search() {
+
+    this.searchMode = this.route.snapshot.paramMap.has('keyword');
+    
+    if (this.searchMode) {
+      this.handleSearchProduct();
+    }
+    
+
+    
+
+  }
+  handleSearchProduct() {
+    const theKeyword:string = this.route.snapshot.paramMap.get('keyword');
+
+    // now search for products using keyword
+    this.productService.searchProduct(theKeyword).subscribe(
+      (          data: Product[]) => {
+        this.product = data;
+      
+      }
+    
+    );
+  }
+
+  
    Product() {
 
      //Check if "id" parameter is available
@@ -92,4 +126,8 @@ export class ProductComponent implements OnInit {
 }
    }
   }
+
+function data(data: any, arg1: (Product: any) => void) {
+  throw new Error('Function not implemented.');
+}
 

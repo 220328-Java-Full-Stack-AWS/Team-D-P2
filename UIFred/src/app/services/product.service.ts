@@ -12,7 +12,7 @@ import { UrlTree } from '@angular/router';
   providedIn: 'root'
 })
 export class ProductService {
-
+  
   private baseUrl = URL +'/product';
   getCategory() {
     throw new Error('Method not implemented.');
@@ -44,7 +44,37 @@ export class ProductService {
     console.log("in all")
     return this.httpClient.get<any>(url+'/category/getAll');
   }
+   searchProduct(theKeyword: string): Observable<Product[]> {
+     console.log (theKeyword)
+
+    // need to build URL based on the keyword 
+    const searchUrl = url + `/product/search/findByNameContaining?name=${theKeyword}`
+      console.log (searchUrl)
+  
+    return this.getSearchProduct(searchUrl)
+  }
+  
+  getSearchProduct(searchUrl: string): Observable<any> {
+  
+    return this.httpClient.get<any>(searchUrl);
+  }
+  
+  /*getProductCategories(): Observable<ProductCategory[]> {
+  
+    return this.httpClient.get<any>(this.searchUrl).pipe(
+      map(response => response._product.productCategory)
+    )
+  } */
 }
+
+
+
+
+
+
+
+
+
 
 
 interface GetResponse {
@@ -52,3 +82,11 @@ interface GetResponse {
   product: Product[];
     
   }
+
+
+
+
+
+
+
+
