@@ -30,14 +30,14 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //this.getCart()
+    this.getCart();
     
   }
 
   public getCart() {
     let cartId = sessionStorage.getItem("cartId");
-    console.log("this is" + cartId);
-    this.cartService.getCart(cartId).subscribe((cart: Cart) => this.cart = cart)
+    console.log("this is " + cartId);
+    this.cartService.getCart(cartId).subscribe((cart: Cart) => {this.cart = cart; this.totalPrice(cart)})
   }
 
   public addProduct(body: Product) {
@@ -62,11 +62,11 @@ export class CartComponent implements OnInit {
 
   }
 
-  public totalPrice() {
+  public totalPrice(cart: Cart) {
 
     let prodSum: number = 0
 
-    for (let product of this.cart.cartItems) {
+    for (let product of cart.cartItems) {
       prodSum += product.price;
     }
     this.total = prodSum
