@@ -3,6 +3,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/common/product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/common/Category';
+import { CartService } from '../../services/cart/cart.service';
 
 @Component({
   selector: 'app-product',
@@ -15,7 +16,7 @@ import { Category } from 'src/app/common/Category';
 export class ProductComponent implements OnInit {
 
   product: Product[]=[];  
-  constructor(private productService: ProductService,private route: ActivatedRoute,private router: Router) { 
+  constructor(private cartService:CartService,private productService: ProductService,private route: ActivatedRoute,private router: Router) { 
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
@@ -62,6 +63,12 @@ export class ProductComponent implements OnInit {
   popup(product:Product){
     if(window.confirm("add "+product.productName+" to cart?")){
       //add to cart here
+      let cartId:any=sessionStorage.getItem("cartId")
+      if(cartId){
+        this.cartService.addProduct(cartId,product).subscribe(()=>{})
+      }else{
+        window.alert("You must be logged in first!")
+      }
     }
 
   }

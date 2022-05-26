@@ -21,7 +21,6 @@ export class CartService {
   }
 
   addProduct(cartId: any, product: any) {
-
     let header = new HttpHeaders({'cartId': cartId})
     return this.http.put(url +'/cart/addProduct', product, {headers: header});
 
