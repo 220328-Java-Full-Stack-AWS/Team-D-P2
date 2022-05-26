@@ -3,6 +3,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/common/Category';
 import { Product } from 'src/app/common/product';
+import { CartService } from '../../services/cart/cart.service';
 
 @Component({
   selector: 'app-product',
@@ -16,22 +17,25 @@ export class ProductComponent implements OnInit {
 
   //productName: string = ""
 
-  product: Product[]=[];  
-  constructor(private productService: ProductService,private route: ActivatedRoute,private router: Router) { 
+  searchMode: Boolean;
+  product: Product[]=[];
+  constructor(private productService: ProductService,private route: ActivatedRoute,private router: Router,private cartService: CartService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
+
+
   }
 
   ngOnInit() {
     //get category from path if exists
     let categoryName:any=this.route.snapshot.paramMap.get('categoryName');
-    console.log(categoryName)
+
     if(categoryName){
       //search in category
       this.getCategory(categoryName)
     }else{
-      //search in 
+      //search in
     this.getProductsAll();
     }
 
@@ -45,7 +49,7 @@ export class ProductComponent implements OnInit {
         p.category=fakeCategory;
         console.log(p)
       }
-      this.product= this.product.concat(cat.products) 
+      this.product= this.product.concat(cat.products)
     })
   }
   getProductsAll(){
@@ -58,16 +62,52 @@ export class ProductComponent implements OnInit {
         p.category=fakeCategory;
       }
       this.product= this.product.concat(c.products)
-    }      
+    }
     })
   }
-  
+
   popup(product:Product){
     if(window.confirm("add "+product.productName+" to cart?")){
-      //add to cart here
+      let x:string=sessionStorage.getItem("cartId");
+      if(x){
+        this.cartService.addProduct(x,product).subscribe();
+      }else{
+        window.alert("Cannot add item. You must register first");
+      }
     }
 
+
+
+
+
   }
+
+  search() {
+
+    this.searchMode = this.route.snapshot.paramMap.has('keyword');
+
+    if (this.searchMode) {
+      this.handleSearchProduct();
+    }
+
+
+
+
+  }
+  handleSearchProduct() {
+    const theKeyword:string = this.route.snapshot.paramMap.get('keyword');
+
+    // now search for products using keyword
+    this.productService.searchProduct(theKeyword).subscribe(
+      (          data: Product[]) => {
+        this.product = data;
+
+      }
+
+    );
+  }
+
+
    Product() {
 
      //Check if "id" parameter is available
@@ -95,4 +135,8 @@ export class ProductComponent implements OnInit {
 }
    }
   }
+
+function data(data: any, arg1: (Product: any) => void) {
+  throw new Error('Function not implemented.');
+}
 

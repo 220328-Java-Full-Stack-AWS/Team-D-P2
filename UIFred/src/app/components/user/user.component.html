@@ -23,7 +23,7 @@
 
                 <input type="text" id="form3Example8" class="form-control form-control-lg" [(ngModel)]="user.streetName"/>
                 <label class="form-label" for="form3Example8">Street</label>
-  
+
                 <div class=row>
                 <div class="col-md-6 mb-4">
                     <div class="form-outline">
@@ -50,11 +50,11 @@
                         </div>
                     </div>
                 </div>
-  
+
                 <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
-  
+
                 </div>
-  
+
                   <div class="form-outline mb-4">
                     <input type="text" id="form3Example97" class="form-control form-control-lg"[(ngModel)]="user.email" />
                     <label class="form-label" for="form3Example97">Email</label>
@@ -64,10 +64,10 @@
                     <button style="color: #61ce8d; font-size: 2em;" (click) ="addPayment()">Add payment</button>
                   </div>
 
-                  
+
 
                   <div *ngFor="let p of user.paymentMethods"class="form-outline mb-4">
-                    <label class="form-label" for="form3Example97">Payment method {{p.id}}</label>
+                    <label class="form-label" for="form3Example97">Payment method:</label>
                     <input type="text" id="form3Example97" class="form-control form-control-lg"[(ngModel)]="p.cardNumber" />
                     <label class="form-label" for="form3Example97">Card number</label>
                     <input type="text" id="form3Example97" class="form-control form-control-lg"[(ngModel)]="p.expirationDate" />
@@ -79,7 +79,7 @@
                   </div>
 
                 <button class="btn btn-outline-light btn-lg px-5" type="submit" (click) = 'update()'>Update</button>
-  
+
             </div>
           </div>
         </div>

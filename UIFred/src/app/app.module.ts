@@ -14,6 +14,7 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { LoginComponent } from './components/login/login.component';
 import { CartComponent } from './components/cart/cart.component';
 import { UserComponent } from './components/user/user.component';
+import { SearchComponent } from './components/search/search.component';
 
     // Redirect the user to your custom login page
 
@@ -39,9 +40,10 @@ const routes: Routes = [
     RegistrationComponent,
     PaymentComponent,
     CartComponent,
-    UserComponent
+    UserComponent,
+    SearchComponent
 
-    
+
   ],
   imports: [
     RouterModule.forRoot(routes,{onSameUrlNavigation:'reload'}),
@@ -56,9 +58,6 @@ const routes: Routes = [
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-
-
 
 function ProductGridComponent(ProductGridComponent: any) {
   throw new Error('Function not implemented.');

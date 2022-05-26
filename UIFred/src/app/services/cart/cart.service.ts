@@ -18,7 +18,7 @@ export class CartService {
 
     let header = new HttpHeaders({'cartId': cartId})
     console.log("We are in service and cartId is " + cartId)
-    return this.http.get(url +'/cart', {headers: header});
+    return this.http.post(url +'/cart', {headers: header});
   }
 
   addProduct(cartId: any, product: any) {
@@ -31,6 +31,8 @@ export class CartService {
   deleteProduct(cartId: any, product: any) {
 
     let header = new HttpHeaders({'cartId': cartId})
+    console.log("made it")
+    console.log(cartId)
     return this.http.put(url +'/cart/deleteProduct', product, {headers: header});
 
   }

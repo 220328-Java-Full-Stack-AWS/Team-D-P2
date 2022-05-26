@@ -47,11 +47,14 @@ public class CartController {
 
     @PutMapping("/addProduct")
     public void addProduct(@RequestHeader("cartId") Integer cartId, @RequestBody Product product) {
+        System.out.println("AZAZAZA");
         cartService.addProduct(product, cartId);
     }
 
     @PutMapping("/deleteProduct")
     public void deleteProduct(@RequestHeader("cartId") Integer cartId, @RequestBody Product product) {
+        System.out.println("azazaza " + cartId);
+        System.out.println(product);
         cartService.deleteProduct(product, cartId);
     }
 

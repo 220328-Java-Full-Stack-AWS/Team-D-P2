@@ -20,7 +20,7 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     private final CartService cartService;
-    private final IPaymentRepository paymentRepository;
+    private final PaymentRepository paymentRepository;
     @Autowired
     public UserService(UserRepository userRepository, CartService cartService,PaymentRepository paymentRepository) {
         this.userRepository=userRepository;
@@ -63,43 +63,57 @@ public class UserService {
     4. update
      */
     public User edit(User user) throws ResponseStatusException {
-    Optional<User> oldUser=userRepository.getById(user.getId());
-    if(oldUser.isPresent()&&user.getPassword()!=null){
-        user.setEmail(user.getEmail().toLowerCase(Locale.ROOT));
-        if(!user.getEmail().matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email invalid!");
-        }
-        User outUser=oldUser.get();
-        outUser.setUsername(user.getUsername());
-        outUser.setPassword(user.getPassword());
-        outUser.setEnabled(user.isEnabled());
-        outUser.setFirstName(user.getFirstName());
-        outUser.setLastName(user.getLastName());
-        outUser.setEmail(user.getEmail());
-        outUser.setPhone(user.getPhone());
-        outUser.setStreetName(user.getStreetName());
-        outUser.setCity(user.getCity());
-        outUser.setState(user.getState());
-        outUser.setZipCode(user.getZipCode());
-        outUser.setPaymentMethods(user.getPaymentMethods());
-        List<Payment> p2List = new ArrayList<>();
-        for(Payment p: user.getPaymentMethods()){
-            Payment p2=new Payment();
-            p2.setId(p.getId());
+    return userRepository.merge(user);
+    }
+        /*
+        Optional<User> oldUser=userRepository.getById(user.getId());
+        if(oldUser.isPresent()&&user.getPassword()!=null){
+            user.setEmail(user.getEmail().toLowerCase(Locale.ROOT));
+            if(!user.getEmail().matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email invalid!");
+            }
+            User outUser=oldUser.get();
+            outUser.setUsername(user.getUsername());
+            outUser.setPassword(user.getPassword());
+            outUser.setEnabled(user.isEnabled());
+            outUser.setFirstName(user.getFirstName());
+            outUser.setLastName(user.getLastName());
+            outUser.setEmail(user.getEmail());
+            outUser.setPhone(user.getPhone());
+            outUser.setStreetName(user.getStreetName());
+            outUser.setCity(user.getCity());
+            outUser.setState(user.getState());
+            outUser.setZipCode(user.getZipCode());
+            outUser.setPaymentMethods(user.getPaymentMethods());
+            for(Payment p: user.getPaymentMethods()){
+                paymentRepository.patch(p);
+                */
+
+            /*
+            Payment p2;
+            if(p.getId()==0){
+                p2= new Payment();
+            }else {
+                p2 = (Payment)paymentRepository.getById(p.getId()).get();
+            }
             p2.setCardNumber(p.getCardNumber());
             p2.setCvvNumber(p.getCvvNumber());
             p2.setExpirationDate(p.getExpirationDate());
             p2List.add(p2);
+            if(p.getId()==0){
+                paymentRepository.create(p2);
+            }
+
+            }
+            userRepository.update(outUser);
+            return outUser;
+
+
         }
-        outUser.setPaymentMethods(p2List);
-        for(Payment p: outUser.getPaymentMethods()){
-            paymentRepository.create(p);
-        }
-        userRepository.update(outUser);
-        return outUser;
-    }
         throw new ResponseStatusException(HttpStatus.FORBIDDEN,"auth failed!");
     }
+    */
+
     public User unregister(User user) throws ResponseStatusException {
         Optional<User> oldUser =userRepository.getByUsername(user.getUsername());
         if(oldUser.isPresent()){
