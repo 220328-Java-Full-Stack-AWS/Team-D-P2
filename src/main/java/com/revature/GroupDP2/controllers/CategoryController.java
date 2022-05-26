@@ -56,9 +56,9 @@ public class CategoryController {
 
     }
     @GetMapping("/getAll")
-    public ResponseEntity<? extends List> getAll(){
+    public ResponseEntity<List<Category>> getAll(){
 
-        return ResponseEntity.ok().body(categoryService.getAll());
+        return ResponseEntity.ok(categoryService.getAll());
     }
 
 }

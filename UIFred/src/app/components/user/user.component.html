@@ -2,7 +2,7 @@
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-          <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card text-white" style="border-radius: 1rem; background-color: #205b8d;">
             <div class="card-body p-5 text-center">
                 <div class="row">
                     <h1 class="fw-bold text-white-50 mb-2 text-uppercase ">User Data</h1>
@@ -23,7 +23,7 @@
 
                 <input type="text" id="form3Example8" class="form-control form-control-lg" [(ngModel)]="user.streetName"/>
                 <label class="form-label" for="form3Example8">Street</label>
-  
+
                 <div class=row>
                 <div class="col-md-6 mb-4">
                     <div class="form-outline">
@@ -50,19 +50,21 @@
                         </div>
                     </div>
                 </div>
-  
+
                 <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
-  
+
                 </div>
-  
+
                   <div class="form-outline mb-4">
                     <input type="text" id="form3Example97" class="form-control form-control-lg"[(ngModel)]="user.email" />
                     <label class="form-label" for="form3Example97">Email</label>
                     <input type="text" id="form3Example97" class="form-control form-control-lg"[(ngModel)]="user.username" />
                     <label class="form-label" for="form3Example97">Username</label>
+                    <br>
+                    <button style="color: #61ce8d; font-size: 2em;" (click) ="addPayment()">Add payment</button>
                   </div>
 
-                  <button style="color: rgb(51, 255, 61);font-size: 2em;" (click) ="addPayment()">Add payment</button>
+
 
                   <div *ngFor="let p of user.paymentMethods"class="form-outline mb-4">
                     <label class="form-label" for="form3Example97">Payment method:</label>
@@ -72,11 +74,12 @@
                     <label class="form-label" for="form3Example97">Expiration Date</label>
                     <input type="text" id="form3Example97" class="form-control form-control-lg" [(ngModel)]="p.cvvNumber" />
                     <label class="form-label" for="form3Example97">CVV number</label>
+                    <br>
                     <button style="color: rgb(255, 51, 51);font-size: 2em;" (click) ="removePayment(p)">Remove above payment</button>
                   </div>
 
                 <button class="btn btn-outline-light btn-lg px-5" type="submit" (click) = 'update()'>Update</button>
-  
+
             </div>
           </div>
         </div>
