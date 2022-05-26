@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
-import { Product } from 'src/app/common/product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/common/Category';
+import { Product } from 'src/app/common/product';
 import { CartService } from '../../services/cart/cart.service';
 
 @Component({
@@ -15,14 +15,16 @@ import { CartService } from '../../services/cart/cart.service';
 })
 export class ProductComponent implements OnInit {
 
+  //productName: string = ""
+
   searchMode: Boolean;
-  product: Product[]=[];  
-  constructor(private productService: ProductService,private route: ActivatedRoute,private router: Router,private cartService: CartService) { 
+  product: Product[]=[];
+  constructor(private productService: ProductService,private route: ActivatedRoute,private router: Router,private cartService: CartService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
 
-    
+
   }
 
   ngOnInit() {
@@ -33,7 +35,7 @@ export class ProductComponent implements OnInit {
       //search in category
       this.getCategory(categoryName)
     }else{
-      //search in 
+      //search in
     this.getProductsAll();
     }
 
@@ -47,7 +49,7 @@ export class ProductComponent implements OnInit {
         p.category=fakeCategory;
         console.log(p)
       }
-      this.product= this.product.concat(cat.products) 
+      this.product= this.product.concat(cat.products)
     })
   }
   getProductsAll(){
@@ -60,9 +62,10 @@ export class ProductComponent implements OnInit {
         p.category=fakeCategory;
       }
       this.product= this.product.concat(c.products)
-    }      
+    }
     })
   }
+
   popup(product:Product){
     if(window.confirm("add "+product.productName+" to cart?")){
       let x:string=sessionStorage.getItem("cartId");
@@ -73,22 +76,22 @@ export class ProductComponent implements OnInit {
       }
     }
 
-     
-  
-  
+
+
+
 
   }
 
   search() {
 
     this.searchMode = this.route.snapshot.paramMap.has('keyword');
-    
+
     if (this.searchMode) {
       this.handleSearchProduct();
     }
-    
 
-    
+
+
 
   }
   handleSearchProduct() {
@@ -98,13 +101,13 @@ export class ProductComponent implements OnInit {
     this.productService.searchProduct(theKeyword).subscribe(
       (          data: Product[]) => {
         this.product = data;
-      
+
       }
-    
+
     );
   }
 
-  
+
    Product() {
 
      //Check if "id" parameter is available

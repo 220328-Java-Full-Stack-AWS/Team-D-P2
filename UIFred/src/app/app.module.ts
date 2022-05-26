@@ -59,9 +59,6 @@ const routes: Routes = [
 })
 export class AppModule { }
 
-
-
-
 function ProductGridComponent(ProductGridComponent: any) {
   throw new Error('Function not implemented.');
 }

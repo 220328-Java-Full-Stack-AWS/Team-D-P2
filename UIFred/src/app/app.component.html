@@ -28,15 +28,6 @@
 
 				<app-search></app-search>
 
-				<button *ngIf="username" class="form-header" class="au-btn-submit"><a href="userPage" style="color:white">Welcome, {{username}}</a></button>
-
-			  <form class="form-header" onsubmit="return false;" method="GET">
-				<input class="au-input au-input-xl" type="text" name="search" placeholder="Search for data ..." />
-				<button class="au-btn-submit" type="submit">
-				  Search
-				</button>
-				<p></p>
-				</form>
 				<div *ngIf="username">
 				<button class="form-header" class="au-btn-submit"><a href="userPage" style="color:white;padding:.5em">Welcome, {{username}}</a></button>
 				<button class="form-header" class="au-btn-submit"><a href="userPage" style="color:white;padding:.5em">View Profile</a></button>
