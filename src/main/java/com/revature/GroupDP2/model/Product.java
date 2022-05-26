@@ -102,24 +102,15 @@ public class Product {
 
     public void setImageUrl(String imageUrl) {this.imageUrl = imageUrl;}
 
-    /*
-    public List<Cart> getProductCart() {
-        return productCart;
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                ", productName='" + productName + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                '}';
     }
-
-    public void setProductCart(List<Cart> productCart) {
-        this.productCart = productCart;
-    }
-  
-    public void addProductCart(Cart cart){
-      productCart.add(cart);
-    }
-    
-    public void removeProductCart(Cart cart){
-      productCart.remove(cart);
-    }
-*/
-
 }
 
 
