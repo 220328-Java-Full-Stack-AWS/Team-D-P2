@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { range } from 'rxjs';
 import { User } from 'src/app/common/User';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { Cart, Product, Payment } from '../../common/Models';
@@ -46,19 +47,27 @@ export class CartComponent implements OnInit {
   }
 
   public deleteProduct(body: Product) {
-    let cartId = localStorage.getItem("cartId");
-    this.cartService.deleteProduct(cartId, body);
+    console.log(body);
+    let cartId = sessionStorage.getItem("cartId");
+    this.cartService.deleteProduct(cartId, body).subscribe((data:any)=>console.log(data));
+    window.location.href = "cart"
+  
   } 
+
+  public deleteAll() {
+    let p = this.cart.cartItems.length;
+    for(let i of Array(p).keys()){
+      this.deleteProduct(this.cart.cartItems[0])
+    }
+    
+   
+  }
 
   public populatePayment(payment: Payment) {
 
     this.cardNumber = payment.cardNumber;
     this.expiration = payment.expirationDate;
     this.cvv = payment.cvvNumber
-
-    console.log(this.cardNumber)
-    console.log(this.expiration)
-    console.log(this.cvv)
 
   }
 
@@ -70,6 +79,8 @@ export class CartComponent implements OnInit {
       prodSum += product.price;
     }
     this.total = prodSum
+
+    sessionStorage.setItem("totalPrice", String(prodSum));
 }
 
 }

@@ -36,18 +36,20 @@ export class AppComponent implements OnInit {
     window.location.reload();
   }
   public getCart() {
+    console.log("get cart called");
     let cartId = sessionStorage.getItem("cartId");
-    this.cartService.getCart(cartId).subscribe((cart: Cart) => {this.cart = cart; this.totalPrice(cart)})
+    this.cartService.getCart(cartId).subscribe((cart: Cart) => {this.cart = cart;this.totalPrice(this.cart)})
   }
   public totalPrice(cart: Cart) {
-
+    
     let prodSum: number = 0
     for (let product of cart.cartItems) {
       prodSum += product.price;
     }
-    this.total = prodSum
+    this.total = prodSum;
+    console.log(cart);
     this.numItems = cart.cartItems.length;
+    console.log(this.numItems);
 }
 }
 
-// yeah

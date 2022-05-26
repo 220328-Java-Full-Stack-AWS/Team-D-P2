@@ -30,6 +30,7 @@
 				<button class="au-btn-submit" type="submit">
 				  Search
 				</button>
+				<p></p>
 				</form>
 				<div *ngIf="username">
 				<button class="form-header" class="au-btn-submit"><a href="userPage" style="color:white;padding:.5em">Welcome, {{username}}</a></button>
@@ -42,6 +43,7 @@
 					</button>
 			  </form>
 			  <div class="cart-area d-n">
+				  <p>{{totalPrice(cart)}}</p>
 				<a href="cart">
 				  <div class="total">{{total | currency}} <span> {{numItems}}</span> </div> <i class="fa fa-shopping-cart" aria-hidden="true"></i>
 				</a>
