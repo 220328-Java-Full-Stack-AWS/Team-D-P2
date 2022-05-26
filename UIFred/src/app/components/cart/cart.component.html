@@ -1,85 +1,88 @@
+<section class="h-100 h-custom" style="background-color: #eee;">
 
-    <div class="container h-100 py-5"style="float:right">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col">
-          <div class="card shopping-cart" style="border-radius: 15px;">
-            <div class="card-body text-black">
-  
-              <div class="row">
-                <div class="col-lg-3 px-5 py-4">
-  
-                  <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Your products</h3>
+  <div class="container h-100 py-5">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+        <div class="card shopping-cart" style="border-radius: 15px;">
+          <div class="card-body text-black">
 
-  
-                  <div class="d-flex align-items-center mb-5" *ngFor="let product of cart.cartItems">
-                    <div class="flex-shrink-0">
-                      <img src={{product.imageUrl}}
-                        class="img-fluid" style="width: 150px;" alt="N/A">
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                      <a (click)="deleteProduct(product)" class="float-end text-black"><i class="fas fa-times"></i></a>
-                      <h5 class="text-primary">{{product.productName}}</h5>
-                      <div class="d-flex align-items-center">
-                        <p class="fw-bold mb-0 me-5 pe-3">{{product.price | currency}}</p>
-                        
-                      </div>
-                    </div> 
+            <div class="row">
+              <div class="col-lg-6 px-5 py-4">
+
+                <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Your products</h3>
+
+
+                <div class="d-flex align-items-center mb-5" *ngFor="let product of cart.cartItems">
+                  <div class="flex-shrink-0">
+                    <img src={{product.imageUrl}}
+                      class="img-fluid" style="width: 150px;" alt="N/A">
                   </div>
-  
-  
-                  <hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
-  
-                  <div class="d-flex justify-content-between p-2 mb-2" style="background-color: #e1f5fe;">
-                    <h5 class="fw-bold mb-0">Total:</h5>
-                    <h5 class="fw-bold mb-0">{{total | currency}}</h5>
-                  </div>
-  
-                </div>
-                <div class="col-lg-6 px-5 py-4">
-  
-                  <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Payment</h3>
-                  <details><summary>Payments on File</summary>
-                    <div (click)="populatePayment(i)" *ngFor="let i of user.paymentMethods">{{i.cardNumber}}</div>
-                    
-                    </details>
-
-                  
-  
-                    <div class="form-outline mb-5">
-                      <input type = "text" id = "typeExp" class = "form-control form-control-lg" placeholder="Card Number" [(ngModel)] = 'cardNumber'>
-                      <label class="form-label" for="typeText">Card Number</label>
+                  <div class="flex-grow-1 ms-3">
+                    <a (click)="deleteProduct(product)" class="float-end text-black"><i class="fas fa-times"></i></a>
+                    <h5 class="text-primary">{{product.productName}}</h5>
+                    <div class="d-flex align-items-center">
+                      <p class="fw-bold mb-0 me-5 pe-3">{{product.price | currency}}</p>
+                      
                     </div>
-
-  
-                    <div class="row">
-                      <div class="col-md-6 mb-5">
-                        <div class="form-outline">
-                          <input type = "text" id = "typeExp" class = "form-control form-control-lg" placeholder="Expiration Date" [(ngModel)] = 'expiration'>
-                          <label class="form-label" for="typeExp">Expiration</label>
-                        </div>
-                      </div>
-
-                      <div class="col-md-6 mb-5">
-                        <div class="form-outline">
-                          <input type = "password" id = "typeExp" class = "form-control form-control-lg" placeholder="CVV" [(ngModel)] = 'cvv'>
-                          <label class="form-label" for="typeText">CVV</label>
-                        </div>
-                      </div>
-                    </div>
-  
-                    <button (click)="deleteAll()" type="button" class="btn btn-primary btn-block btn-lg" >Checkout</button>
-                  <br>
-                    <h5 class="fw-bold mb-5" style="float:right">
-                      <a href=""><i class="fas fa-angle-left me-2"></i>Back to shopping</a>
-                    </h5>
+                  </div> 
                 </div>
+
+
+                <hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
+
+                <div class="d-flex justify-content-between p-2 mb-2" style="background-color: #e1f5fe;">
+                  <h5 class="fw-bold mb-0">Total:</h5>
+                  <h5 class="fw-bold mb-0">{{total | currency}}</h5>
+                </div>
+
               </div>
-  
+              <div class="col-lg-6 px-5 py-4">
+
+                <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Payment</h3>
+                <details><summary>Payments on File</summary>
+                  <div (click)="populatePayment(i)" *ngFor="let i of user.paymentMethods">{{i.cardNumber}}</div>
+                  
+                  </details>
+
+                
+
+                  <div class="form-outline mb-5">
+                    <input type = "text" id = "typeExp" class = "form-control form-control-lg" placeholder="Card Number" [(ngModel)] = 'cardNumber'>
+                    <label class="form-label" for="typeText">Card Number</label>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-md-6 mb-5">
+                      <div class="form-outline">
+                        <input type = "text" id = "typeExp" class = "form-control form-control-lg" placeholder="Expiration Date" [(ngModel)] = 'expiration'>
+                        <label class="form-label" for="typeExp">Expiration</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 mb-5">
+                      <div class="form-outline">
+                        <input type = "password" id = "typeExp" class = "form-control form-control-lg" placeholder="CVV" [(ngModel)] = 'cvv'>
+                        <label class="form-label" for="typeText">CVV</label>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <button (click)="deleteAll()" type="button" class="btn btn-primary btn-block btn-lg" >Checkout</button>
+                <br>
+                  <h5 class="fw-bold mb-5" style="position: absolute; bottom: 0;">
+                    <a href=""><i class="fas fa-angle-left me-2"></i>Back to shopping</a>
+                  </h5>
+
+                
+
+              </div>
             </div>
+
           </div>
         </div>
       </div>
     </div>
-
-
-
+  </div>
+</section>
