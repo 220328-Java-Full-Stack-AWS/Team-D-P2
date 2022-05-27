@@ -1,4 +1,4 @@
-# Project 2 - E-Commerce SPA
+# Project 2 - Revature Digital Marketplace (RDM)
 
 ## Executive Summary
 RDM (Revature Digital Marketplace) is an e-commerce application featuring ebooks, music, and memes. Users may browse products on the homepage whether or not they are logged in. Browsing may be accomplished by selecting any of the category links on the homepage sidebar, or through searching the desired product via the search bar. Only registered and logged in users may add products to their cart and checkout. Logged-in users are able to edit any of their user information, and add / delete / edit payment methods. Once users are in the checkout page, they may select any of their payment methods from a dropdown menu, or they can enter a new payment method using the form on the checkout page. After checkout users are redirected to the home page and their cart is emptied.
