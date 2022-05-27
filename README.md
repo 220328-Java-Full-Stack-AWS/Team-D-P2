@@ -1,7 +1,7 @@
 # Project 2 - E-Commerce SPA
 
 ## Executive Summary
-The E-Commerce Single-Page Application will allow consumers to browse, search, and buy products. Users will be able to browse our catelog of products, or search for a specific item, and add these to a cart. Users can register accounts which includes a profile. There are a number of stretch goals to choose from. Please update this text to summarize additional features. This text is fairly generic, your project will be unique, this text should be re-written to reflect your final deliverable.
+RDM (Revature Digital Marketplace) is an e-commerce application featuring ebooks, music, and memes. Users may browse products on the homepage whether or not they are logged in. Browsing may be accomplished by selecting any of the category links on the homepage sidebar, or through searching the desired product via the search bar. Only registered and logged in users may add products to their cart and checkout. Logged-in users are able to edit any of their user information, and add / delete / edit payment methods. Once users are in the checkout page, they may select any of their payment methods from a dropdown menu, or they can enter a new payment method using the form on the checkout page. After checkout users are redirected to the home page and their cart is emptied.
 
 
 # Tech Stack
@@ -21,24 +21,6 @@ The E-Commerce Single-Page Application will allow consumers to browse, search, a
    - Spring Boot
    - Spring MVC
  - Angular
-
-## Forbidden Abstractions:
- - Spring Data JPA - Spring Data JPA uses Hibernate as an ORM provider. Before we get to that level of abstraction, we will use hibernate directly ourselves.
-
-
-# Functional Requirements
-### Required:
- - Domain objects persisted in relational database via ORM
- - All CRUD functionality accessible via RESTful API
- - Single page web UI to consume RESTful API
- - Workflows to complete all user stories
- - Validate all user input
- - Unit test coverage for service-layer classes
-
-### Stretch Goals:
- - Application is merged, tested, and deployed with a fully functional CI/CD Pipeline
-
-The persistence layer shall use Hibernate ORM to translate between the database and the application server. The API layer shall abstract away the low-level servlets with Spring Web MVC. The client shall use Angular to produce an SPA which is styled to be functional and readable. The server should follow a proper layered architecture, and have adequate unit testing of the service layer. The client and server should communicate in a RESTful manner, and the server should be stateless. 
 
 
 ## User Stories
@@ -62,9 +44,5 @@ The persistence layer shall use Hibernate ORM to translate between the database 
  - As a User, I should be able to reset my password.
  - As a User, I should be able to change the color scheme from the normal mode to a dark mode option.
  - As a User, I should receive notifications when a transaction has occurred or a transfer has been completed.
-
-# Submission
-### Due Date: Thursday 5/26/2022 at 9:00 AM CST
-Your project needs to be pushed into the main branch of your team's P2 repository no later than the due data and time above. Commits after this deadline will not be considered. On the due date there will be a presentation. You will be expected to briefly cover your project, and should be prepared to discuss it with QC.
 
 
