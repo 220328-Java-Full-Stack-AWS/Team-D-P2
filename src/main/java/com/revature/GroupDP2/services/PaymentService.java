@@ -3,6 +3,7 @@ package com.revature.GroupDP2.services;
 import com.revature.GroupDP2.model.Payment;
 import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.repository.PaymentRepository;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,40 +22,40 @@ public class PaymentService {
         this.userService = userService;
     }
 
-    public void save(Payment payment) {
-         paymentRepo.create(payment);
+    public void save(Payment payment, Session session) {
+         paymentRepo.create(payment,session);
 
     }
 
-    public void update(Payment payment) {
-        paymentRepo.update(payment);
+    public void update(Payment payment,Session session) {
+        paymentRepo.update(payment,session);
 
     }
 
-    public void patch(Payment payment){
-        paymentRepo.patch(payment);
+    public void patch(Payment payment,Session session){
+        paymentRepo.patch(payment,session);
     }
 
-    public Optional<Payment> getPaymentById(Integer id) {
-         return paymentRepo.getById(id);
+    public Optional<Payment> getPaymentById(Integer id,Session session) {
+         return paymentRepo.getById(id,session);
     }
 
-    public Payment getPaymentByCardNumber(Payment payment){
-        return paymentRepo.getPaymentByCardNumber(payment);
+    public Payment getPaymentByCardNumber(Payment payment,Session session){
+        return paymentRepo.getPaymentByCardNumber(payment,session);
 
     }
 
-    public List<Payment> getByUser(Integer userId) {
-        User user = userService.getById(userId);
-        return paymentRepo.getByUser(user);
+    public List<Payment> getByUser(Integer userId,Session session) {
+        User user = userService.getById(userId,session);
+        return paymentRepo.getByUser(user,session);
     }
 
-    public List<Payment> getAll() {
-        return paymentRepo.getAll();
+    public List<Payment> getAll(Session session) {
+        return paymentRepo.getAll(session);
     }
 
-    public void delete(Payment payment) {
-        paymentRepo.delete(payment);
+    public void delete(Payment payment,Session session) {
+        paymentRepo.delete(payment,session);
 
     }
 

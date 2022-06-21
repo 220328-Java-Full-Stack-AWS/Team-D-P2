@@ -20,74 +20,60 @@ import java.util.Optional;
 
 
 @Component
-public class ProductRepository implements IProductRepository<Product>, Lifecycle {
+public class ProductRepository implements IProductRepository<Product> {
 
-
-    private final StorageManager storageManager;
-    private Session session;
-    private boolean running = false;
-
-    @Autowired
-    public ProductRepository(StorageManager storageManager) {
-        this.storageManager = storageManager;
-    }
 
     @Override
-    public void create(Product p) {
+    public void create(Product p,Session session) {
         Transaction transaction = session.beginTransaction();
         session.save(p);
         transaction.commit();
     }
 
     @Override
-    public void update(Product p) {
+    public void update(Product p,Session session) {
         Transaction transaction = session.beginTransaction();
         session.update(p);
         transaction.commit();
     }
 
     @Override
-    public Optional<Product> getById(int t) {
-        session = storageManager.getSessionFactory().openSession();
+    public Optional<Product> getById(int t,Session session) {
         TypedQuery<Product> query = session.createQuery("FROM Product WHERE id = :id", Product.class);
         query.setParameter("id", t);
         return Optional.ofNullable(query.getSingleResult());
     }
 
     @Override
-    public void delete(Product p) {
+    public void delete(Product p,Session session) {
         Transaction transaction = session.beginTransaction();
         session.delete(p);
         transaction.commit();
     }
 
     @Override
-    public Product getByCategoryId(int id) {
-        session = storageManager.getSessionFactory().openSession();
+    public Product getByCategoryId(int id,Session session) {
         TypedQuery<Product> query = session.createQuery("FROM Product WHERE categoryId = :categoryId", Product.class);
         query.setParameter("categoryId", id);
         return query.getSingleResult();
     }
 
     @Override
-    public List<Product> getAll() {
-        session = storageManager.getSessionFactory().openSession();
+    public List<Product> getAll(Session session) {
         TypedQuery<Product> query = session.createQuery("FROM Product", Product.class);
         return query.getResultList();
     }
 
-    public Product getProductByProductName(String productnameorId) {
+    public Product getProductByProductName(String productnameorId,Session session) {
         Transaction transaction = session.beginTransaction();
-        session = storageManager.getSessionFactory().openSession();
         TypedQuery<Product>query = session.createQuery("From Product where productName = : productName");
         query.setParameter("productName", productnameorId);
         Product product = query.getSingleResult();
         transaction .commit();
         return product;
     }
-    public List<Product> getProductByMatchingName(String productName){
+    public List<Product> getProductByMatchingName(String productName,Session session){
         Transaction transaction = session.beginTransaction();
-        session = storageManager.getSessionFactory().openSession();
         String hql = "From Product where productName like :productName";
         TypedQuery<Product> query = session.createQuery(hql);
         query.setParameter("productName",productName + "%");
@@ -97,9 +83,8 @@ public class ProductRepository implements IProductRepository<Product>, Lifecycle
     }
 
     @Override
-    public Product getById(Integer id) {
+    public Product getById(Integer id,Session session) {
         Transaction transaction = session.beginTransaction();
-        session = storageManager.getSessionFactory().openSession();
         TypedQuery<Product>query = session.createQuery("From Product where productId = : productId");
         query.setParameter("productId", id);
         Product product = query.getSingleResult();
@@ -108,25 +93,9 @@ public class ProductRepository implements IProductRepository<Product>, Lifecycle
     }
 
     @Override
-    public Product getByUserId(int l) {
+    public Product getByUserId(int l,Session session) {
         return null;
     }
 
-    @Override
-    public void start() {
-        running = true;
-        this.session = storageManager.getSession();
-    }
-
-    @Override
-    public void stop() {
-        running = false;
-        this.session.close();
-    }
-
-    @Override
-    public boolean isRunning() {
-        return running;
-    }
 }
 

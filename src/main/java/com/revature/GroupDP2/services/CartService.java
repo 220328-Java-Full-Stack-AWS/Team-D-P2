@@ -5,6 +5,7 @@ import com.revature.GroupDP2.model.Product;
 import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.repository.CartRepository;
 import com.revature.GroupDP2.repository.ProductRepository;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,35 +25,35 @@ public class CartService {
         this.productRepository = productRepository;
     }
 
-    public Cart newCart(){
-        return cartRepository.create();
+    public Cart newCart(Session session){
+        return cartRepository.create(session);
     }
-    public void newCart(User user) {
+    public void newCart(User user,Session session) {
         //cartRepository.create(new Cart(user));
     }
 
-    public void newCart(Cart cart) {
+    public void newCart(Cart cart,Session session) {
         //System.out.println("Service layer" + cart);
         //cartRepository.create(cart);
     }
 
-    public Optional<Cart> getCartByUser(User user) {
-        return cartRepository.getByUser(user);
+    public Optional<Cart> getCartByUser(User user,Session session) {
+        return cartRepository.getByUser(user,session);
     }
 
 
-    public Optional<Cart> getCartById(Integer cartId) {
-        return cartRepository.getById(cartId);
+    public Optional<Cart> getCartById(Integer cartId,Session session) {
+        return cartRepository.getById(cartId,session);
     }
 
-    public void checkout(Cart cart) {
-        cartRepository.delete(cart);
+    public void checkout(Cart cart,Session session) {
+        cartRepository.delete(cart,session);
 
     }
 
-    public List<Cart> getAll() {
+    public List<Cart> getAll(Session session) {
 
-        List<Cart> output = cartRepository.getAll();
+        List<Cart> output = cartRepository.getAll(session);
 
         for(Cart i : output){
             System.out.println(i);
@@ -61,26 +62,26 @@ public class CartService {
         return output;
     }
 
-    public Cart addProduct(Product product, Integer cartId) {
-        Cart cart = getCartById(cartId).get();
-        Product nProduct=productRepository.getById(product.getProductId());
+    public Cart addProduct(Product product, Integer cartId,Session session) {
+        Cart cart = getCartById(cartId,session).get();
+        Product nProduct=productRepository.getById(product.getProductId(),session);
         cart.addCartItem(nProduct);
-        cartRepository.merge(cart);
+        cartRepository.merge(cart,session);
         return cart;
     }
 
-    public Cart deleteProduct(Product product, Integer cartId) {
-        Cart cart = getCartById(cartId).get();
+    public Cart deleteProduct(Product product, Integer cartId,Session session) {
+        Cart cart = getCartById(cartId,session).get();
         System.out.println("Before " + cart);
         cart.deleteCartItem(product);
         System.out.println("After " + cart);
-        cartRepository.update(cart);
+        cartRepository.update(cart,session);
         return cart;
     }
 
-    public void deleteCartItems(Cart cart, Integer cartId){
+    public void deleteCartItems(Cart cart, Integer cartId,Session session){
         System.out.println("service");
-        cartRepository.delete(cart);
+        cartRepository.delete(cart,session);
     }
 
     public List<Product> getCartItems(Cart cart) {return cart.getCartItems();}

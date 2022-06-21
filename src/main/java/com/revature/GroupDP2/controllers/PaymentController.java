@@ -2,6 +2,8 @@ package com.revature.GroupDP2.controllers;
 
 import com.revature.GroupDP2.model.Payment;
 import com.revature.GroupDP2.services.PaymentService;
+import com.revature.GroupDP2.util.StorageManager;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,16 +22,20 @@ import java.util.Map;
 public class PaymentController {
 
     final PaymentService paySerRepo;
-
+    final StorageManager storageManager;
     @Autowired
-    public PaymentController(PaymentService paySerRepo) {
+    public PaymentController(PaymentService paySerRepo, StorageManager storageManager) {
 
         this.paySerRepo = paySerRepo;
+        this.storageManager = storageManager;
     }
 
     @GetMapping("/byUser")
     public List<Payment> getByUser(@RequestHeader("userId") Integer userId) {
-        return paySerRepo.getByUser(userId);
+        Session session = this.storageManager.getSessionFactory().openSession();
+        List<Payment> out= paySerRepo.getByUser(userId,session);
+        //session.close();
+        return out;
     }
 
 
@@ -37,7 +43,9 @@ public class PaymentController {
     @PostMapping()
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Payment> addNewPayment(@Valid @RequestBody Payment payment) {
-        paySerRepo.save(payment);
+        Session session = this.storageManager.getSessionFactory().openSession();
+        paySerRepo.save(payment,session);
+        //session.close();
         return ResponseEntity.status(200).build();
     }
 
@@ -45,21 +53,27 @@ public class PaymentController {
     @PutMapping ()
     @ResponseStatus(HttpStatus.OK)
     public Payment updatePayment(@Valid @RequestBody Payment payment) {
-        paySerRepo.update(payment);
+        Session session = this.storageManager.getSessionFactory().openSession();
+        paySerRepo.update(payment,session);
+        //session.close();
         return payment;
     }
 
     @PatchMapping
     public ResponseEntity<Payment> patch(@Valid @RequestBody Payment payment){
-        paySerRepo.patch(payment);
+        Session session = this.storageManager.getSessionFactory().openSession();
+        paySerRepo.patch(payment,session);
+        //session.close();
         return ResponseEntity.status(200).build();
     }
 
     //Delete an existing payment
     @DeleteMapping ()
     public Payment deletePayment(@RequestBody Payment payment) {
-        Payment out = paySerRepo.getPaymentById(payment.getId()).get();
-        paySerRepo.delete(out);
+        Session session = this.storageManager.getSessionFactory().openSession();
+        Payment out = paySerRepo.getPaymentById(payment.getId(),session).get();
+        paySerRepo.delete(out,session);
+        //session.close();
         return out;
     }
 
@@ -67,7 +81,10 @@ public class PaymentController {
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     public List<Payment> paymentList() {
-        return  paySerRepo.getAll();
+        Session session = this.storageManager.getSessionFactory().openSession();
+        List<Payment> out = paySerRepo.getAll(session);
+        //session.close();
+        return out;
 
     }
     @ResponseStatus(HttpStatus.BAD_REQUEST)

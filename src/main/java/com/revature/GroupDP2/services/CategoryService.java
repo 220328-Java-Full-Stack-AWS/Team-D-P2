@@ -2,6 +2,7 @@ package com.revature.GroupDP2.services;
 
 import com.revature.GroupDP2.model.Category;
 import com.revature.GroupDP2.repository.CategoryRepository;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,35 +17,37 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public void create(Category category){
+    public void create(Category category, Session session){
 
-        categoryRepository.create(category);
+        categoryRepository.create(category,session);
     }
 
-    public void update(int id, Category category){
+    public void update(int id, Category category,Session session){
 
-        categoryRepository.update(id, category);
+        categoryRepository.update(id, category,session);
     }
 
-    public void patch(Category category){
+    public void patch(Category category,Session session){
 
-        categoryRepository.patch(category);
+        categoryRepository.patch(category,session);
     }
 
-    public void delete(Category category){
+    public void delete(Category category,Session session){
 
-        categoryRepository.delete(category);
+        categoryRepository.delete(category,session);
     }
 
-    public Optional<Category> getById(int t){
-        return categoryRepository.getById(t);
+    public Optional<Category> getById(int t,Session session){
+        return categoryRepository.getById(t,session);
     }
 
-    public Optional<Category> getByName(String t){return Optional.ofNullable(categoryRepository.getByCategoryName(t));}
+    public Optional<Category> getByName(String t,Session session){
+        return Optional.ofNullable(categoryRepository.getByCategoryName(t,session));
+    }
 
-    public List<Category> getAll(){
+    public List<Category> getAll(Session session){
 
-        return categoryRepository.getAll();
+        return categoryRepository.getAll(session);
     }
 
 }

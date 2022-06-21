@@ -15,65 +15,56 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class CartRepository implements ICartRepository, Lifecycle {
+public class CartRepository implements ICartRepository {
 
-    private StorageManager storageManager;
-    private Session session;
-    private boolean running=false;
-    @Autowired
-    public CartRepository(StorageManager storageManager) {
-        this.storageManager = storageManager;
-    }
-
-
-    public Cart create(){
-        session = storageManager.getSessionFactory().openSession();
+    public Cart create(Session session) {
         Cart cart = new Cart();
         Transaction transaction = session.beginTransaction();
         session.save(cart);
-        TypedQuery<Cart> query = session.createQuery("FROM Cart cart ORDER BY cart.id desc",Cart.class);
+        TypedQuery<Cart> query = session.createQuery("FROM Cart cart ORDER BY cart.id desc", Cart.class);
         List<Cart> list = query.getResultList();
         cart.setId(list.get(0).getId());
         transaction.commit();
         return cart;
     }
+
     @Override
-    public void create(Cart c) {
+    public void create(Cart c, Session session) {
         Transaction transaction = session.beginTransaction();
         session.save(c);
         transaction.commit();
     }
 
     @Override
-    public void update(Cart c) {
+    public void update(Cart c, Session session) {
         Transaction transaction = session.beginTransaction();
         session.update(c);
         transaction.commit();
     }
-    public void merge(Cart c){
+
+    public void merge(Cart c, Session session) {
         Transaction transaction = session.beginTransaction();
         session.merge(c);
         transaction.commit();
     }
 
-    public Optional<Cart> getByUser(User user) {
-        session = storageManager.getSessionFactory().openSession();
-        TypedQuery<Cart> query = session.createQuery("FROM Cart WHERE user = :u",Cart.class);
-        query.setParameter("u",user);
+    public Optional<Cart> getByUser(User user, Session session) {
+        TypedQuery<Cart> query = session.createQuery("FROM Cart WHERE user = :u", Cart.class);
+        query.setParameter("u", user);
         return Optional.ofNullable(query.getSingleResult());
     }
 
     @Override
-    public Optional<Cart> getById(int t) {
-        session = storageManager.getSessionFactory().openSession();
-        TypedQuery<Cart> query = session.createQuery("FROM Cart WHERE id = :id",Cart.class);
-        query.setParameter("id",t);
-        return Optional.ofNullable(query.getSingleResult());
+    public Optional<Cart> getById(int t, Session session) {
+        TypedQuery<Cart> query = session.createQuery("FROM Cart WHERE id = :id", Cart.class);
+        query.setParameter("id", t);
+        Optional<Cart> out = Optional.ofNullable(query.getSingleResult());
+        return out;
     }
 
 
     @Override
-    public void delete(Cart c) {
+    public void delete(Cart c, Session session) {
         System.out.println("repo");
         Transaction transaction = session.beginTransaction();
         session.merge(c);
@@ -82,26 +73,8 @@ public class CartRepository implements ICartRepository, Lifecycle {
 
     //NEED TO FINISH THIS METHOD
     @Override
-    public List<Cart> getAll() {
-        session = storageManager.getSessionFactory().openSession();
+    public List<Cart> getAll(Session session) {
         Query query = session.createQuery("from Cart");
         return query.getResultList();
-    }
-
-    @Override
-    public void start() {
-        this.session =storageManager.getSession();
-        running=true;
-    }
-
-    @Override
-    public void stop() {
-    running=false;
-    session.close();
-    }
-
-    @Override
-    public boolean isRunning() {
-        return running;
     }
 }

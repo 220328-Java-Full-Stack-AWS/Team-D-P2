@@ -27,13 +27,9 @@ import java.util.Optional;
 */
 
 @Component
-public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle {
+public class PaymentRepository implements IPaymentRepository<Payment> {
 
     //the return type of isRunning() that check whether a component is currently running
-    private boolean running = false;
-
-
-    private final StorageManager storageManager;
 
     /*
         * Session is the main runtime interface between a Java application and Hibernate.
@@ -50,19 +46,13 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
             * detached: previously persistent, not associated with any Session. Detached instances
               may be made persistent by calling update(), saveOrUpdate(), lock(), or replicate().
      */
-    private  Session session;
-    
 
-    public PaymentRepository(StorageManager storageManager) {
-        this.storageManager = storageManager;
-
-    }
 
     /*
-        * save() and persist() result in an SQL INSERT
-    */
+     * save() and persist() result in an SQL INSERT
+     */
     @Override
-    public void create(Payment payment) {
+    public void create(Payment payment, Session session) {
       
         /* A transaction is associated with a Session and is usually initiated
            by a call to Session.beginTransaction().
@@ -73,16 +63,16 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
     }
 
     /*
-        * update() or merge() results in an SQL UPDATE
-    */
+     * update() or merge() results in an SQL UPDATE
+     */
     @Override
-    public void update(Payment payment) {
+    public void update(Payment payment, Session session) {
         Transaction tx = session.beginTransaction();
         session.update(payment);
         tx.commit();
     }
 
-    public void patch(Payment payment){
+    public void patch(Payment payment, Session session) {
         Transaction transaction = session.beginTransaction();
         session.merge(payment);
         transaction.commit();
@@ -90,20 +80,19 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
 
 
     @Override
-    public Optional<Payment> getById(int t) {
-        session = storageManager.getSessionFactory().openSession();
-        TypedQuery<Payment> query = session.createQuery("FROM Payment WHERE id = :id",Payment.class);
+    public Optional<Payment> getById(int t, Session session) {
+        TypedQuery<Payment> query = session.createQuery("FROM Payment WHERE id = :id", Payment.class);
 
         return Optional.ofNullable(query.getSingleResult());
     }
 
     /*
-        * delete() results in an SQL DELETE
-    */
+     * delete() results in an SQL DELETE
+     */
     @Override
-    public void delete(Payment payment) {
+    public void delete(Payment payment, Session session) {
         Transaction tx = session.beginTransaction();
-        if(payment != null){
+        if (payment != null) {
             session.delete(payment);
         }
         tx.commit();
@@ -111,69 +100,24 @@ public class PaymentRepository implements IPaymentRepository<Payment>, Lifecycle
     }
 
     @Override
-    public Payment getPaymentByCardNumber(Payment payment) {
-        if (session != null){
-            session = storageManager.getSessionFactory().openSession();
-            TypedQuery<Payment> query = session.createQuery("FROM Payment WHERE cardNumber = :cardNumber",Payment.class);
-            query.setParameter("cardNumber", payment.getCardNumber());
-            payment = query.getSingleResult();
-        }
-        else{
-            //throw an exception
-        }
+    public Payment getPaymentByCardNumber(Payment payment, Session session) {
+        TypedQuery<Payment> query = session.createQuery("FROM Payment WHERE cardNumber = :cardNumber", Payment.class);
+        query.setParameter("cardNumber", payment.getCardNumber());
+        payment = query.getSingleResult();
         return payment;
     }
 
-    public List<Payment> getAll() {
-        session = storageManager.getSessionFactory().openSession();
+    public List<Payment> getAll(Session session) {
         String sql = "FROM Payment";
-        TypedQuery query = session.createQuery(sql, Payment.class);
-
+        TypedQuery<Payment> query = session.createQuery(sql, Payment.class);
         return query.getResultList();
 
     }
 
-    public List<Payment> getByUser(User user) {
-        session = storageManager.getSessionFactory().openSession();
-        TypedQuery<Payment> query = session.createQuery("FROM Payment WHERE user = :u",Payment.class);
-        query.setParameter("u",user);
+    public List<Payment> getByUser(User user, Session session) {
+        TypedQuery<Payment> query = session.createQuery("FROM Payment WHERE user = :u", Payment.class);
+        query.setParameter("u", user);
         return query.getResultList();
     }
-
-    /*
-           * Start this component.
-           * Should not throw an exception if the component is already running.
-           * In the case of a container, this will propagate the start signal to all
-             components that apply.
-       */
-    @Override
-    public void start() {
-        running = true;
-        this.session = storageManager.getSession();
-    }
-
-    /*
-        * Stop this component
-        * Should not throw an exception if the component is not running (not started yet).
-	    * In the case of a container, this will propagate the stop signal to all components
-	      that apply.
-    */
-    @Override
-    public void stop() {
-        running = false;
-        this.session.close();
-    }
-
-    /* Check whether this component is currently running.
-        * In the case of a container, this will return {@code true} only if
-          components that apply are currently running.
-        * @return whether the component is currently running
-    */
-    @Override
-    public boolean isRunning() {
-        return running;
-    }
-
 
 }
-

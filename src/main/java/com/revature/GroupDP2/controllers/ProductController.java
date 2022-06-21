@@ -1,28 +1,26 @@
 package com.revature.GroupDP2.controllers;
 
-import com.revature.GroupDP2.dtos.AuthDto;
 import com.revature.GroupDP2.model.Product;
-import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.services.ProductService;
+import com.revature.GroupDP2.util.StorageManager;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 @RestController
 @RequestMapping("/product")
 public class ProductController {
 
-
+    private final StorageManager storageManager;
     private final ProductService productService;
 
-
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(StorageManager storageManager, ProductService productService) {
+        this.storageManager = storageManager;
         this.productService = productService;
 
     }
@@ -31,36 +29,52 @@ public class ProductController {
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     public List<Product> getAll() {
-        return productService.getAll();
+        Session session = this.storageManager.getSessionFactory().openSession();
+        List<Product> out = productService.getAll(session);
+        //session.close();
+        return out;
     }
 
     //get product by productname or id
     @GetMapping("/{productnameorId}")
     @ResponseStatus(HttpStatus.OK)
     public Product getProduct (@PathVariable String productnameorId) {
+        Session session = this.storageManager.getSessionFactory().openSession();
         //this checks if parameter is only numeric
+        Product out;
         if(productnameorId.matches("^[0-9]*$")){
-            return productService.getProductById(Integer.parseInt(productnameorId));
+            out= productService.getProductById(Integer.parseInt(productnameorId),session);
         }else{
-            return productService.getProductByProductname(productnameorId);
+            out= productService.getProductByProductname(productnameorId,session);
         }
+        //session.close();
+        return out;
     }
     @GetMapping("/id/{productId}")
     @ResponseStatus(HttpStatus.OK)
     public Product getProductId(@PathVariable String productId){
-        return productService.getProductById(Integer.parseInt(productId));
+        Session session = this.storageManager.getSessionFactory().openSession();
+        Product out = productService.getProductById(Integer.parseInt(productId),session);
+        //session.close();
+        return out;
     }
     @GetMapping("/name/{productName}")
     @ResponseStatus(HttpStatus.OK)
     public Product getProductName(@PathVariable String productName){
-        return productService.getProductByProductname(productName);
+        Session session = this.storageManager.getSessionFactory().openSession();
+        Product out = productService.getProductByProductname(productName,session);
+        //session.close();
+        return out;
     }
     //post a new product - auto generate the ID
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public Product persistNewProduct (@RequestBody Product product){
-        return productService.createProduct(product);
+        Session session = this.storageManager.getSessionFactory().openSession();
+        Product out = productService.createProduct(product,session);
+        //session.close();
+        return out;
     }
 
   /*  @GetMapping("/auth")
@@ -71,6 +85,7 @@ public class ProductController {
     }*/
 
     //put (update) an existing user (based on id)
+    //TODO NOT WORKING
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public Product updateProduct (@RequestBody Product product){
@@ -80,11 +95,17 @@ public class ProductController {
     @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
     public Product deleteProduct (@RequestBody Product product){
-    return productService.delete(product);
+        Session session = this.storageManager.getSessionFactory().openSession();
+        Product out = productService.delete(product);
+        //session.close();
+        return out;
     }
     @GetMapping("/search/findByNameContaining")
     public List <Product>findByNameContaining(@RequestParam("name") String name) {
-        return productService.getProductByMatchingName(name);
+        Session session = this.storageManager.getSessionFactory().openSession();
+        List<Product> out = productService.getProductByMatchingName(name,session);
+        //session.close();
+        return out;
     }
 
 }

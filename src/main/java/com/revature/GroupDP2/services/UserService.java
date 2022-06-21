@@ -6,6 +6,7 @@ import com.revature.GroupDP2.model.Payment;
 import com.revature.GroupDP2.model.User;
 import com.revature.GroupDP2.repository.PaymentRepository;
 import com.revature.GroupDP2.repository.UserRepository;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -33,10 +34,10 @@ public class UserService {
     2. check if email is valid
     3. check if there is a password
      */
-    public User register(User user) throws ResponseStatusException {
+    public User register(User user, Session session) throws ResponseStatusException {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
         user.setPassword(encoder.encode(user.getPassword()));
-        if (userRepository.getByUsername(user.getUsername()).isPresent()) {
+        if (userRepository.getByUsername(user.getUsername(),session).isPresent()) {
             //throw new AlredyExsistsException("username already taken!");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists!");
         }//email validator. got it online
@@ -47,13 +48,13 @@ public class UserService {
         }
         Cart cart=new Cart();
         user.setCart(cart);
-        userRepository.create(user);
+        userRepository.create(user,session);
         //user.setCart(cartService.newCart());
         return user;
     }
-    public User login(User user) throws ResponseStatusException{
+    public User login(User user,Session session) throws ResponseStatusException{
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
-        Optional<User> oldUser = userRepository.getByUsername(user.getUsername());
+        Optional<User> oldUser = userRepository.getByUsername(user.getUsername(),session);
         if(oldUser.isPresent()&&encoder.matches(user.getPassword(),oldUser.get().getPassword())){
             return oldUser.get();
         }
@@ -65,8 +66,8 @@ public class UserService {
     3.see if email is valid
     4. update
      */
-    public User edit(User user) throws ResponseStatusException {
-    return userRepository.merge(user);
+    public User edit(User user,Session session) throws ResponseStatusException {
+    return userRepository.merge(user,session);
     }
         /*
         Optional<User> oldUser=userRepository.getById(user.getId());
@@ -117,24 +118,24 @@ public class UserService {
     }
     */
 
-    public User unregister(User user) throws ResponseStatusException {
-        Optional<User> oldUser =userRepository.getByUsername(user.getUsername());
+    public User unregister(User user,Session session) throws ResponseStatusException {
+        Optional<User> oldUser =userRepository.getByUsername(user.getUsername(),session);
         if(oldUser.isPresent()){
-            userRepository.delete(oldUser.get());
+            userRepository.delete(oldUser.get(),session);
             return oldUser.get();
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND,"failed to delete!");
 
     }
 
-    public User getById(Integer userId) {
+    public User getById(Integer userId,Session session) {
         System.out.println("made it here");
-        return userRepository.getById(userId).get();
+        return userRepository.getById(userId,session).get();
 
     }
 
-    public void addCart(Integer cartId, Integer userId){
-        userRepository.addCart(cartId, userId);
+    public void addCart(Integer cartId, Integer userId,Session session){
+        userRepository.addCart(cartId, userId,session);
     }
 }
 
