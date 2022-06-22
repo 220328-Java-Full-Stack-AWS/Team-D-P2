@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Product } from '../common/product';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { url } from '../common/Path';
 import { Category } from '../common/Category';
 import { UrlTree } from '@angular/router';
+import { Product } from '../common/Models';
 
 
 @Injectable({

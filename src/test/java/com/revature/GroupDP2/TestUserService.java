@@ -16,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 import static org.mockito.Mockito.when;
+/*
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class TestUserService {
@@ -128,3 +129,4 @@ public class TestUserService {
 
     }
 }
+*/

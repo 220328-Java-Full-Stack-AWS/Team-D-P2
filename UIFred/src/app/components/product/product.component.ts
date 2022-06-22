@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Category } from 'src/app/common/Category';
-import { Product } from 'src/app/common/product';
+
 import { CartService } from '../../services/cart/cart.service';
+import { ShareService } from 'src/app/services/share.service';
+import { Category, Product } from 'src/app/common/Models';
 
 @Component({
   selector: 'app-product',
@@ -19,7 +20,7 @@ export class ProductComponent implements OnInit {
 
   searchMode: Boolean;
   product: Product[]=[];
-  constructor(private productService: ProductService,private route: ActivatedRoute,private router: Router,private cartService: CartService) {
+  constructor(private shareService:ShareService,private productService: ProductService,private route: ActivatedRoute,private router: Router,private cartService: CartService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
@@ -43,7 +44,7 @@ export class ProductComponent implements OnInit {
   getCategory(categoryName:string){
     this.productService.getCategoryName(categoryName).subscribe((cat:Category)=>{
       let fakeCategory= new Category()
-      fakeCategory.id=cat.id;
+      fakeCategory.categoryId=cat.categoryId;
       fakeCategory.categoryName=cat.categoryName;
       for(let p of cat.products){
         p.category=fakeCategory;
@@ -56,7 +57,7 @@ export class ProductComponent implements OnInit {
     this.productService.getCategoryAll().subscribe((cat:Category[])=>{
     for(let c of cat){
       let fakeCategory= new Category()
-      fakeCategory.id=c.id;
+      fakeCategory.categoryId=c.categoryId;
       fakeCategory.categoryName=c.categoryName;
       for(let p of c.products){
         p.category=fakeCategory;
@@ -70,7 +71,10 @@ export class ProductComponent implements OnInit {
     if(window.confirm("add "+product.productName+" to cart?")){
       let x:string=sessionStorage.getItem("cartId");
       if(x){
-        this.cartService.addProduct(x,product).subscribe();
+        this.cartService.addProduct(x,product).subscribe((data:any)=>{
+          this.shareService.cart.cartItems.push(product)
+          this.shareService.totalPrice();
+        });
       }else{
         window.alert("Cannot add item. You must register first");
       }

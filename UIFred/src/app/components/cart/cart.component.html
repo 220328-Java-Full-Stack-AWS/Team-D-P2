@@ -13,7 +13,7 @@
                   <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Your products</h3>
 
   
-                  <div class="d-flex align-items-center mb-5" *ngFor="let product of cart.cartItems">
+                  <div class="d-flex align-items-center mb-5" *ngFor="let product of shareService.cart.cartItems">
                     <div class="flex-shrink-0">
                       <img src={{product.imageUrl}}
                         class="img-fluid" style="width: 150px;" alt="N/A">
@@ -33,7 +33,7 @@
   
                   <div class="d-flex justify-content-between p-2 mb-2" style="background-color: #e1f5fe;">
                     <h5 class="fw-bold mb-0">Total:</h5>
-                    <h5 class="fw-bold mb-0">{{total | currency}}</h5>
+                    <h5 class="fw-bold mb-0">{{shareService.total| currency}}</h5>
                   </div>
   
                 </div>

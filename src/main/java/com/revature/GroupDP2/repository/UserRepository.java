@@ -17,27 +17,16 @@ import java.util.Optional;
 
 
 @Repository
-public class UserRepository implements IUserRepository, Lifecycle {
-    private boolean running;
-    private final StorageManager storageManager;
-    private Session session;
-
-
-    @Autowired
-    public UserRepository(StorageManager storageManager) {
-        this.storageManager = storageManager;
-    }
-
+public class UserRepository implements IUserRepository {
 
     @Override
-    public List<User> getAll() {
-        session = storageManager.getSessionFactory().openSession();
+    public List<User> getAll(Session session) {
         TypedQuery<User> query = session.createQuery("FROM User", User.class);
         return query.getResultList();
     }
 
     @Override
-    public void create(User o) {
+    public void create(User o,Session session) {
         Transaction t = session.beginTransaction();
         session.save(o.getCart());
         session.save(o);
@@ -45,16 +34,15 @@ public class UserRepository implements IUserRepository, Lifecycle {
     }
 
     @Override
-    public void update(User o) {
+    public void update(User o,Session session) {
         Transaction t = session.beginTransaction();
         session.update(o);
         t.commit();
     }
 
     @Override
-    public Optional<User> getById(int t) {
+    public Optional<User> getById(int t,Session session) {
         try {
-            session = storageManager.getSessionFactory().openSession();
             TypedQuery<User> query = session.createQuery("FROM User WHERE id= :id", User.class);
             query.setParameter("id", t);
             return Optional.ofNullable(query.getSingleResult());
@@ -64,16 +52,15 @@ public class UserRepository implements IUserRepository, Lifecycle {
     }
 
     @Override
-    public void delete (User o){
+    public void delete (User o,Session session){
         Transaction t = session.beginTransaction();
         session.delete(o);
         t.commit();
     }
 
     @Override
-    public Optional<User> getByUsername (String username){
+    public Optional<User> getByUsername (String username,Session session){
         try {
-            session = storageManager.getSessionFactory().openSession();
             TypedQuery<User> query = session.createQuery("FROM User WHERE userName= :userName", User.class);
             query.setParameter("userName", username);
             return Optional.ofNullable(query.getSingleResult());
@@ -83,7 +70,7 @@ public class UserRepository implements IUserRepository, Lifecycle {
         }
     }
 
-    public void addCart(Integer cartId, Integer userId){
+    public void addCart(Integer cartId, Integer userId,Session session){
         Transaction transaction = session.beginTransaction();
         User user = session.get(User.class, userId);
         Cart cart = session.get(Cart.class, cartId);
@@ -91,28 +78,11 @@ public class UserRepository implements IUserRepository, Lifecycle {
         session.merge(user);
         transaction.commit();
     }
-    public User merge(User u){
-        Session s = storageManager.getSessionFactory().openSession();
+    public User merge(User u,Session session){
         Transaction t = session.beginTransaction();
         session.merge(u);
         t.commit();
-        s.close();
         return u;
     }
 
-    @Override
-    public void start () {
-        session = storageManager.getSession();
-        running = true;
-    }
-
-    @Override
-    public void stop () {
-        running = false;
-    }
-
-    @Override
-    public boolean isRunning () {
-        return running;
-    }
 }

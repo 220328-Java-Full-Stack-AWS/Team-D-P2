@@ -15,7 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 import { CartComponent } from './components/cart/cart.component';
 import { UserComponent } from './components/user/user.component';
 import { SearchComponent } from './components/search/search.component';
-
+import { ShareService } from './services/share.service';
     // Redirect the user to your custom login page
 
 const routes: Routes = [
@@ -53,7 +53,7 @@ const routes: Routes = [
 	  FormsModule
 
   ],
-  providers: [PaymentService,ProductService,RegistrationService],
+  providers: [PaymentService,ProductService,RegistrationService,ShareService],
 
   bootstrap: [AppComponent]
 })

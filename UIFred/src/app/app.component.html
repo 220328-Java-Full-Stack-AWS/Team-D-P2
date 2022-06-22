@@ -41,9 +41,9 @@
 			  </form>
 			  
 			  <div class="cart-area d-n"class='form-header'>
-				  <p>{{totalPrice(cart)}}</p>
+				  <!--<<p>{{totalPrice(cart)}}</p>>-->
 				<a href="cart">
-				  <div class="total">{{total | currency}} <span> {{numItems}}</span> </div> <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+				  <div class="total">{{shareService.total | currency}} <span> {{shareService.items}}</span> </div> <i class="fa fa-shopping-cart" aria-hidden="true"></i>
 				</a>
 			  </div>
 			</div>
