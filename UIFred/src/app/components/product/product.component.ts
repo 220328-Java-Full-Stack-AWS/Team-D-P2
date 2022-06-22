@@ -73,6 +73,7 @@ export class ProductComponent implements OnInit {
       if(x){
         this.cartService.addProduct(x,product).subscribe((data:any)=>{
           this.shareService.cart.cartItems.push(product)
+          this.shareService.totalPrice();
         });
       }else{
         window.alert("Cannot add item. You must register first");
