@@ -68,6 +68,7 @@ public class CartController {
     }
     @PutMapping("/deleteProductItems")
     public void deleteProductItems(@RequestHeader("cartId") Integer cartId, @RequestBody Cart cart) {
+        System.out.println("we are");
         Session session = this.storageManager.getSessionFactory().openSession();
         cartService.deleteCartItems(cart, cartId,session);
         //session.close();

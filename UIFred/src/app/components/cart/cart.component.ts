@@ -30,9 +30,7 @@ export class CartComponent implements OnInit {
    }
 
   ngOnInit(): void {
-
     this.getCart();
-    
   }
 
   public getCart() {
@@ -49,18 +47,28 @@ export class CartComponent implements OnInit {
 
   public deleteProduct(body: Product) {
     console.log(body);
+    console.log("WITHIN DELETEPRODUCT COMPONENT");
     let cartId = sessionStorage.getItem("cartId");
-    this.cartService.deleteProduct(cartId, body).subscribe((data:any)=>console.log(data));
-    window.location.href = "cart"
-  
+    this.cartService.deleteProduct(cartId, body).subscribe((data:any)=>{
+      this.cart.cartItems.splice(this.cart.cartItems.indexOf(body),1);
+      this.totalPrice(this.cart);
+    });
+    
+    //this.cart
+    //window.location.reload()
   } 
 
   public deleteAll() {
     let cart = new Cart();
+    console.log("WITHIN DELETEALL COMPONENT");
     let cartId = sessionStorage.getItem("cartId");
     cart.id = Number(sessionStorage.getItem("cartId"));
-    this.cartService.deleteProductCart(cartId,cart).subscribe((data:any) => console.log(data));
-    window.location.href = "cart"
+    this.cartService.deleteProductCart(cartId,cart).subscribe((data:any) => {
+      this.cart.cartItems=[];
+      this.totalPrice(this.cart);
+    });
+    //window.location.href = "cart"
+    //window.location.reload()
   }
 
   public populatePayment(payment: Payment) {
